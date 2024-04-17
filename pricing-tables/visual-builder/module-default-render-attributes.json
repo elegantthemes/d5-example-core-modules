@@ -1,0 +1,43 @@
+{
+  "_comment": "!!! THIS IS AN AUTOMATICALLY GENERATED FILE - DO NOT EDIT !!!",
+  "module": {
+    "meta": {
+      "adminLabel": {
+        "desktop": {
+          "value": "Pricing Tables"
+        }
+      }
+    }
+  },
+  "content": {
+    "advanced": {
+      "showBullet": {
+        "desktop": {
+          "value": "on"
+        }
+      }
+    }
+  },
+  "featuredTable": {
+    "advanced": {
+      "showDropShadow": {
+        "desktop": {
+          "value": "on"
+        }
+      }
+    }
+  },
+  "button": {
+    "decoration": {
+      "button": {
+        "desktop": {
+          "value": {
+            "icon": {
+              "enable": "on"
+            }
+          }
+        }
+      }
+    }
+  }
+}

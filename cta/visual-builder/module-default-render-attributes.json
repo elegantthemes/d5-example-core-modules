@@ -1,0 +1,80 @@
+{
+  "_comment": "!!! THIS IS AN AUTOMATICALLY GENERATED FILE - DO NOT EDIT !!!",
+  "module": {
+    "meta": {
+      "adminLabel": {
+        "desktop": {
+          "value": "Call To Action"
+        }
+      }
+    },
+    "decoration": {
+      "background": {
+        "desktop": {
+          "value": {
+            "color": "#7EBEC5"
+          }
+        }
+      }
+    },
+    "advanced": {
+      "text": {
+        "text": {
+          "desktop": {
+            "value": {
+              "orientation": "center",
+              "color": "dark"
+            }
+          }
+        }
+      }
+    }
+  },
+  "title": {
+    "decoration": {
+      "font": {
+        "font": {
+          "desktop": {
+            "value": {
+              "headingLevel": "h2"
+            }
+          }
+        }
+      }
+    }
+  },
+  "button": {
+    "decoration": {
+      "button": {
+        "desktop": {
+          "value": {
+            "enable": "off",
+            "icon": {
+              "enable": "on"
+            }
+          }
+        }
+      },
+      "border": {
+        "desktop": {
+          "value": {
+            "styles": {
+              "all": {
+                "color": ""
+              }
+            }
+          }
+        }
+      },
+      "font": {
+        "font": {
+          "desktop": {
+            "value": {
+              "color": ""
+            }
+          }
+        }
+      }
+    }
+  }
+}

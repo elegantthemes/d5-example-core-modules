@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PricingList /> Should match the snapshot when content contains <div> tag 1`] = `
+<ul class="et_pb_pricing">
+    <li><span>&lt;div&gt;+This feature is included&lt;/div&gt;&lt;div&gt;+This feature is included&lt;/div&gt;&lt;div&gt;-This feature is included&lt;/div&gt;</span></li>
+    <li><span>&lt;div&gt;-This feature is included&lt;/div&gt;</span></li>
+</ul>
+`;
+
+exports[`<PricingList /> Should match the snapshot when content contains <p> tag 1`] = `
+<ul class="et_pb_pricing">
+    <li><span>This feature is included</span></li>
+    <li><span>This feature is included</span></li>
+    <li class="et_pb_not_available"><span>This feature is included</span></li>
+    <li class="et_pb_not_available"><span>This feature is included</span></li>
+</ul>
+`;
+
+exports[`<PricingList /> Should match the snapshot when well formatted parameter is given 1`] = `
+<ul class="et_pb_pricing">
+    <li><span>This feature is included</span></li>
+    <li><span>This feature is included</span></li>
+    <li><span>This feature is included</span></li>
+    <li class="et_pb_not_available"><span>This feature is included</span></li>
+    <li class="et_pb_not_available"><span>This feature is included</span></li>
+</ul>
+`;
+
+exports[`<PricingList /> Should match the snapshot with number content 1`] = `
+<ul class="et_pb_pricing">
+    <li><span>20</span></li>
+</ul>
+`;
+
+exports[`<PricingList /> Should match the snapshot with undefined content 1`] = `<ul class="et_pb_pricing"></ul>`;

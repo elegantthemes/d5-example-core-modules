@@ -38,5 +38,11 @@ The Accordion module is a module that demonstrates how to create a module with c
 ### Blog Module
 The Blog module is a dynamic module that demonstrates how to create a module which fetches data from the WordPress database.
 
+### Button Module
+The Button module is a module that allows users to create stylish, responsive buttons for calls-to-action. It supports advanced design options, dynamic links, and styling for hover effects, providing enhanced interactivity for websites.
+
+### Slider Module
+The slider module is a module that allows users to create dynamic, customizable sliders with images, text, and buttons for showcasing content interactively. It includes advanced design settings, autoplay options, and support for responsive layouts, enhancing visual appeal and engagement.
+
 
 Feel free to browse through the examples and incorporate the demonstrated techniques into your Divi module projects. Happy coding!

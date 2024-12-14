@@ -1,0 +1,57 @@
+{
+  "_comment": "!!! THIS IS AN AUTOMATICALLY GENERATED FILE - DO NOT EDIT !!!",
+  "module": {
+    "meta": {
+      "adminLabel": {
+        "desktop": {
+          "value": "Button"
+        }
+      }
+    },
+    "advanced": {
+      "text": {
+        "text": {
+          "desktop": {
+            "value": {
+              "color": "light"
+            }
+          }
+        }
+      }
+    }
+  },
+  "button": {
+    "decoration": {
+      "button": {
+        "desktop": {
+          "value": {
+            "enable": "off",
+            "icon": {
+              "enable": "on"
+            }
+          }
+        }
+      },
+      "border": {
+        "desktop": {
+          "value": {
+            "styles": {
+              "all": {
+                "color": ""
+              }
+            }
+          }
+        }
+      },
+      "font": {
+        "font": {
+          "desktop": {
+            "value": {
+              "color": ""
+            }
+          }
+        }
+      }
+    }
+  }
+}

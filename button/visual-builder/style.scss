@@ -1,0 +1,15 @@
+.et_pb_button_module_wrapper .et_pb_button.et-fb-dragged {
+  transition: none !important;
+}
+
+.et_pb_empty_button .et_pb_button {
+  background: none !important;
+  border: none;
+  height: 55px;
+  transition: none !important;
+  width: 85px;
+
+  &:hover::after {
+    content: '';
+  }
+}

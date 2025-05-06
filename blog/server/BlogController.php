@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use ET\Builder\Framework\Controllers\RESTController;
 use ET\Builder\Framework\UserRole\UserRole;
+use ET\Builder\Framework\Utility\PostUtility;
 use WP_REST_Request;
 use WP_REST_Response;
 
@@ -114,76 +115,31 @@ class BlogController extends RESTController {
 		// Get query.
 		$query = new \WP_Query( $query_args );
 
+		$sticky_posts = get_option( 'sticky_posts' );
+
 		if ( $query->have_posts() ) {
+			// Display sticky posts first.
+			if ( ! empty( $sticky_posts ) ) {
+				$sticky_args  = array(
+					'post_type'      => 'post',
+					'post__in'       => $sticky_posts,
+					'posts_per_page' => -1,
+					'cat'            => $args['categories'],
+				);
+				$sticky_query = new \WP_Query( $sticky_args );
+				while ( $sticky_query->have_posts() ) {
+					$sticky_query->the_post();
+					$posts[] = self::process_post_data( $sticky_query->post, $args );
+				}
+				wp_reset_postdata();
+			}
+
+			// Display non-sticky posts.
 			while ( $query->have_posts() ) {
 				$query->the_post();
-
-				$title = get_the_title();
-
-				$thumbnail = [];
-				$thumb     = '';
-
-				if ( has_post_thumbnail() || 'attachment' === get_post_type() ) {
-					$thumb          = '';
-					$width          = 'on' === $args['fullwidth'] ? 1080 : 400;
-					$width          = (int) apply_filters( 'et_pb_blog_image_width', $width );
-					$height         = 'on' === $args['fullwidth'] ? 675 : 250;
-					$height         = (int) apply_filters( 'et_pb_blog_image_height', $height );
-					$class          = 'on' === $args['fullwidth'] ? 'et_pb_post_main_image' : '';
-					$alt            = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
-					$thumbnail_data = get_thumbnail( $width, $height, $class, $alt, $title, false, 'Blogimage' );
-					$thumb          = $thumbnail_data['thumb'];
-					$alt_text       = get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true );
-					$thumbnail      = [
-						'src'    => $thumb,
-						'alt'    => ! empty( $alt_text ) ? $alt_text : esc_attr( get_the_title( get_the_ID() ) ),
-						'width'  => $width,
-						'height' => $height,
-					];
+				if ( ! in_array( get_the_ID(), $sticky_posts, true ) ) {
+					$posts[] = self::process_post_data( $query->post, $args );
 				}
-
-				$taxonomy   = et_builder_get_category_taxonomy( get_post_type( get_the_ID() ) );
-				$terms      = get_the_terms( get_the_ID(), $taxonomy );
-				$categories = [];
-
-				if ( ! empty( $terms ) ) {
-					foreach ( $terms as $term ) {
-						$categories[] = [
-							'id'   => $term->term_id,
-							'name' => $term->name,
-							'slug' => $term->slug,
-							'link' => get_term_link( $term, $taxonomy ),
-						];
-					}
-				}
-
-				$content = BlogModule::render_content(
-					[
-						'excerpt_content' => $args['excerpt_content'],
-						'show_excerpt'    => $args['show_excerpt'],
-						'excerpt_manual'  => $args['manual_excerpt'],
-						'excerpt_length'  => $args['excerpt_length'],
-						'post_id'         => get_the_ID(),
-					]
-				);
-
-				$new_post = [
-					'id'         => get_the_ID(),
-					'classNames' => get_post_class(),
-					'title'      => get_the_title( get_the_ID() ),
-					'permalink'  => get_permalink( get_the_ID() ),
-					'thumbnail'  => ! empty( $thumb ) ? $thumbnail : null,
-					'content'    => $content,
-					'date'       => get_the_date( $args['date_format'] ),
-					'comment'    => sprintf( esc_html( _nx( '%s Comment', '%s Comments', get_comments_number(), 'number of comments', 'et_builder' ) ), number_format_i18n( get_comments_number() ) ),
-					'author'     => [
-						'name' => get_the_author(),
-						'link' => get_author_posts_url( get_the_author_meta( 'ID' ) ),
-					],
-					'categories' => $categories,
-				];
-
-				$posts[] = $new_post;
 			}
 		}
 
@@ -324,5 +280,126 @@ class BlogController extends RESTController {
 	 */
 	public static function index_permission(): bool {
 		return UserRole::can_current_user_use_visual_builder();
+	}
+
+	/**
+	 * Process post data.
+	 *
+	 * @param \WP_Post $post Post object.
+	 * @param array    $args Arguments.
+	 *
+	 * @return array
+	 */
+	public static function process_post_data( $post, $args ) {
+		global $et_theme_image_sizes;
+		$title = get_the_title( $post );
+
+		$thumbnail = [];
+		$thumb     = '';
+
+		if ( has_post_thumbnail( $post ) || 'attachment' === get_post_type( $post ) ) {
+			$thumb          = '';
+			$width          = 'on' === $args['fullwidth'] ? 1080 : 400;
+			$width          = (int) apply_filters( 'et_pb_blog_image_width', $width );
+			$height         = 'on' === $args['fullwidth'] ? 675 : 250;
+			$height         = (int) apply_filters( 'et_pb_blog_image_height', $height );
+			$class          = 'on' === $args['fullwidth'] ? 'et_pb_post_main_image' : '';
+			$alt            = get_post_meta( get_post_thumbnail_id( $post ), '_wp_attachment_image_alt', true );
+			$thumbnail_data = get_thumbnail( $width, $height, $class, $alt, $title, false, 'Blogimage' );
+			$thumb          = $thumbnail_data['thumb'];
+			$alt_text       = get_post_meta( get_post_thumbnail_id( $post ), '_wp_attachment_image_alt', true );
+
+			// Get thubmnail with size.
+			$image_size_name = $width . 'x' . $height;
+			$et_size         = isset( $et_theme_image_sizes ) && array_key_exists( $image_size_name, $et_theme_image_sizes ) ? $et_theme_image_sizes[ $image_size_name ] : array( $width, $height );
+
+			$et_attachment_image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id( $post ), $et_size );
+
+			$thumbnail_with_size = ! empty( $et_attachment_image_attributes[0] ) ? $et_attachment_image_attributes[0] : '';
+
+			$thumbnail = [
+				'src'    => $thumb,
+				'alt'    => ! empty( $alt_text ) ? $alt_text : esc_attr( get_the_title( $post ) ),
+				'width'  => $width,
+				'height' => $height,
+				'class'  => $class,
+			];
+
+			if ( $width < 480 && et_is_responsive_images_enabled() ) {
+				$thumbnail['srcset'] = $thumb . ' 479w, ' . $thumbnail_with_size . ' 480w';
+				$thumbnail['sizes']  = '(max-width:479px) 479px, 100vw';
+			}
+		}
+
+		$taxonomy   = et_builder_get_category_taxonomy( get_post_type( $post ) );
+		$terms      = get_the_terms( $post, $taxonomy );
+		$categories = [];
+
+		if ( ! empty( $terms ) ) {
+			foreach ( $terms as $term ) {
+				$categories[] = [
+					'id'   => $term->term_id,
+					'name' => $term->name,
+					'slug' => $term->slug,
+					'link' => get_term_link( $term, $taxonomy ),
+				];
+			}
+		}
+
+		$content = BlogModule::render_content(
+			[
+				'excerpt_content' => $args['excerpt_content'],
+				'show_excerpt'    => $args['show_excerpt'],
+				'excerpt_manual'  => $args['manual_excerpt'],
+				'excerpt_length'  => $args['excerpt_length'],
+				'post_id'         => $post->ID,
+			]
+		);
+
+		ob_start();
+		et_pb_gallery_images( 'slider' );
+		$post_gallery = ob_get_clean();
+
+		// Post background color.
+		$post_use_background_color = get_post_meta( $post->ID, '_et_post_use_bg_color', true ) ? true : false;
+		$background_color          = get_post_meta( $post->ID, '_et_post_bg_color', true );
+		$post_background_color     = $background_color && '' !== $background_color ? $background_color : '#ffffff';
+
+		return [
+			'id'                 => $post->ID,
+			'classNames'         => get_post_class( '', $post->ID ),
+			/**
+			 * Process the data with the html_entity_decode function.
+			 *
+			 * This function is used to decode HTML entities in the given data.
+			 * It is specifically required for data consumed by VB REST requests.
+			 * HTML entities are special characters that are represented in HTML using entity references,
+			 * such as `&amp;` for the ampersand character (&).
+			 * By decoding these entities, the original characters are restored,
+			 * ensuring that the data is correctly interpreted by the VB REST requests.
+			 */
+			'title'              => html_entity_decode( get_the_title( $post ) ),
+			'isPasswordRequired' => post_password_required( $post ),
+			'permalink'          => get_permalink( $post ),
+			'thumbnail'          => ! empty( $thumb ) ? $thumbnail : null,
+			'content'            => $content,
+			'date'               => get_the_date( $args['date_format'], $post ),
+			'comment'            => sprintf( esc_html( _nx( '%s Comment', '%s Comments', get_comments_number( $post ), 'number of comments', 'et_builder' ) ), number_format_i18n( get_comments_number( $post ) ) ),
+			'author'             => [
+				'name' => get_the_author_meta( 'display_name', $post->post_author ),
+				'link' => get_author_posts_url( $post->post_author ),
+			],
+			'categories'         => $categories,
+			'postFormat'         => [
+				'type'            => et_pb_post_format(),
+				'video'           => PostUtility::get_first_video(),
+				'gallery'         => $post_gallery,
+				'audio'           => et_core_intentionally_unescaped( et_pb_get_audio_player(), 'html' ),
+				'quote'           => et_core_intentionally_unescaped( et_get_blockquote_in_content(), 'html' ),
+				'link'            => esc_html( et_get_link_url() ),
+				'textColorClass'  => et_divi_get_post_text_color(),
+				'backgroundColor' => $post_use_background_color ? $post_background_color : '',
+			],
+		];
 	}
 }

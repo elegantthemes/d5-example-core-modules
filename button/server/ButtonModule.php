@@ -380,35 +380,18 @@ class ButtonModule implements DependencyInterface {
 	}
 
 	/**
-	 * Style declaration for button's border overflow.
+	 * Button spacing style declaration.
 	 *
-	 * This function is used to generate the style declaration for the border overflow of a button module.
+	 * This function will declare spacing style for button module.
 	 *
 	 * @since ??
 	 *
 	 * @param array $params An array of arguments.
 	 *
-	 * @return string The generated CSS style declaration.
-	 *
-	 * @example
-	 * ```php
-	 * $args = [
-	 *   'attrValue' => [
-	 *     'radius' => [
-	 *       'desktop' => [
-	 *         'default' => '10px',
-	 *         'hover'   => '8px',
-	 *       ],
-	 *     ],
-	 *   ],
-	 *   'important'  => true,
-	 *   'returnType' => 'string',
-	 * ];
-	 * $styleDeclaration = AccordionModule::overflow_style_declaration( $args );
-	 * ```
+	 * @return string The CSS for button spacing style.
 	 */
-	public static function overflow_style_declaration( array $params ): string {
-		$radius = $params['attrValue']['radius'] ?? [];
+	public static function button_spacing_style_declaration( array $params ): string {
+		$icon_show_on_hover = 'on' === ( $params['attrValue']['icon']['onHover'] ?? '' );
 
 		$style_declarations = new StyleDeclarations(
 			[
@@ -417,32 +400,10 @@ class ButtonModule implements DependencyInterface {
 			]
 		);
 
-		if ( ! $radius ) {
-			return $style_declarations->value();
+		if ( $icon_show_on_hover ) {
+			$style_declarations->add( 'padding-left', '1em' );
+			$style_declarations->add( 'padding-right', '1em' );
 		}
-
-		$all_corners_zero = true;
-
-		// Check whether all corners are zero.
-		// If any corner is not zero, update the variable and break the loop.
-		foreach ( $radius as $corner => $value ) {
-			if ( 'sync' === $corner ) {
-				continue;
-			}
-
-			$corner_value = SanitizerUtility::numeric_parse_value( $value ?? '' );
-			if ( 0.0 !== ( $corner_value['valueNumber'] ?? 0.0 ) ) {
-				$all_corners_zero = false;
-				break;
-			}
-		}
-
-		if ( $all_corners_zero ) {
-			return $style_declarations->value();
-		}
-
-		// Add overflow hidden when any corner's border radius is not zero.
-		$style_declarations->add( 'overflow', 'hidden' );
 
 		return $style_declarations->value();
 	}
@@ -480,6 +441,7 @@ class ButtonModule implements DependencyInterface {
 		$default_attributes = ModuleRegistration::get_default_attrs( 'divi/button' );
 		$attrs              = array_replace_recursive( $default_attributes, $args['attrs'] );
 		$elements           = $args['elements'];
+		$style_group        = $args['styleGroup'];
 		$settings           = $args['settings'] ?? [];
 
 		$icon_placement_value = $attrs['button']['decoration']['button']['desktop']['value']['icon']['placement'] ?? 'right';
@@ -487,12 +449,30 @@ class ButtonModule implements DependencyInterface {
 
 		$is_custom_post_type = $args['isCustomPostType'] ?? false;
 
+		$order_class      = $args['orderClass'] ?? '';
 		$base_order_class = $args['baseOrderClass'] ?? '';
 
 		$wrapper_order_class = $args['wrapperOrderClass'] ?? '';
-		$base_selector       = $is_custom_post_type
-			? 'body.et-db #page-container #et-boc .et-l .et_pb_section'
-			: 'body #page-container .et_pb_section';
+
+		$module_element_attrs = $attrs['module']['decoration'] ?? [];
+		$button_element_attrs = $attrs['button']['decoration'] ?? [];
+
+		if ( 'presetGroup' === $style_group ) {
+			$module_element_attrs = array_replace_recursive(
+				[
+					'spacing'   => $attrs['button']['decoration']['spacing'] ?? [],
+					'boxShadow' => $attrs['button']['decoration']['boxShadow'] ?? [],
+				],
+				$module_element_attrs
+			);
+
+			unset( $button_element_attrs['spacing'] );
+			unset( $button_element_attrs['boxShadow'] );
+		}
+
+		if ( 'module' === $style_group ) {
+			unset( $button_element_attrs['boxShadow'] );
+		}
 
 		Style::add(
 			[
@@ -506,6 +486,7 @@ class ButtonModule implements DependencyInterface {
 						[
 							'attrName'   => 'module',
 							'styleProps' => [
+								'attrs'          => $module_element_attrs,
 								'spacing'        => [
 									'propertySelectors' => [
 										'desktop' => [
@@ -514,8 +495,8 @@ class ButtonModule implements DependencyInterface {
 												'padding' => implode(
 													', ',
 													[
-														"{$base_selector} {$wrapper_order_class} {$base_order_class}",
-														"{$base_selector} {$wrapper_order_class} {$base_order_class}:hover",
+														"{$wrapper_order_class} {$base_order_class}",
+														"{$wrapper_order_class} {$base_order_class}:hover",
 													]
 												),
 											],
@@ -551,6 +532,7 @@ class ButtonModule implements DependencyInterface {
 						[
 							'attrName'   => 'button',
 							'styleProps' => [
+								'attrs'          => $button_element_attrs,
 								'disabledOn'     => [
 									'disabledModuleVisibility' => $settings['disabledModuleVisibility'] ?? null,
 								],
@@ -626,19 +608,17 @@ class ButtonModule implements DependencyInterface {
 									[
 										'componentName' => 'divi/common',
 										'props'         => [
-											'selector' => implode(
-												', ',
-												$is_custom_post_type
-												? [
-													"body.et-db #page-container #et-boc .et-l .et_pb_section {$base_order_class}",
-												]
-												: [
-													"body #page-container .et_pb_section {$base_order_class}",
-												]
-											),
-											'attr'                => $attrs['button']['decoration']['border'] ?? [],
-											'declarationFunction' => [ self::class, 'overflow_style_declaration' ],
+											'selector' => $is_custom_post_type
+												? "body.et-db #page-container #et-boc .et-l {$order_class}"
+												: "body #page-container {$order_class}",
+											'attr'     => $attrs['button']['decoration']['button'] ?? [],
+											'declarationFunction' => [ self::class, 'button_spacing_style_declaration' ],
 										],
+									],
+								],
+								'button'         => [
+									'affectingAttrs' => [
+										'spacing' => $attrs['module']['decoration']['spacing'] ?? [],
 									],
 								],
 							],
@@ -678,23 +658,23 @@ class ButtonModule implements DependencyInterface {
 	 * @return string|array The icon style declaration or key/value pairs.
 	 */
 	public static function icon_style_declaration( array $params ): string {
-		$icon_attr = $params['attrValue'];
-
-		$icon_placement = $icon_attr['icon']['placement'] ?? 'right';
+		$icon_attr           = $params['attrValue'];
+		$icon_placement      = $icon_attr['icon']['placement'] ?? 'right';
+		$icon_show_on_hover  = 'off' !== ( $icon_attr['icon']['onHover'] ?? '' );
+		$should_animate_icon = 'right' === $icon_placement && $icon_show_on_hover;
 
 		$style_declarations = new StyleDeclarations(
 			[
 				'returnType' => 'string',
 				'important'  => [
 					'font-family' => true,
-					'margin-left' => true,
 					'font-size'   => true,
 					'line-height' => true,
 				],
 			]
 		);
 
-		$margin_left = 'left' === $icon_placement ? '-1.3em' : '.3em';
+		$margin_left = 'left' === $icon_placement || $should_animate_icon ? '-1.3em' : '0';
 
 		if ( ! empty( $icon_attr['icon']['settings'] ) ) {
 			$icon_unicode = Utils::escape_font_icon( Utils::process_font_icon( $icon_attr['icon']['settings'] ) );
@@ -714,8 +694,8 @@ class ButtonModule implements DependencyInterface {
 		if ( 'on' === $button_enable ) {
 			$style_declarations->add( 'margin-left', $margin_left );
 		}
-		$style_declarations->add( 'font-size', 'inherit' );
-		$style_declarations->add( 'line-height', 'inherit' );
+		$style_declarations->add( 'font-size', '1.6em' );
+		$style_declarations->add( 'line-height', '1em' );
 
 		return $style_declarations->value();
 	}

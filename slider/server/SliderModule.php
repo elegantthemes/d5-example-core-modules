@@ -26,6 +26,7 @@ use ET\Builder\Packages\Module\Options\Element\ElementClassnames;
 use ET\Builder\Packages\ModuleLibrary\ModuleRegistration;
 use ET\Builder\Packages\ModuleLibrary\Slider\SliderPresetAttrsMap;
 use ET\Builder\Packages\StyleLibrary\Utils\StyleDeclarations;
+use ET\Builder\Packages\GlobalData\GlobalPresetItemGroupAttrNameResolved;
 
 // phpcs:disable Squiz.Commenting.InlineComment -- Temporarily disabled to get the PR CI pass for now. TODO: Fix this later.
 
@@ -503,5 +504,48 @@ class SliderModule implements DependencyInterface {
 				'render_callback' => [ self::class, 'render_callback' ],
 			]
 		);
+	}
+
+	/**
+	 * Resolve the group preset attribute name for the Slider module.
+	 *
+	 * @param GlobalPresetItemGroupAttrNameResolved $attr_name_to_resolve The attribute name to be resolved.
+	 * @param array                                 $params               The filter parameters.
+	 *
+	 * @return GlobalPresetItemGroupAttrNameResolved The resolved attribute name.
+	 */
+	public static function option_group_preset_resolver_attr_name( $attr_name_to_resolve, array $params ):?GlobalPresetItemGroupAttrNameResolved {
+		// Bydefault, $attr_name_to_resolve is a null value.
+		// If it is not null, it means that the attribute name is already resolved.
+		// In this case, we return the resolved attribute name.
+		if ( null !== $attr_name_to_resolve ) {
+			return $attr_name_to_resolve;
+		}
+
+		if ( $params['moduleName'] !== $params['dataModuleName'] ) {
+			if ( 'divi/slider' === $params['dataModuleName'] && 'divi/fullwidth-slider' !== $params['moduleName'] ) {
+				if ( 'module.decoration.background' === $params['attrName'] ) {
+					return new GlobalPresetItemGroupAttrNameResolved(
+						[
+							'attrName'    => 'children.module.decoration.background',
+							'attrSubName' => $params['attrSubName'] ?? null,
+						]
+					);
+				}
+			}
+
+			if ( 'divi/slider' === $params['moduleName'] && 'divi/fullwidth-slider' !== $params['dataModuleName'] ) {
+				if ( 'children.module.decoration.background' === $params['attrName'] ) {
+					return new GlobalPresetItemGroupAttrNameResolved(
+						[
+							'attrName'    => 'module.decoration.background',
+							'attrSubName' => $params['attrSubName'] ?? null,
+						]
+					);
+				}
+			}
+		}
+
+		return $attr_name_to_resolve;
 	}
 }

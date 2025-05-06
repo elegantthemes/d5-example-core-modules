@@ -1,12 +1,12 @@
 <?php
 /**
- * Module Library: Button Module
+ * Module Library:CTA Module Preset Attributes Map
  *
  * @package Divi
  * @since ??
  */
 
-namespace ET\Builder\Packages\ModuleLibrary\Button;
+namespace ET\Builder\Packages\ModuleLibrary\CTA;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Direct access forbidden.' );
@@ -14,15 +14,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 /**
- * Class ButtonPresetAttrsMap
+ * Class CTAPresetAttrsMap
  *
  * @since ??
  *
- * @package ET\Builder\Packages\ModuleLibrary\Button
+ * @package ET\Builder\Packages\ModuleLibrary\CTA
  */
-class ButtonPresetAttrsMap {
+class CTAPresetAttrsMap {
 	/**
-	 * Get the preset attributes map for the Button module.
+	 * Get the preset attributes map for the CTA module.
 	 *
 	 * @since ??
 	 *
@@ -32,24 +32,13 @@ class ButtonPresetAttrsMap {
 	 * @return array
 	 */
 	public static function get_map( array $map, string $module_name ) {
-		if ( 'divi/button' !== $module_name ) {
+		if ( 'divi/cta' !== $module_name ) {
 			return $map;
 		}
 
-		$keys_to_remove = [
-			'module.advanced.text.text__orientation',
-			'module.advanced.text.textShadow__style',
-			'module.advanced.text.textShadow__horizontal',
-			'module.advanced.text.textShadow__vertical',
-			'module.advanced.text.textShadow__blur',
-			'module.advanced.text.textShadow__color',
-			'button.decoration.boxShadow__style',
-			'button.decoration.boxShadow__horizontal',
-			'button.decoration.boxShadow__vertical',
-			'button.decoration.boxShadow__blur',
-			'button.decoration.boxShadow__spread',
-			'button.decoration.boxShadow__color',
-			'button.decoration.boxShadow__position',
+		// Keys to unset.
+		$keys_to_unset = [
+			'button.decoration.font.font__lineHeight',
 			'button.decoration.button.innerContent__text',
 			'button.decoration.button.innerContent__linkUrl',
 			'button.decoration.button.innerContent__linkTarget',
@@ -152,24 +141,19 @@ class ButtonPresetAttrsMap {
 			'button.decoration.button.decoration.font.textShadow__vertical',
 			'button.decoration.button.decoration.font.textShadow__blur',
 			'button.decoration.button.decoration.font.textShadow__color',
-			'button.decoration.font.font__textAlign',
-			'button.decoration.spacing__margin',
-			'button.decoration.spacing__padding',
 		];
 
-		foreach ( $keys_to_remove as $key ) {
+		// Unset the keys.
+		foreach ( $keys_to_unset as $key ) {
 			unset( $map[ $key ] );
 		}
 
 		return array_merge(
 			$map,
 			[
-				'button.decoration.button__enable'         => [
-					'attrName' => 'button.decoration.button',
-					'preset'   => [
-						'style',
-					],
-					'subName'  => 'enable',
+				'title.innerContent'                       => [
+					'attrName' => 'title.innerContent',
+					'preset'   => 'content',
 				],
 				'button.innerContent__text'                => [
 					'attrName' => 'button.innerContent',
@@ -186,48 +170,49 @@ class ButtonPresetAttrsMap {
 					'preset'   => 'content',
 					'subName'  => 'linkTarget',
 				],
-				'button.decoration.button__icon.enable'    => [
-					'attrName' => 'button.decoration.button',
-					'preset'   => [
-						'style',
-					],
-					'subName'  => 'icon.enable',
-				],
-				'button.decoration.button__icon.settings'  => [
-					'attrName' => 'button.decoration.button',
-					'preset'   => [
-						'html',
-						'style',
-					],
-					'subName'  => 'icon.settings',
-				],
-				'button.decoration.button__icon.color'     => [
-					'attrName' => 'button.decoration.button',
-					'preset'   => [
-						'style',
-					],
-					'subName'  => 'icon.color',
-				],
-				'button.decoration.button__icon.placement' => [
-					'attrName' => 'button.decoration.button',
-					'preset'   => [
-						'style',
-					],
-					'subName'  => 'icon.placement',
-				],
-				'button.decoration.button__icon.onHover'   => [
-					'attrName' => 'button.decoration.button',
-					'preset'   => [
-						'style',
-					],
-					'subName'  => 'icon.onHover',
-				],
 				'button.innerContent__rel'                 => [
 					'attrName' => 'button.innerContent',
 					'preset'   => [
 						'html',
 					],
 					'subName'  => 'rel',
+				],
+				'button.decoration.button__alignment'      => [
+					'attrName' => 'button.decoration.button',
+					'preset'   => [
+						'style',
+					],
+					'subName'  => 'alignment',
+				],
+				'button.decoration.button__enable'         => [
+					'attrName' => 'button.decoration.button',
+					'preset'   => [ 'style' ],
+					'subName'  => 'enable',
+				],
+				'button.decoration.button__icon.enable'    => [
+					'attrName' => 'button.decoration.button',
+					'preset'   => [ 'style' ],
+					'subName'  => 'icon.enable',
+				],
+				'button.decoration.button__icon.settings'  => [
+					'attrName' => 'button.decoration.button',
+					'preset'   => [ 'html', 'style' ],
+					'subName'  => 'icon.settings',
+				],
+				'button.decoration.button__icon.color'     => [
+					'attrName' => 'button.decoration.button',
+					'preset'   => [ 'style' ],
+					'subName'  => 'icon.color',
+				],
+				'button.decoration.button__icon.placement' => [
+					'attrName' => 'button.decoration.button',
+					'preset'   => [ 'style' ],
+					'subName'  => 'icon.placement',
+				],
+				'button.decoration.button__icon.onHover'   => [
+					'attrName' => 'button.decoration.button',
+					'preset'   => [ 'style' ],
+					'subName'  => 'icon.onHover',
 				],
 			]
 		);

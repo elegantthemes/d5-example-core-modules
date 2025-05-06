@@ -4,7 +4,6 @@ import {
 } from 'lodash';
 
 import { select } from '@divi/data';
-import { type ModuleFlatObject } from '@divi/types';
 
 /**
    * Get featured pricing tables classname based on given childrenIds and its featured status.
@@ -23,7 +22,7 @@ export const getFeaturedPricingTablesClassname = (childrenIds: string[]): string
   const featuredPricingTables: string[] = [];
 
   // If child pricing table module has featured on then add it into featuredPricingTables array.
-  forEach(select('divi/edit-post').getModulesByIds(childrenIds, true), (pricingTable: ModuleFlatObject): void => {
+  forEach(select('divi/edit-post').getModulesByIds(childrenIds), (pricingTable): void => {
     const featured = get(pricingTable, ['props', 'attrs', 'module', 'advanced', 'featured', 'desktop', 'value']) as string ?? 'off';
     featuredPricingTables.push(featured);
   });

@@ -1,3 +1,4 @@
+import { select } from '@divi/data';
 import { type DeclarationFunctionProps } from '@divi/module';
 import { StyleDeclarations } from '@divi/style-library';
 
@@ -19,7 +20,13 @@ export const iconWidthStyleDeclaration = (
   });
 
   if (attrValue?.icon) {
-    declarations.add('font-size', attrValue?.icon);
+    let iconWidth = attrValue.icon;
+
+    if (iconWidth?.startsWith('$variable')) {
+      iconWidth = select('divi/global-data').getResolvedGlobalVariableValue(iconWidth);
+    }
+
+    declarations.add('font-size', iconWidth);
   }
 
   return declarations.value as string;

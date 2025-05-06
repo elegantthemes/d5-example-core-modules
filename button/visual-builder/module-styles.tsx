@@ -1,4 +1,5 @@
 import React, { type ReactElement } from 'react';
+import { isEmpty, merge } from 'lodash';
 
 import {
   buttonIconSelectorFunction,
@@ -12,11 +13,11 @@ import { type ButtonAttrs } from '@divi/types';
 import {
   buttonAlignmentDeclaration,
   buttonIconStyleDeclaration,
-  overflowStyleDeclaration,
+  buttonSpacingDeclaration,
 } from './style-declarations';
 
 /**
- * Text Module's style components.
+ * Button Module's style components.
  *
  * @since ??
  */
@@ -26,11 +27,38 @@ const ModuleStyles = <TProps extends StylesProps<ButtonAttrs>>({
   settings,
   wrapperOrderClass,
   baseOrderClass,
+  orderClass,
   mode,
   state,
   noStyleTag,
   isCustomPostType = false,
+  styleGroup,
 }: TProps): ReactElement => {
+  let moduleElementAttrs = attrs?.module?.decoration ?? {};
+  let buttonElementAttrs = attrs?.button?.decoration ?? {};
+  if ('presetGroup' === styleGroup) {
+    moduleElementAttrs = merge({}, {
+      spacing:   attrs?.button?.decoration?.spacing ?? {},
+      boxShadow: attrs?.button?.decoration?.boxShadow ?? {},
+    }, moduleElementAttrs);
+
+    buttonElementAttrs = {
+      ...buttonElementAttrs,
+      spacing:   {},
+      boxShadow: {},
+    };
+  }
+
+  // If button element has box shadow, we need to remove it from button element.
+  // Button module does not support box shadow on button element.
+  // This is to prevent the box shadow from being applied to the button element from OG
+  // preset that is create at other module.
+  if ('module' === styleGroup) {
+    if (! isEmpty(buttonElementAttrs?.boxShadow)) {
+      buttonElementAttrs.boxShadow = {};
+    }
+  }
+
   // Selectors.
   const iconPlacement = 'left' === attrs?.button?.decoration?.button?.desktop?.value?.icon?.placement ? 'before' : 'after';
 
@@ -68,14 +96,13 @@ const ModuleStyles = <TProps extends StylesProps<ButtonAttrs>>({
   const iconSelectorFunction      = <TParams extends SelectorFunctionParams<TParams['attr']>>(params: TParams): string => getIconHoverSelector(buttonIconSelectorFunction(params));
   const iconStyleSelectorFunction = <TParams extends SelectorFunctionParams<TParams['attr']>>(params: TParams): string => getIconHoverSelector(params?.selector);
 
-  const baseSelector = isCustomPostType ? 'body.et-db #page-container #et-boc .et-l .et_pb_section' : 'body #page-container .et_pb_section';
-
   return (
     <StyleContainer mode={mode} state={state} noStyleTag={noStyleTag}>
       {/* Module */}
       {elements.style({
         attrName:   'module',
         styleProps: {
+          attrs:   moduleElementAttrs,
           spacing: {
             // Custom `propertySelectors` is needed here to set custom hover selectors
             // for margin and padding only on the builder. Button margin is set to the
@@ -93,15 +120,15 @@ const ModuleStyles = <TProps extends StylesProps<ButtonAttrs>>({
                 value: {
                   margin:  `${wrapperOrderClass}`,
                   padding: [
-                    `${baseSelector} ${wrapperOrderClass} ${baseOrderClass}`,
-                    `${baseSelector} ${wrapperOrderClass} ${baseOrderClass}:hover`,
+                    `${wrapperOrderClass} ${baseOrderClass}`,
+                    `${wrapperOrderClass} ${baseOrderClass}:hover`,
                   ].join(', '),
                 },
                 hover: {
                   margin:  `${wrapperOrderClass}.et_vb_wrapper_hover`,
                   padding: [
-                    `${baseSelector} ${wrapperOrderClass} ${baseOrderClass}.et_vb_hover`,
-                    `${baseSelector} ${wrapperOrderClass} ${baseOrderClass}.et_vb_hover:hover`,
+                    `${wrapperOrderClass} ${baseOrderClass}.et_vb_hover`,
+                    `${wrapperOrderClass} ${baseOrderClass}.et_vb_hover:hover`,
                   ].join(', '),
                 },
               },
@@ -146,6 +173,7 @@ const ModuleStyles = <TProps extends StylesProps<ButtonAttrs>>({
       {elements.style({
         attrName:   'button',
         styleProps: {
+          attrs:          buttonElementAttrs,
           advancedStyles: [
             {
               componentName: 'divi/common',
@@ -168,14 +196,10 @@ const ModuleStyles = <TProps extends StylesProps<ButtonAttrs>>({
               componentName: 'divi/common',
               props:         {
                 selector: isCustomPostType
-                  ? [
-                    `body.et-db #page-container #et-boc .et-l .et_pb_section ${baseOrderClass}`,
-                  ].join(', ')
-                  : [
-                    `body #page-container .et_pb_section ${baseOrderClass}`,
-                  ].join(', '),
-                attr:                attrs?.button?.decoration?.border,
-                declarationFunction: overflowStyleDeclaration,
+                  ? `body.et-db #page-container #et-boc .et-l ${orderClass}`
+                  : `body #page-container ${orderClass}`,
+                attr:                attrs?.button?.decoration?.button,
+                declarationFunction: buttonSpacingDeclaration,
               },
             },
           ],
@@ -184,6 +208,9 @@ const ModuleStyles = <TProps extends StylesProps<ButtonAttrs>>({
             // @see https://github.com/elegantthemes/Divi/issues/33635.
             selectorFunctions: {
               buttonIconSelectorFunction: iconSelectorFunction,
+            },
+            affectingAttrs: {
+              spacing: attrs?.module?.decoration?.spacing,
             },
           },
           spacing: {
@@ -203,7 +230,7 @@ const ModuleStyles = <TProps extends StylesProps<ButtonAttrs>>({
         * so might need to re-visit this sometime later.
       */}
       <CssStyle
-        selector={wrapperOrderClass}
+        selector={orderClass}
         attr={attrs.css}
       />
     </StyleContainer>

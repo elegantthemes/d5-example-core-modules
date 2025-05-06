@@ -18,9 +18,10 @@ const pricingTablesModuleMetaData: Metadata.Values<PricingTablesAttrs> = {
   childModuleName:  'divi/pricing-table',
   childModuleTitle: 'Pricing Table',
   category:         'module',
+  childrenName:     ['divi/pricing-table'],
   videos:           [
     {
-      id:   'BVzu4WnjgYI',
+      id:   'd2MTMey712I',
       name: 'An introduction to the Pricing Tables module',
     },
     {
@@ -403,6 +404,7 @@ const pricingTablesModuleMetaData: Metadata.Values<PricingTablesAttrs> = {
                     description: 'Disabling bullets will remove the bullet points that appear next to each list item within the pricing table\'s feature area.',
                     features:    {
                       sticky: false,
+                      preset: ['html'],
                     },
 
                     //
@@ -869,6 +871,7 @@ const pricingTablesModuleMetaData: Metadata.Values<PricingTablesAttrs> = {
                             icon: 'divi/align-right',
                           },
                         },
+                        showLabel: false,
                       },
                     },
                   },
@@ -1022,7 +1025,8 @@ const pricingTablesModuleMetaData: Metadata.Values<PricingTablesAttrs> = {
         component: {
           name:  'divi/composite',
           props: {
-            groupLabel: 'Layout',
+            clipboardCategory: 'style',
+            groupLabel:        'Layout',
           },
         },
       },
@@ -1036,7 +1040,8 @@ const pricingTablesModuleMetaData: Metadata.Values<PricingTablesAttrs> = {
         component:     {
           name:  'divi/composite',
           props: {
-            groupLabel: 'Bullet',
+            clipboardCategory: 'style',
+            groupLabel:        'Bullet',
           },
         },
       },
@@ -1050,7 +1055,9 @@ const pricingTablesModuleMetaData: Metadata.Values<PricingTablesAttrs> = {
         component:     {
           name:  'divi/composite',
           props: {
-            groupLabel: 'Title Text',
+            clipboardCategory: 'style',
+            groupLabel:        'Title Text',
+            presetGroup:       'divi/font',
           },
         },
       },
@@ -1064,7 +1071,9 @@ const pricingTablesModuleMetaData: Metadata.Values<PricingTablesAttrs> = {
         component:     {
           name:  'divi/composite',
           props: {
-            groupLabel: 'Body Text',
+            clipboardCategory: 'style',
+            groupLabel:        'Body Text',
+            presetGroup:       'divi/font-body',
           },
         },
       },
@@ -1078,7 +1087,9 @@ const pricingTablesModuleMetaData: Metadata.Values<PricingTablesAttrs> = {
         component:     {
           name:  'divi/composite',
           props: {
-            groupLabel: 'Subtitle Text',
+            clipboardCategory: 'style',
+            groupLabel:        'Subtitle Text',
+            presetGroup:       'divi/font',
           },
         },
       },
@@ -1092,7 +1103,9 @@ const pricingTablesModuleMetaData: Metadata.Values<PricingTablesAttrs> = {
         component:     {
           name:  'divi/composite',
           props: {
-            groupLabel: 'Price Text',
+            clipboardCategory: 'style',
+            groupLabel:        'Price Text',
+            presetGroup:       'divi/font',
           },
         },
       },
@@ -1106,7 +1119,9 @@ const pricingTablesModuleMetaData: Metadata.Values<PricingTablesAttrs> = {
         component:     {
           name:  'divi/composite',
           props: {
-            groupLabel: 'Currency & Frequency Text',
+            clipboardCategory: 'style',
+            groupLabel:        'Currency & Frequency Text',
+            presetGroup:       'divi/font',
           },
         },
       },
@@ -1120,7 +1135,9 @@ const pricingTablesModuleMetaData: Metadata.Values<PricingTablesAttrs> = {
         component:     {
           name:  'divi/composite',
           props: {
-            groupLabel: 'Excluded Item Text',
+            clipboardCategory: 'style',
+            groupLabel:        'Excluded Item Text',
+            presetGroup:       'divi/font',
           },
         },
       },
@@ -1138,6 +1155,13 @@ const pricingTablesModuleMetaData: Metadata.Values<PricingTablesAttrs> = {
           },
         },
       },
+    },
+  },
+  mousetrap: {
+    inner: {
+
+      // Child module covers parent module's surface area. Thus inner mousetrap is added on child module
+      edited: true,
     },
   },
 };

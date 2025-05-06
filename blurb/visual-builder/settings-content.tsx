@@ -20,18 +20,33 @@ import {
  * @returns {ReactElement}
  */
 export const SettingsContent = ({
-  attrs,
   groupConfiguration,
+  defaultSettingsAttrs,
 }: Module.Settings.Panel.Props<BlurbAttrs>): ReactElement => {
   // Show Icon or Image.
-  const showIcon  = 'on' === attrs?.imageIcon?.innerContent?.desktop?.value?.useIcon;
-  const showImage = 'on' !== attrs?.imageIcon?.innerContent?.desktop?.value?.useIcon;
+  const showImageCallback = (params: Module.Settings.Field.CallbackParams<BlurbAttrs>) => {
+    const { attrs }      = params;
+    const useIconDefault = defaultSettingsAttrs?.imageIcon?.innerContent?.desktop?.value?.useIcon;
+    const useIcon        = attrs?.imageIcon?.innerContent?.desktop?.value?.useIcon;
+    const showIcon       = 'on' === (useIcon ?? useIconDefault);
+    const showImage      = ! showIcon;
 
+    return showImage;
+  };
+
+  const showIconCallback = (params: Module.Settings.Field.CallbackParams<BlurbAttrs>) => {
+    const { attrs }      = params;
+    const useIconDefault = defaultSettingsAttrs?.imageIcon?.innerContent?.desktop?.value?.useIcon;
+    const useIcon        = attrs?.imageIcon?.innerContent?.desktop?.value?.useIcon;
+    const showIcon       = 'on' === (useIcon ?? useIconDefault);
+
+    return showIcon;
+  };
 
   // Insert props value to `imageIcon` group.
   if (groupConfiguration?.contentImageIcon?.component?.props) {
-    set(groupConfiguration, ['contentImageIcon', 'component', 'props', 'fields', 'src', 'visible'], showImage);
-    set(groupConfiguration, ['contentImageIcon', 'component', 'props', 'fields', 'icon', 'visible'], showIcon);
+    set(groupConfiguration, ['contentImageIcon', 'component', 'props', 'fields', 'src', 'visible'], showImageCallback);
+    set(groupConfiguration, ['contentImageIcon', 'component', 'props', 'fields', 'icon', 'visible'], showIconCallback);
   }
 
   return (

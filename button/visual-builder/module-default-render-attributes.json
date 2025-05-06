@@ -31,26 +31,6 @@
             }
           }
         }
-      },
-      "border": {
-        "desktop": {
-          "value": {
-            "styles": {
-              "all": {
-                "color": ""
-              }
-            }
-          }
-        }
-      },
-      "font": {
-        "font": {
-          "desktop": {
-            "value": {
-              "color": ""
-            }
-          }
-        }
       }
     }
   }

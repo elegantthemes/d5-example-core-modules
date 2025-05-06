@@ -28,7 +28,7 @@ export const buttonIconStyleDeclaration = ({
     },
   });
 
-  const marginLeft = 'left' === placement ? '-1.3em' : '.3em';
+  const marginLeft = 'left' === placement ? '-1.3em' : '0';
 
   // Checking if the icon is enabled.
   // It is important to check this because sometimes we are getting different values for the icon settings.
@@ -36,8 +36,8 @@ export const buttonIconStyleDeclaration = ({
   if ('on' === attrValue?.enable) {
     declarations.add('margin-left', marginLeft);
   }
-  declarations.add('font-size', 'inherit');
-  declarations.add('line-height', 'inherit');
+  declarations.add('font-size', '1.6em');
+  declarations.add('line-height', '1em');
 
   return declarations.value as string;
 };

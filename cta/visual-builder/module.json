@@ -10,7 +10,7 @@
   "category": "module",
   "videos": [
     {
-      "id": "E3AEllqnCus",
+      "id": "gV-l14jA2hE",
       "name": "An introduction to the Call To Action module"
     },
     {
@@ -118,7 +118,17 @@
       "elementType": "content",
       "selector": "{{selector}} .et_pb_promo_description .et_pb_promo_content",
       "settings": {
-        "innerContent": {},
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentText",
+            "features": {
+              "dynamicContent": {
+                "type": "text"
+              }
+            }
+          }
+        },
         "decoration": {
           "bodyFont": {}
         }
@@ -145,7 +155,7 @@
     },
     "button": {
       "type": "object",
-      "selector": "{{selector}} .et_pb_promo_button.et_pb_button",
+      "selector": "body #page-container {{selector}} .et_pb_promo_button.et_pb_button",
       "settings": {
         "innerContent": {},
         "decoration": {
@@ -165,7 +175,7 @@
         "hasWrapper": true
       },
       "styleProps": {
-        "selector": "{{selector}}.et_pb_promo .et_pb_promo_button.et_pb_button",
+        "selector": "body #page-container {{selector}}.et_pb_promo .et_pb_promo_button.et_pb_button",
         "boxShadow": {
           "propertySelectors": {
             "desktop": {
@@ -189,6 +199,7 @@
             "font": {
               "desktop": {
                 "value": {
+                  "color": true,
                   "line-height": true
                 }
               }

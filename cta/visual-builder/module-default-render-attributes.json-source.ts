@@ -23,7 +23,7 @@ const ctaModuleDefaultRenderAttributes: Metadata.DefaultAttributes<CtaAttrs> = {
       background: {
         desktop: {
           value: {
-            color: '#7EBEC5',
+            color: 'var(--gcid-primary-color)',
           },
         },
       },
@@ -62,26 +62,6 @@ const ctaModuleDefaultRenderAttributes: Metadata.DefaultAttributes<CtaAttrs> = {
             enable: 'off',
             icon:   {
               enable: 'on',
-            },
-          },
-        },
-      },
-      border: {
-        desktop: {
-          value: {
-            styles: {
-              all: {
-                color: '',
-              },
-            },
-          },
-        },
-      },
-      font: {
-        font: {
-          desktop: {
-            value: {
-              color: '',
             },
           },
         },

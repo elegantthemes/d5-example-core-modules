@@ -19,14 +19,15 @@ import { type Props } from './types';
  * @returns {ReactElement} List of pricing list items.
  */
 export const PricingList = ({ content = '' }: Props): ReactElement => {
-  const contentProcessed = content.toString().replace(/<p>/g, '\n').replace(/<\/p>/g, '\n').replace(/<br>/g, '\n')
+  const contentProcessed = content?.toString().replace(/<p>/g, '\n').replace(/<\/p>/g, '\n').replace(/<br>/g, '\n')
     .replace(/<br\s*\/>/g, '\n');
-  const listItems        = compact(contentProcessed.split('\n'));
+
+  const listItems = compact(contentProcessed?.split('\n'));
 
   return (
     <ul className="et_pb_pricing">
       {
-        listItems.map((listItem, index): ReactElement => {
+        listItems?.map((listItem, index): ReactElement => {
           const listItemTrimmed = trim(listItem);
           if ('' === listItemTrimmed) {
             return null;

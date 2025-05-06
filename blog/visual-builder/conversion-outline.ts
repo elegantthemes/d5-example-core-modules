@@ -2,6 +2,8 @@
 import { convertFontIcon } from '@divi/conversion';
 import { type ModuleConversionOutline } from '@divi/types';
 
+import { includedCategories } from './utils';
+
 // Compare this to wp.data.select('divi/settings').getSetting('shortcodeModuleDefinitions').et_pb_blog.fields
 
 export const conversionOutline: ModuleConversionOutline = {
@@ -37,7 +39,7 @@ export const conversionOutline: ModuleConversionOutline = {
     },
     background: 'module.decoration.background',
     borders:    {
-      default:   'module.decoration.border',
+      default:   'post.decoration.border', // There are no module.decoration.border settings for blog module.
       fullwidth: 'fullwidth.decoration.border',
       image:     'image.decoration.border',
     },
@@ -48,13 +50,15 @@ export const conversionOutline: ModuleConversionOutline = {
       default: 'module.decoration.filters',
       child:   'image.decoration.filters',
     },
-    max_width:    'module.decoration.sizing',
-    link_options: 'module.advanced.link',
+    max_width:          'module.decoration.sizing',
+    link_options:       'module.advanced.link',
+    display_conditions: 'module.decoration.conditions',
   },
   css: {
     before:         'css.*.before',
     main_element:   'css.*.mainElement',
     after:          'css.*.after',
+    free_form:      'css.*.freeForm',
     title:          'css.*.title',
     content:        'css.*.content',
     post_meta:      'css.*.postMeta',
@@ -89,6 +93,7 @@ export const conversionOutline: ModuleConversionOutline = {
     header_level:                  'title.decoration.font.font.*.headingLevel',
   },
   valueExpansionFunctionMap: {
-    hover_icon: convertFontIcon,
+    hover_icon:         convertFontIcon,
+    include_categories: includedCategories,
   },
 };

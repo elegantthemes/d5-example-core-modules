@@ -1,0 +1,68 @@
+{
+  "_comment": "!!! THIS IS AN AUTOMATICALLY GENERATED FILE - DO NOT EDIT !!!",
+  "advanced": {
+    "admin_label": "module.meta.adminLabel",
+    "animation": "module.decoration.animation",
+    "background": "module.decoration.background",
+    "disabled_on": "module.decoration.disabledOn",
+    "height": "module.decoration.sizing",
+    "link_options": "module.advanced.link",
+    "margin_padding": "module.decoration.spacing",
+    "max_width": "module.decoration.sizing",
+    "module": "module.advanced.htmlAttributes",
+    "overflow": "module.decoration.overflow",
+    "position_fields": "module.decoration.position",
+    "scroll": "module.decoration.scroll",
+    "sticky": "module.decoration.sticky",
+    "text": "module.advanced.text",
+    "transform": "module.decoration.transform",
+    "transition": "module.decoration.transition",
+    "z_index": "module.decoration.zIndex",
+    "display_conditions": "module.decoration.conditions",
+    "borders": {
+      "default": "module.decoration.border"
+    },
+    "box_shadow": {
+      "button": "button.decoration.boxShadow",
+      "default": "module.decoration.boxShadow"
+    },
+    "button": {
+      "button": "button"
+    },
+    "fonts": {
+      "body": "content.decoration.bodyFont.body",
+      "body_link": "content.decoration.bodyFont.link",
+      "body_ol": "content.decoration.bodyFont.ol",
+      "body_quote": "content.decoration.bodyFont.quote",
+      "body_ul": "content.decoration.bodyFont.ul",
+      "header": "title.decoration.font"
+    },
+    "text_shadow": {
+      "default": "module.advanced.text.textShadow"
+    },
+    "filters": {
+      "default": "module.decoration.filters"
+    }
+  },
+  "css": {
+    "after": "css.*.after",
+    "free_form": "css.*.freeForm",
+    "before": "css.*.before",
+    "main_element": "css.*.mainElement",
+    "promo_button": "css.*.button",
+    "promo_description": "css.*.description",
+    "promo_title": "css.*.title"
+  },
+  "module": {
+    "button_text": "button.innerContent.*.text",
+    "button_url": "button.innerContent.*.linkUrl",
+    "content": "content.innerContent.*",
+    "url_new_window": "button.innerContent.*.linkTarget",
+    "title": "title.innerContent.*",
+    "header_level": "title.decoration.font.font.*.headingLevel",
+    "inline_fonts": "content.decoration.inlineFont.*.families"
+  },
+  "valueExpansionFunctionMap": {
+    "inline_fonts": "convertInlineFont"
+  }
+}

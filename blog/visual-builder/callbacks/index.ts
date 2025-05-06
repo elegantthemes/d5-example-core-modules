@@ -1,3 +1,2 @@
-export * from './on-categories-visible';
-export * from './on-grid-background';
-export * from './on-overlay-enabled';
+export { isVisibleFields } from './is-visible-fields';
+export { isVisibleGroup } from './is-visible-group';

@@ -1,4 +1,4 @@
-import React, { Fragment, type ReactElement } from 'react';
+import React, { Fragment, type ReactElement, useRef } from 'react';
 import {
   isEmpty,
   isNull,
@@ -36,9 +36,13 @@ import './style.scss';
 const ButtonEdit = ({
   attrs,
   id,
+  isFirst,
+  isLast,
   name,
   elements,
 }: ButtonEditProps): ReactElement => {
+  const buttonRef = useRef(null);
+
   // TODO consider use `<ButtonComponent />` to render the button.
   const linkValue = attrs?.button?.innerContent?.desktop?.value?.linkUrl;
   const textValue = getAttrByMode(attrs?.button?.innerContent)?.text || linkValue;
@@ -68,6 +72,7 @@ const ButtonEdit = ({
   return (
     <ModuleContainer
       attrs={attrs}
+      domRef={buttonRef}
       elements={elements}
       htmlAttrs={{
         href:               linkValueDynamic?.resolvedValue,
@@ -79,6 +84,8 @@ const ButtonEdit = ({
       }}
       classnamesFunction={moduleClassnames}
       id={id}
+      isFirst={isFirst}
+      isLast={isLast}
       hasModuleClassName={false}
       name={name}
       stylesComponent={ModuleStyles}

@@ -1,0 +1,23 @@
+{
+  "_comment": "!!! THIS IS AN AUTOMATICALLY GENERATED FILE - DO NOT EDIT !!!",
+  "module": {
+    "advanced": {
+      "open": {
+        "desktop": {
+          "value": "off"
+        }
+      }
+    }
+  },
+  "closedToggleIcon": {
+    "decoration": {
+      "icon": {
+        "desktop": {
+          "value": {
+            "useSize": "off"
+          }
+        }
+      }
+    }
+  }
+}

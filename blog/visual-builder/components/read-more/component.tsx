@@ -2,8 +2,6 @@ import React, { type ReactElement } from 'react';
 
 import { __ } from '@wordpress/i18n';
 
-import { getAttrByMode } from '@divi/module-utils';
-
 import { type ReadMoreProps } from './types';
 
 /**
@@ -15,14 +13,8 @@ import { type ReadMoreProps } from './types';
  *
  * @returns {ReactElement}
  */
-const ReadMore = ({ post, enable }: ReadMoreProps): ReactElement => (
-  <React.Fragment>
-    {
-        'on' === getAttrByMode(enable) && (
-          <a href={post.permalink} className="more-link">{__('read more', 'et_builder')}</a>
-        )
-      }
-  </React.Fragment>
+const ReadMore = ({ permalink }: ReadMoreProps): ReactElement => (
+  <a href={permalink} className="more-link">{__('read more', 'et_builder')}</a>
 );
 
 export {

@@ -1,4 +1,4 @@
-import { type AccordionItemAttrs, type ModuleMetadata } from '@divi/types';
+import { type AccordionItemAttrs, type Metadata } from '@divi/types';
 
 /**
  * Accordion Item Module Meta Data.
@@ -6,7 +6,7 @@ import { type AccordionItemAttrs, type ModuleMetadata } from '@divi/types';
  * Note: The module metadata will be used to generate `module.json` upon build.
  * Variable name must end with `ModuleMetaData` to be picked up by the build script.
  */
-const accordionItemModuleMetaData: ModuleMetadata<AccordionItemAttrs> = {
+const accordionItemModuleMetaData: Metadata.Values<AccordionItemAttrs> = {
   name:        'divi/accordion-item',
   d4Shortcode: 'et_pb_accordion_item',
   title:       'Accordion Item',
@@ -29,37 +29,14 @@ const accordionItemModuleMetaData: ModuleMetadata<AccordionItemAttrs> = {
   ],
   attributes: {
     module: {
-      type:     'object',
-      selector: '{{selector}}',
-      default:  {
-        advanced: {
-          open: {
-            desktop: {
-              value: 'off',
-            },
-          },
-        },
-      },
-      defaultPrintedStyle: {
-        decoration: {
-          position: {
-            desktop: {
-              value: {
-                mode:   'relative',
-                origin: {
-                  relative: 'top left',
-                },
-              },
-            },
-          },
-        },
-      },
+      type:       'object',
+      selector:   '{{selector}}',
       styleProps: {
         background: {
           selector: '{{selector}}.et_pb_toggle',
         },
         border: {
-          selector: '.et_pb_accordion .et_pb_module{{selector}}.et_pb_toggle',
+          selector: '{{selectorPrefix}}.et_pb_accordion .et_pb_module{{baseSelector}}.et_pb_toggle',
         },
         boxShadow: {
           important: true,
@@ -69,26 +46,46 @@ const accordionItemModuleMetaData: ModuleMetadata<AccordionItemAttrs> = {
           important: true,
         },
       },
+      settings: {
+        advanced: {
+          link: {},
+          text: {
+            priority:  15,
+            component: {
+              props: {
+                fields: {
+                  color: {
+                    render: false,
+                  },
+                },
+              },
+            },
+          },
+        },
+        decoration: {
+          background: {},
+          conditions: {},
+          disabledOn: {},
+          filters:    {},
+          border:     {},
+          boxShadow:  {},
+          overflow:   {},
+          position:   {},
+          scroll:     {},
+          sizing:     {},
+          spacing:    {},
+          sticky:     {},
+          transform:  {},
+          transition: {},
+          zIndex:     {},
+        },
+      },
     },
     title: {
       type:       'object',
       selector:   '{{selector}} .et_pb_toggle_title',
       attributes: {
         class: 'et_pb_toggle_title',
-      },
-      defaultPrintedStyle: {
-        decoration: {
-          font: {
-            font: {
-              desktop: {
-                value: {
-                  size:       '16px',
-                  lineHeight: '1em',
-                },
-              },
-            },
-          },
-        },
       },
       inlineEditor:      'plainText',
       childrenSanitizer: 'et_core_esc_previously',
@@ -105,42 +102,67 @@ const accordionItemModuleMetaData: ModuleMetadata<AccordionItemAttrs> = {
           },
         },
       },
-    },
-    closedToggleIcon: {
-      type:     'object',
-      selector: '{{selector}}.et_pb_toggle_close',
-      default:  {
-        decoration: {
-          icon: {
-            desktop: {
-              value: {
-                useSize: 'off',
+      settings: {
+        innerContent: {
+          groupType: 'group-item',
+          item:      {
+            groupSlug:   'contentText',
+            attrName:    'title.innerContent',
+            label:       'Title',
+            description: 'The title will appear above the content and when the toggle is closed.',
+            priority:    10,
+            render:      true,
+            features:    {
+              dynamicContent: {
+                type: 'text',
               },
+              sticky: false,
+              preset: 'content',
+            },
+
+            component: {
+              type: 'field',
+              name: 'divi/text',
             },
           },
         },
-      },
-      defaultPrintedStyle: {
         decoration: {
           font: {
-            font: {
-              desktop: {
-                value: {
-                  size:       '16px',
-                  lineHeight: '1em',
+            groupType: 'group-item',
+            item:      {
+              groupSlug: 'designTitleText',
+              priority:  10,
+              render:    true,
+
+              // Built-in group component
+              component: {
+                type: 'group',
+                name: 'divi/font',
+
+                props: {
+                  grouped:    false,
+                  groupLabel: 'Title Text',
+                  fieldLabel: 'Title',
+
+                  fields: {
+                    color: {
+                      priority: 5,
+                      render:   true,
+                    },
+                    headingLevel: {
+                      render: true,
+                    },
+                  },
                 },
               },
             },
           },
-          icon: {
-            desktop: {
-              value: {
-                size: '16px',
-              },
-            },
-          },
         },
       },
+    },
+    closedToggleIcon: {
+      type:       'object',
+      selector:   '{{selector}}.et_pb_toggle_close',
       styleProps: {
         icon: {
           selector:          '{{selector}}.et_pb_toggle_close .et_pb_toggle_title:before',
@@ -163,14 +185,192 @@ const accordionItemModuleMetaData: ModuleMetadata<AccordionItemAttrs> = {
           },
         },
       },
+      settings: {
+        decoration: {
+          icon: {
+            groupType: 'group-items',
+            items:     {
+              icon: {
+                groupSlug: 'designToggleIcon',
+                attrName:  'closedToggleIcon.decoration.icon',
+                label:     'Closed Icon',
+                priority:  10,
+                render:    true,
+                features:  {
+                  preset: [
+                    'style',
+                    'html',
+                  ],
+                },
+
+                // Built-in group component
+                component: {
+                  type: 'field',
+                  name: 'divi/icon-picker',
+                },
+              },
+              iconAttributes: {
+                groupSlug: 'designToggleIcon',
+                attrName:  'closedToggleIcon.decoration.icon',
+                priority:  10,
+                render:    true,
+
+                // Built-in group component
+                component: {
+                  type: 'group',
+                  name: 'divi/icon',
+
+                  props: {
+                    grouped:    false,
+                    fieldLabel: 'Icon',
+
+                    fields: {
+                      icon: {
+                        render: false,
+                      },
+                      color: {
+                        render: true,
+                      },
+                      useSize: {
+                        render: true,
+                      },
+                      size: {
+                        render: true,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     },
     openToggle: {
       type:     'object',
-      selector: '{{selector}}.et_pb_toggle_open',
+      selector: '{{selector}}.et_pb_accordion_item.et_pb_toggle.et_pb_toggle_open',
+      settings: {
+        decoration: {
+          background: {
+            groupType: 'group-item',
+            item:      {
+              groupSlug:   'designToggle',
+              attrName:    'openToggle.decoration.background',
+              subName:     'color',
+              label:       'Open Toggle Background Color',
+              description: 'You can pick unique background colors for toggles when they are in their open and closed states. Choose the open state background color here.',
+              priority:    10,
+              render:      true,
+              features:    {
+                sticky: false,
+              },
+
+              // Built-in component
+              component: {
+                type: 'field',
+                name: 'divi/color-picker',
+              },
+            },
+          },
+          font: {
+            groupType: 'group-item',
+            item:      {
+              groupSlug:   'designTitleText',
+              attrName:    'openToggle.decoration.font.font',
+              subName:     'color',
+              label:       'Open Title Text Color',
+              description: 'You can pick unique text colors for toggle titles when they are open and closed. Choose the open state title color here.',
+              priority:    5,
+              render:      true,
+              features:    {
+                sticky: false,
+              },
+
+              // Built-in component
+              component: {
+                type: 'field',
+                name: 'divi/color-picker',
+              },
+            },
+          },
+        },
+      },
     },
     closedToggle: {
       type:     'object',
-      selector: '{{selector}}.et_pb_toggle_close',
+      selector: '{{selector}}.et_pb_accordion_item.et_pb_toggle.et_pb_toggle_close',
+      settings: {
+        decoration: {
+          background: {
+            groupType: 'group-item',
+            item:      {
+              groupSlug:   'designToggle',
+              attrName:    'closedToggle.decoration.background',
+              subName:     'color',
+              label:       'Closed Toggle Background Color',
+              description: 'You can pick unique background colors for toggles when they are in their open and closed states. Choose the open state background color here.',
+              priority:    10,
+              render:      true,
+              features:    {
+                sticky: false,
+              },
+
+              // Built-in component
+              component: {
+                type: 'field',
+                name: 'divi/color-picker',
+              },
+            },
+          },
+          font: {
+            groupType: 'group-items',
+            items:     {
+              color: {
+                groupSlug:   'designClosedTitleText',
+                attrName:    'closedToggle.decoration.font.font',
+                subName:     'color',
+                label:       'Closed Title Text Color',
+                description: 'You can pick unique text colors for toggle titles when they are open and closed. Choose the closed state title color here.',
+                priority:    5,
+                render:      true,
+                features:    {
+                  sticky: false,
+                },
+
+                // Built-in component
+                component: {
+                  type: 'field',
+                  name: 'divi/color-picker',
+                },
+              },
+              font: {
+                groupSlug: 'designClosedTitleText',
+                attrName:  'closedToggle.decoration.font',
+                priority:  10,
+                render:    true,
+
+                // Built-in group component
+                component: {
+                  type: 'group',
+                  name: 'divi/font',
+
+                  props: {
+                    grouped:    false,
+                    groupLabel: 'Closed Title Text',
+                    fieldLabel: 'Closed Title',
+
+                    fields: {
+                      color: {
+                        render: false,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     },
     content: {
       type:        'object',
@@ -194,24 +394,149 @@ const accordionItemModuleMetaData: ModuleMetadata<AccordionItemAttrs> = {
           },
         },
       },
+      settings: {
+        innerContent: {
+          groupType: 'group-item',
+          item:      {
+            groupSlug:   'contentText',
+            attrName:    'content.innerContent',
+            label:       'Body',
+            description: 'Input the main text content for your module here.',
+            priority:    10,
+            render:      true,
+            features:    {
+              sticky:         false,
+              preset:         'content',
+              dynamicContent: {
+                type: 'text',
+              },
+            },
+
+            // Built-in component
+            component: {
+              type: 'field',
+              name: 'divi/richtext',
+            },
+          },
+        },
+        decoration: {
+          bodyFont: {
+            priority: 30,
+
+            // Built-in component
+            component: {
+              props: {
+                groups: {
+                  body: {
+                    groupLabel: 'Body Text',
+                    fieldLabel: 'Body',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     },
   },
   customCssFields: {
     openToggle: {
+      label:          'Open Toggle',
       subName:        'openToggle',
       selectorSuffix: ' .et_pb_toggle.et_pb_toggle_open',
     },
     toggleTitle: {
+      label:          'Toggle Title',
       subName:        'toggleTitle',
       selectorSuffix: ' .et_pb_toggle_title',
     },
     toggleIcon: {
+      label:          'Toggle Icon',
       subName:        'toggleIcon',
       selectorSuffix: ' .et_pb_toggle_title:before',
     },
     toggleContent: {
+      label:          'Toggle Content',
       subName:        'toggleContent',
       selectorSuffix: ' .et_pb_toggle_content',
+    },
+  },
+  settings: {
+    content:  'auto',
+    advanced: 'auto',
+
+    groups: {
+      // Content > Text
+      contentText: {
+        panel:     'content',
+        priority:  10,
+        groupName: 'text',
+
+        component: {
+          name:  'divi/composite',
+          props: {
+            groupLabel: 'Text',
+          },
+        },
+      },
+
+      // Design > Toggle Icon
+      designToggleIcon: {
+        panel:     'design',
+        priority:  10,
+        groupName: 'designToggleIcon',
+
+        component: {
+          name:  'divi/composite',
+          props: {
+            groupLabel: 'Icon',
+          },
+        },
+      },
+
+      // Design > Toggle
+      designToggle: {
+        panel:     'design',
+        priority:  10,
+        groupName: 'designToggle',
+
+        component: {
+          name:  'divi/composite',
+          props: {
+            groupLabel: 'Toggle',
+          },
+        },
+      },
+
+      // Design > Title Text
+      designTitleText: {
+        panel:     'design',
+        priority:  20,
+        groupName: 'designTitleText',
+
+        component: {
+          name:  'divi/composite',
+          props: {
+            groupLabel:  'Title Text',
+            presetGroup: 'divi/font',
+          },
+        },
+      },
+
+      // Design > Closed Title Text
+      designClosedTitleText: {
+        panel:     'design',
+        priority:  30,
+        groupName: 'designClosedTitleText',
+
+        component: {
+          name:  'divi/composite',
+          props: {
+            groupLabel:  'Closed Title Text',
+            presetGroup: 'divi/font',
+          },
+        },
+      },
     },
   },
 };

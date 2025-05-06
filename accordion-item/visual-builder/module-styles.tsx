@@ -1,6 +1,7 @@
 import React, { type ReactElement } from 'react';
 
 import {
+  CssStyle,
   StyleContainer,
   type StylesProps,
 } from '@divi/module';
@@ -16,7 +17,6 @@ import {
   toggleCloseOverlaySizingStyleDeclaration,
   toggleOpenOverlaySizingStyleDeclaration,
 } from './style-declarations';
-import { getHeadingLevel } from './utils';
 
 /**
  * Text Module's style components.
@@ -26,15 +26,12 @@ import { getHeadingLevel } from './utils';
 const ModuleStyles = ({
   attrs,
   defaultPrintedStyleAttrs,
-  parentAttrs,
   mode,
   state,
   orderClass,
   noStyleTag,
   elements,
 }: StylesProps<AccordionItemAttrs, AccordionAttrs>):ReactElement => {
-  const headingLevel = getHeadingLevel(attrs, parentAttrs);
-
   // Classnames.
   const mainClass = `${orderClass}.et_pb_toggle`;
 
@@ -72,13 +69,6 @@ const ModuleStyles = ({
                 declarationFunction: accordionItemBorderStyleDeclaration,
               },
             },
-            {
-              componentName: 'divi/css',
-              props:         {
-                attr: attrs.css,
-                cssFields,
-              },
-            },
           ],
         },
       })}
@@ -91,7 +81,7 @@ const ModuleStyles = ({
       {elements.style({
         attrName:   'title',
         styleProps: {
-          selector: `${mainClass} ${headingLevel}.et_pb_toggle_title`,
+          selector: `${mainClass} h1.et_pb_toggle_title, ${mainClass} h2.et_pb_toggle_title, ${mainClass} h3.et_pb_toggle_title, ${mainClass} h4.et_pb_toggle_title, ${mainClass} h5.et_pb_toggle_title, ${mainClass} h6.et_pb_toggle_title`,
         },
       })}
       {/* Open Toggle */}
@@ -99,7 +89,7 @@ const ModuleStyles = ({
         attrName:   'openToggle',
         styleProps: {
           font: {
-            selector:  `${orderClass}.et_pb_toggle_open ${headingLevel}.et_pb_toggle_title`,
+            selector:  `${orderClass}.et_pb_toggle_open h1.et_pb_toggle_title, ${orderClass}.et_pb_toggle_open h2.et_pb_toggle_title, ${orderClass}.et_pb_toggle_open h3.et_pb_toggle_title, ${orderClass}.et_pb_toggle_open h4.et_pb_toggle_title, ${orderClass}.et_pb_toggle_open h5.et_pb_toggle_title, ${orderClass}.et_pb_toggle_open h6.et_pb_toggle_title`,
             important: {
               font: {
                 desktop: {
@@ -117,12 +107,12 @@ const ModuleStyles = ({
         attrName:   'closedToggle',
         styleProps: {
           font: {
-            selector:          `${mainClass}.et_pb_toggle_close ${headingLevel}.et_pb_toggle_title`,
+            selector:          `${mainClass}.et_pb_toggle_close h1.et_pb_toggle_title, ${mainClass}.et_pb_toggle_close h2.et_pb_toggle_title, ${mainClass}.et_pb_toggle_close h3.et_pb_toggle_title, ${mainClass}.et_pb_toggle_close h4.et_pb_toggle_title, ${mainClass}.et_pb_toggle_close h5.et_pb_toggle_title, ${mainClass}.et_pb_toggle_close h6.et_pb_toggle_title`,
             propertySelectors: {
               font: {
                 desktop: {
                   value: {
-                    color: `${orderClass}.et_pb_toggle_close ${headingLevel}.et_pb_toggle_title`,
+                    color: `${orderClass}.et_pb_toggle_close h1.et_pb_toggle_title, ${orderClass}.et_pb_toggle_close h2.et_pb_toggle_title, ${orderClass}.et_pb_toggle_close h3.et_pb_toggle_title, ${orderClass}.et_pb_toggle_close h4.et_pb_toggle_title, ${orderClass}.et_pb_toggle_close h5.et_pb_toggle_title, ${orderClass}.et_pb_toggle_close h6.et_pb_toggle_title`,
                   },
                 },
               },
@@ -174,6 +164,22 @@ const ModuleStyles = ({
           ],
         },
       })}
+      {/* Module
+        * This is only to output the CSS form Custom CSS from Advanced Tab
+        * at the very end of the DOM, so that it can override the css from
+        * design tab. This is to fix the issue for re-ordering css
+        * https://github.com/elegantthemes/Divi/issues/38331
+        *
+        * This may not be the ideal solution as per the conversation here
+        * https://elegantthemes.slack.com/archives/C01CW343ZJ9/p1724934785470029?
+        * thread_ts=1708688820.993489&cid=C01CW343ZJ9
+        * so might need to re-visit this sometime later.
+      */}
+      <CssStyle
+        selector={orderClass}
+        attr={attrs.css}
+        cssFields={cssFields}
+      />
     </StyleContainer>
   );
 };

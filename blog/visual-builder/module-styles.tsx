@@ -42,11 +42,7 @@ const ModuleStyles = ({
     <TextStyle
       selector={orderClass}
       attr={attrs?.module?.advanced?.text}
-    />
-    <CssStyle
-      selector={orderClass}
-      attr={attrs.css}
-      cssFields={cssFields}
+      orderClass={orderClass}
     />
 
     {/* Image */}
@@ -57,6 +53,7 @@ const ModuleStyles = ({
       selector={`${orderClass} .et_pb_post .entry-featured-image-url,${orderClass} .et_pb_post .et_pb_slides,${orderClass} .et_pb_post .et_pb_video_overlay`}
       attr={attrs?.image?.decoration?.border}
       declarationFunction={borderStyleDeclaration}
+      orderClass={orderClass}
     />
 
     {/* Title */}
@@ -83,6 +80,7 @@ const ModuleStyles = ({
       selector={`${orderClass} .et_pb_post`}
       attr={attrs?.post?.decoration?.border}
       declarationFunction={borderStyleDeclaration}
+      orderClass={orderClass}
     />
 
     {/* Fullwidth */}
@@ -93,6 +91,7 @@ const ModuleStyles = ({
       selector={`${orderClass}:not(.et_pb_blog_grid_wrapper) .et_pb_post`}
       attr={attrs?.fullwidth?.decoration?.border}
       declarationFunction={borderStyleDeclaration}
+      orderClass={orderClass}
     />
     {/* Overlay */}
     {elements.style({
@@ -111,6 +110,13 @@ const ModuleStyles = ({
     {elements.style({
       attrName: 'pagination',
     })}
+
+    <CssStyle
+      selector={orderClass}
+      attr={attrs.css}
+      cssFields={cssFields}
+      orderClass={orderClass}
+    />
   </StyleContainer>
 );
 

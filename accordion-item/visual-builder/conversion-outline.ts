@@ -14,7 +14,8 @@ export const conversionOutline: ModuleConversionOutline = {
     box_shadow: {
       default: 'module.decoration.boxShadow',
     },
-    filters: {
+    display_conditions: 'module.decoration.conditions',
+    filters:            {
       default: 'module.decoration.filters',
     },
     fonts: {
@@ -34,6 +35,7 @@ export const conversionOutline: ModuleConversionOutline = {
     max_width:       'module.decoration.sizing',
     overflow:        'module.decoration.overflow',
     position_fields: 'module.decoration.position',
+    scroll:          'module.decoration.scroll',
     text:            'module.advanced.text',
     text_shadow:     {
       default: 'module.advanced.text.textShadow',
@@ -44,6 +46,7 @@ export const conversionOutline: ModuleConversionOutline = {
   },
   css: {
     after:          'css.*.after',
+    free_form:      'css.*.freeForm',
     before:         'css.*.before',
     main_element:   'css.*.mainElement',
     open_toggle:    'css.*.openToggle',

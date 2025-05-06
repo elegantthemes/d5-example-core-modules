@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { convertFontIcon, convertInlineFont } from '@divi/conversion';
+import {
+  convertFontIcon,
+  convertImageAndIconWidth,
+  convertInlineFont,
+} from '@divi/conversion';
 import {
   convertSpacing,
 } from '@divi/module';
@@ -20,8 +24,9 @@ export const conversionOutline: ModuleConversionOutline = {
       default: 'module.decoration.boxShadow',
       image:   'imageIcon.decoration.boxShadow',
     },
-    disabled_on: 'module.decoration.disabledOn',
-    filters:     {
+    disabled_on:        'module.decoration.disabledOn',
+    display_conditions: 'module.decoration.conditions',
+    filters:            {
       child:   'imageIcon.decoration.filters',
       default: 'module.decoration.filters',
     },
@@ -55,6 +60,7 @@ export const conversionOutline: ModuleConversionOutline = {
   },
   css: {
     after:         'css.*.after',
+    free_form:     'css.*.freeForm',
     before:        'css.*.before',
     main_element:  'css.*.mainElement',
     blurb_content: 'css.*.blurbContent',
@@ -78,19 +84,13 @@ export const conversionOutline: ModuleConversionOutline = {
     header_level:                'title.decoration.font.font.*.headingLevel',
     animation:                   'imageIcon.innerContent.*.animation',
     inline_fonts:                'content.decoration.inlineFont.*.families',
-
-    // TODO feat(D5, Blurb, Conversion) - We need to make it possible to convert single
-    // D4 module attribute to more than one D5 module attributes. In the Blurb module,
-    // The `image_icon_width` should be converted to `imageIcon.advanced.width.*.image`
-    // and `imageIcon.advanced.width.*.icon` because unlike in D4, the Blurb image width
-    // and icon width are separated in D5.
-    // @see https://github.com/elegantthemes/Divi/issues/34247.
-    image_icon_width: 'imageIcon.advanced.width.*.image',
+    image_icon_width:            'imageIcon.advanced.width.*',
   },
   valueExpansionFunctionMap: {
     image_icon_custom_margin:  convertSpacing,
     image_icon_custom_padding: convertSpacing,
     font_icon:                 convertFontIcon,
     inline_fonts:              convertInlineFont,
+    image_icon_width:          convertImageAndIconWidth,
   },
 };

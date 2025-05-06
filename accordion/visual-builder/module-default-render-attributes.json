@@ -1,0 +1,36 @@
+{
+  "_comment": "!!! THIS IS AN AUTOMATICALLY GENERATED FILE - DO NOT EDIT !!!",
+  "module": {
+    "meta": {
+      "adminLabel": {
+        "desktop": {
+          "value": "Accordion"
+        }
+      }
+    }
+  },
+  "title": {
+    "decoration": {
+      "font": {
+        "font": {
+          "desktop": {
+            "value": {
+              "headingLevel": "h5"
+            }
+          }
+        }
+      }
+    }
+  },
+  "closedToggleIcon": {
+    "decoration": {
+      "icon": {
+        "desktop": {
+          "value": {
+            "useSize": "off"
+          }
+        }
+      }
+    }
+  }
+}

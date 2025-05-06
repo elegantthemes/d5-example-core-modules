@@ -1,4 +1,7 @@
-import { escapeFontIcon, processFontIcon } from '@divi/icon-library';
+import {
+  escapeFontIcon,
+  processFontIcon,
+} from '@divi/icon-library';
 import { type DeclarationFunctionProps } from '@divi/module';
 import { StyleDeclarations } from '@divi/style-library';
 import { type Icon } from '@divi/types';

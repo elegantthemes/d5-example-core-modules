@@ -71,6 +71,26 @@ const sliderModuleDefaultRenderAttributes: Metadata.DefaultAttributes<SliderAttr
       },
     },
   },
+  children: {
+    button: {
+      advanced: {
+        showOnMobile: {
+          desktop: {
+            value: 'on',
+          },
+        },
+      },
+    },
+    content: {
+      advanced: {
+        showOnMobile: {
+          desktop: {
+            value: 'on',
+          },
+        },
+      },
+    },
+  },
 };
 
 export {

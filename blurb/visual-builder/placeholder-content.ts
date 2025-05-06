@@ -1,4 +1,4 @@
-import { placeholderContent as placeholder } from '@divi/module';
+import { placeholderContent as placeholder } from '@divi/module-utils';
 import { type BlurbAttrs } from '@divi/types';
 
 /**

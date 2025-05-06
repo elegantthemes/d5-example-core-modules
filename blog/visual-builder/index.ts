@@ -1,3 +1,5 @@
+import { addFilter } from '@wordpress/hooks';
+
 import {
   type BlogAttrs,
   type ModuleLibrary,
@@ -5,12 +7,21 @@ import {
 
 import { conversionOutline } from './conversion-outline';
 import { BlogEdit } from './edit';
-import { blogModuleMetaData as metadata } from './module.json-source';
+import { blogModuleMetaData } from './module.json-source';
+import { blogModuleDefaultPrintedStyleAttributes } from './module-default-printed-style-attributes.json-source';
+import { blogModuleDefaultRenderAttributes } from './module-default-render-attributes.json-source';
+import { ModuleStyles } from './module-styles';
+import {
+  optionGroupPresetPrimaryAttrNameResolverBlog,
+  optionGroupPresetResolverAttrNameBlog,
+} from './option-group-preset-resolver';
 import { placeholderContent } from './placeholder-content';
-import { SettingsAdvanced } from './settings-advanced';
 import { SettingsContent } from './settings-content';
 import { SettingsDesign } from './settings-design';
 
+// Register the filter to resolve the option group presets data.
+addFilter('divi.optionGroupPresetPrimaryAttrNameResolver.diviBlog', 'divi', optionGroupPresetPrimaryAttrNameResolverBlog);
+addFilter('divi.optionGroupPresetResolverAttrName', 'divi', optionGroupPresetResolverAttrNameBlog);
 
 /**
  * Defines `Blog` module for Visual Builder.
@@ -18,14 +29,16 @@ import { SettingsDesign } from './settings-design';
  * @since ??
  */
 export const blog: ModuleLibrary.Module.RegisterDefinition<BlogAttrs> = {
-  metadata,
-  settings: {
-    content:  SettingsContent,
-    design:   SettingsDesign,
-    advanced: SettingsAdvanced,
+  metadata:                 blogModuleMetaData,
+  defaultAttrs:             blogModuleDefaultRenderAttributes,
+  defaultPrintedStyleAttrs: blogModuleDefaultPrintedStyleAttributes,
+  settings:                 {
+    content: SettingsContent,
+    design:  SettingsDesign,
   },
   renderers: {
-    edit: BlogEdit,
+    edit:   BlogEdit,
+    styles: ModuleStyles,
   },
   placeholderContent,
   conversionOutline,

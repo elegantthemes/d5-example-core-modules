@@ -9,16 +9,21 @@ import {
 
 
 export const SettingsAdvanced = ({
-  attrs,
   groupConfiguration,
 }: Module.Settings.Panel.Props<BlurbAttrs>):ReactElement => {
-  // Show Attributes.
-  const showAttributes = 'on' !== attrs?.imageIcon?.innerContent?.desktop?.value?.useIcon;
+  const showAttributesCallback = (
+    params: Module.Settings.Group.VisibleCallback.Params<BlurbAttrs>,
+  ): Module.Settings.Group.VisibleCallback.ReturnValue => {
+    // Show Attributes.
+    const showAttributes = params?.isActivePreset ? true : 'on' !== params?.attrs?.imageIcon?.innerContent?.desktop?.value?.useIcon;
+
+    return showAttributes;
+  };
 
 
   // Insert props value to `advancedAttributes` group.
   if (groupConfiguration?.advancedAttributes?.component?.props) {
-    set(groupConfiguration, ['advancedAttributes', 'component', 'props', 'visible'], showAttributes);
+    set(groupConfiguration, ['advancedAttributes', 'component', 'props', 'visible'], showAttributesCallback);
   }
 
   return (

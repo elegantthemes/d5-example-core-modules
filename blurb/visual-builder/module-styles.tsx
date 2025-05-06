@@ -2,6 +2,7 @@ import React, { type ReactElement } from 'react';
 import { isNil } from 'lodash';
 
 import {
+  CssStyle,
   StyleContainer,
   type StylesProps,
 } from '@divi/module';
@@ -45,21 +46,14 @@ const ModuleStyles = ({
           {
             componentName: 'divi/text',
             props:         {
-              selector: orderClass,
+              selector: `${orderClass} .et_pb_blurb_container`,
               attr:     attrs?.module?.advanced?.text,
-            },
-          },
-          {
-            componentName: 'divi/css',
-            props:         {
-              selector:  orderClass,
-              attr:      attrs.css,
-              cssFields: elements?.moduleMetadata?.customCssFields,
             },
           },
           {
             componentName: 'divi/common',
             props:         {
+              selector:            `${orderClass} .et_pb_blurb_container`,
               attr:                attrs?.module?.decoration?.border,
               declarationFunction: overflowStyleDeclaration,
             },
@@ -83,9 +77,16 @@ const ModuleStyles = ({
           {
             componentName: 'divi/common',
             props:         {
-              selector: `${orderClass} .et-pb-icon`,
+              selector:  `${orderClass} .et-pb-icon`,
+              selectors: {
+                desktop: {
+                  value: `${orderClass} .et-pb-icon`,
+                  hover: `${orderClass}{{:hover}} .et-pb-icon`,
+                },
+              },
               attr:     attrs?.imageIcon?.advanced?.color,
               property: 'color',
+              orderClass,
             },
           },
           {
@@ -148,6 +149,22 @@ const ModuleStyles = ({
     {elements.style({
       attrName: 'contentContainer',
     })}
+    {/* Module
+      * This is only to output the CSS form Custom CSS from Advanced Tab
+      * at the very end of the DOM, so that it can override the css from
+      * design tab. This is to fix the issue for re-ordering css
+      * https://github.com/elegantthemes/Divi/issues/38331
+      *
+      * This may not be the ideal solution as per the conversation here
+      * https://elegantthemes.slack.com/archives/C01CW343ZJ9/p1724934785470029?
+      * thread_ts=1708688820.993489&cid=C01CW343ZJ9
+      * so might need to re-visit this sometime later.
+    */}
+    <CssStyle
+      selector={orderClass}
+      attr={attrs.css}
+      cssFields={elements?.moduleMetadata?.customCssFields}
+    />
   </StyleContainer>
 );
 

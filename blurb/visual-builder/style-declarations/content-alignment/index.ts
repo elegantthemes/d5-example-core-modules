@@ -12,4 +12,4 @@ import { type DeclarationFunctionProps } from '@divi/module';
  */
 export const contentAlignmentStyleDeclaration = ({
   attrValue,
-}: DeclarationFunctionProps<string>): string => (('center' !== attrValue) ? `text-align: ${attrValue};` : '');
+}: DeclarationFunctionProps<string>): string => (attrValue ? `text-align: ${attrValue};` : '');

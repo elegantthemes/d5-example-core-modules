@@ -17,7 +17,7 @@ const buttonModuleMetaData: Metadata.Values<ButtonAttrs> = {
   category:             'module',
   videos:               [
     {
-      id:   'XpM2G7tQQIE',
+      id:   'xDJFksZljlc',
       name: 'An introduction to the Button module',
     },
     {

@@ -18,7 +18,7 @@ const ctaModuleMetaData: Metadata.Values<CtaAttrs> = {
   category:             'module',
   videos:               [
     {
-      id:   'E3AEllqnCus',
+      id:   'gV-l14jA2hE',
       name: 'An introduction to the Call To Action module',
     },
     {
@@ -126,8 +126,16 @@ const ctaModuleMetaData: Metadata.Values<CtaAttrs> = {
       elementType: 'content',
       selector:    '{{selector}} .et_pb_promo_description .et_pb_promo_content',
       settings:    {
-        innerContent: {},
-        decoration:   {
+        innerContent: {
+          groupType: 'group-item',
+          item:      {
+            groupSlug: 'contentText',
+            features:  {
+              dynamicContent: { type: 'text' },
+            },
+          },
+        },
+        decoration: {
           bodyFont: {},
         },
       },
@@ -153,7 +161,7 @@ const ctaModuleMetaData: Metadata.Values<CtaAttrs> = {
     },
     button: {
       type:     'object',
-      selector: '{{selector}} .et_pb_promo_button.et_pb_button',
+      selector: 'body #page-container {{selector}} .et_pb_promo_button.et_pb_button',
       settings: {
         innerContent: {},
         decoration:   {
@@ -173,7 +181,7 @@ const ctaModuleMetaData: Metadata.Values<CtaAttrs> = {
         hasWrapper: true,
       },
       styleProps: {
-        selector:  '{{selector}}.et_pb_promo .et_pb_promo_button.et_pb_button',
+        selector:  'body #page-container {{selector}}.et_pb_promo .et_pb_promo_button.et_pb_button',
         boxShadow: {
           propertySelectors: {
             desktop: {
@@ -197,6 +205,7 @@ const ctaModuleMetaData: Metadata.Values<CtaAttrs> = {
             font: {
               desktop: {
                 value: {
+                  color:         true,
                   'line-height': true,
                 },
               },

@@ -51,6 +51,19 @@ const pricingTablesModuleDefaultRenderAttributes: Metadata.DefaultAttributes<Pri
       },
     },
   },
+  title: {
+    decoration: {
+      font: {
+        font: {
+          desktop: {
+            value: {
+              headingLevel: 'h2',
+            },
+          },
+        },
+      },
+    },
+  },
 };
 
 export {

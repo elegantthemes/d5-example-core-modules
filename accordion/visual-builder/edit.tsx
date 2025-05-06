@@ -1,4 +1,4 @@
-import React, { type ReactElement } from 'react';
+import React, { type ReactElement, useRef } from 'react';
 
 import {
   ChildModulesContainer,
@@ -23,28 +23,37 @@ const AccordionEdit = ({
   attrs,
   defaultPrintedStyleAttrs,
   id,
+  isFirst,
+  isLast,
   name,
   childrenIds,
   elements,
-}: AccordionEditProps): ReactElement => (
-  <ModuleContainer
-    attrs={attrs}
-    elements={elements}
-    defaultPrintedStyleAttrs={defaultPrintedStyleAttrs}
-    id={id}
-    name={name}
-    stylesComponent={ModuleStyles}
-    scriptDataComponent={ModuleScriptData}
-    classnamesFunction={moduleClassnames}
-  >
-    {elements.styleComponents({
-      attrName: 'module',
-    })}
-    <ChildModulesContainer
-      ids={childrenIds}
-    />
-  </ModuleContainer>
-);
+}: AccordionEditProps): ReactElement => {
+  const accordionRef = useRef(null);
+
+  return (
+    <ModuleContainer
+      attrs={attrs}
+      domRef={accordionRef}
+      elements={elements}
+      defaultPrintedStyleAttrs={defaultPrintedStyleAttrs}
+      id={id}
+      isFirst={isFirst}
+      isLast={isLast}
+      name={name}
+      stylesComponent={ModuleStyles}
+      scriptDataComponent={ModuleScriptData}
+      classnamesFunction={moduleClassnames}
+    >
+      {elements.styleComponents({
+        attrName: 'module',
+      })}
+      <ChildModulesContainer
+        ids={childrenIds}
+      />
+    </ModuleContainer>
+  );
+};
 
 export {
   AccordionEdit,

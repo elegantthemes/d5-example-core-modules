@@ -25,7 +25,7 @@ export const filterButtonDecorationAttrs = (
   };
 
   const buttonAttr = decorationAttrs?.button ?? {};
-  Object.keys(buttonAttr).forEach((attrBreakpoint:Breakpoint) => {
+  Object.keys(buttonAttr).forEach((attrBreakpoint: Breakpoint.Name) => {
     Object.keys(buttonAttr[attrBreakpoint]).forEach((attrState:AttrState) => {
       if (! Object.prototype.hasOwnProperty.call(buttonAttrs, attrBreakpoint)) {
         buttonAttrs[attrBreakpoint] = {};

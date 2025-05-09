@@ -3,10 +3,12 @@ import React, {
 } from 'react';
 
 import {
+  InnerMousetrap,
   ModuleContainer,
 } from '@divi/module';
 
 import { moduleClassnames } from './module-classnames';
+import { ModuleScriptData } from './module-script-data';
 import { ModuleStyles } from './module-styles';
 import { type AccordionItemEditProps } from './types';
 import { getHeadingLevel } from './utils';
@@ -27,6 +29,7 @@ const AccordionItemEdit = ({
   name,
   parentAttrs,
   elements,
+  isLast,
 }: AccordionItemEditProps): ReactElement => {
   const headingLevel = getHeadingLevel(attrs, parentAttrs);
 
@@ -39,8 +42,11 @@ const AccordionItemEdit = ({
       id={id}
       name={name}
       stylesComponent={ModuleStyles}
+      scriptDataComponent={ModuleScriptData}
       classnamesFunction={moduleClassnames}
+      isLast={isLast}
     >
+      <InnerMousetrap type="edited" />
       {elements.styleComponents({
         attrName: 'module',
       })}

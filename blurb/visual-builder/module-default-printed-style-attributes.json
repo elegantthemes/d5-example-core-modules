@@ -1,0 +1,35 @@
+{
+  "_comment": "!!! THIS IS AN AUTOMATICALLY GENERATED FILE - DO NOT EDIT !!!",
+  "imageIcon": {
+    "advanced": {
+      "width": {
+        "desktop": {
+          "value": {
+            "icon": "96px",
+            "image": "100%"
+          }
+        }
+      }
+    }
+  },
+  "title": {
+    "innerContent": {
+      "desktop": {
+        "value": {
+          "target": "off"
+        }
+      }
+    }
+  },
+  "contentContainer": {
+    "decoration": {
+      "sizing": {
+        "desktop": {
+          "value": {
+            "maxWidth": "550px"
+          }
+        }
+      }
+    }
+  }
+}

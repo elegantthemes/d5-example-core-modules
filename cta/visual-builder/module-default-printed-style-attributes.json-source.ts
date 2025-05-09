@@ -11,17 +11,27 @@ import {
  * `module-default-printed-style-attributes.json` upon build.
  */
 const ctaModuleDefaultPrintedStyleAttributes: Metadata.DefaultAttributes<CtaAttrs> = {
+  module: {
+    decoration: {
+      spacing: {
+        desktop: {
+          value: {
+            padding: {
+              top:    '40px',
+              bottom: '40px',
+            },
+          },
+        },
+      },
+    },
+  },
   title: {
     decoration: {
       font: {
         font: {
           desktop: {
             value: {
-              headingLevel:  'h2',
-              weight:        '400',
-              size:          '26px',
-              letterSpacing: '0px',
-              lineHeight:    '1em',
+              lineHeight: '1em',
             },
           },
         },

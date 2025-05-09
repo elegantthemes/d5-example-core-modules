@@ -21,8 +21,9 @@ export const conversionOutline: ModuleConversionOutline = {
     button: {
       button: 'button',
     },
-    disabled_on: 'module.decoration.disabledOn',
-    filters:     {
+    disabled_on:        'module.decoration.disabledOn',
+    display_conditions: 'module.decoration.conditions',
+    filters:            {
       default: 'module.decoration.filters',
     },
     fonts: {
@@ -56,6 +57,7 @@ export const conversionOutline: ModuleConversionOutline = {
   },
   css: {
     after:                 'css.*.after',
+    free_form:             'css.*.freeForm',
     before:                'css.*.before',
     main_element:          'css.*.mainElement',
     currency:              'css.*.currency',

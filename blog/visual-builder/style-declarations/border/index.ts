@@ -20,6 +20,7 @@ export const borderStyleDeclaration = ({
     important:  false,
   });
 
+  // Check if any radius value is set.
   if (radius) {
     declarations.add('overflow', 'hidden');
   }

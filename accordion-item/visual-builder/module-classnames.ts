@@ -17,12 +17,14 @@ export const moduleClassnames = ({
   attrs,
   state,
   breakpoint,
+  isLast,
 }: ModuleClassnamesParams<AccordionItemAttrs>): void => {
   const isToggleOpen = 'on' === attrs?.module?.advanced?.open?.desktop?.value;
 
   classnamesInstance.add('et_pb_toggle');
   classnamesInstance.add('et_pb_toggle_open', isToggleOpen);
   classnamesInstance.add('et_pb_toggle_close', ! isToggleOpen);
+  classnamesInstance.add('et-last-child', true === isLast);
 
   // Add element classnames.
   classnamesInstance.add(

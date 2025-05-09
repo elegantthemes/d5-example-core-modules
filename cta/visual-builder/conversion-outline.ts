@@ -27,6 +27,7 @@ export const conversionOutline: ModuleConversionOutline = {
     transition:      'module.decoration.transition',
     z_index:         'module.decoration.zIndex',
 
+    display_conditions: 'module.decoration.conditions',
 
     // The following advanced options has capability to be looped.
     // This means, for example, there will be multiple advanced options
@@ -61,6 +62,7 @@ export const conversionOutline: ModuleConversionOutline = {
   },
   css: {
     after:             'css.*.after',
+    free_form:         'css.*.freeForm',
     before:            'css.*.before',
     main_element:      'css.*.mainElement',
     promo_button:      'css.*.button',

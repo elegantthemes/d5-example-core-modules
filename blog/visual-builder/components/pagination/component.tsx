@@ -5,8 +5,6 @@ import React, {
 
 import { __ } from '@wordpress/i18n';
 
-import { getAttrByMode } from '@divi/module-utils';
-
 import { type PaginationProps } from './types';
 
 /**
@@ -18,23 +16,25 @@ import { type PaginationProps } from './types';
  *
  * @returns {ReactElement}
  */
-const Pagination = ({ metadata, paged, enable, onChangePage }: PaginationProps): ReactElement => {
-  const hasPrevPage   = paged < metadata.maxNumPages;
-  const hasNextPage   = paged > 1 && paged <= metadata.maxNumPages;
-  const hasWpPagenavi = metadata.wpPagenavi !== null;
+const Pagination = ({ metadata, paged, onChangePage }: PaginationProps): ReactElement => {
+  const maxNumPages   = metadata?.maxNumPages || 1;
+  const wpPagenavi    = metadata?.wpPagenavi;
+  const hasPrevPage   = paged < maxNumPages;
+  const hasNextPage   = paged > 1 && paged <= maxNumPages;
+  const hasWpPagenavi = !! wpPagenavi;
 
-  if ('on' !== getAttrByMode(enable)) {
-    return null;
-  }
+  const handleNextPage = (event?: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    event.stopPropagation(); // Stop event propagation so the frontend script doesn't executed.
 
-  const handleNextPage = (event?: MouseEvent) => {
-    event?.preventDefault();
-    onChangePage(paged + 1);
+    onChangePage(paged - 1);
   };
 
-  const handlePreviousPage = (event?: MouseEvent) => {
-    event?.preventDefault();
-    onChangePage(paged - 1);
+  const handlePreviousPage = (event?: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    event.stopPropagation(); // Stop event propagation so the frontend script doesn't executed.
+
+    onChangePage(paged + 1);
   };
 
   /**
@@ -44,81 +44,75 @@ const Pagination = ({ metadata, paged, enable, onChangePage }: PaginationProps):
    *
    * @returns {void}
    */
-  const handleWpPagenaviPagination = (event: React.FormEvent<HTMLDivElement>) => {
-    event.preventDefault();
+  const handleWpPagenaviPagination = (event: MouseEvent<HTMLDivElement>) => {
+    const target = event.target as unknown as Element;
 
-    const target = event.target as Element;
+    // Check if the target is an anchor element.
+    if ('a' === target?.tagName?.toLowerCase()) {
+      event.preventDefault();
+      event.stopPropagation(); // Stop event propagation so the frontend script doesn't executed.
 
-    const paginationLinks = target.querySelectorAll('.wp-pagenavi a');
+      if (target.classList.contains('last')) {
+        onChangePage(maxNumPages);
+      }
 
-    if (! paginationLinks) {
-      return;
-    }
+      if (target.classList.contains('first')) {
+        onChangePage(1);
+      }
 
-    const isTargetNextLink = target.classList.contains('nextpostslink');
-    const isTargetPrevLink = target.classList.contains('previouspostslink');
+      if (target.classList.contains('previouspostslink')) {
+        onChangePage(paged - 1);
+      }
 
-    if (isTargetNextLink) {
-      handleNextPage();
-    }
+      if (target.classList.contains('nextpostslink')) {
+        onChangePage(paged + 1);
+      }
 
-    if (isTargetPrevLink) {
-      handlePreviousPage();
-    }
-
-    if (! isTargetNextLink && ! isTargetPrevLink) {
-      onChangePage(parseInt(target.textContent, 10));
+      if (target.classList.contains('page')) {
+        onChangePage(parseInt(target.textContent, 10));
+      }
     }
   };
 
-  return (
-    <React.Fragment>
-      {
-        ! hasWpPagenavi && (
-          <div className="pagination clearfix">
-            {
-              hasPrevPage && (
-                <div className="alignleft">
-                  <a
-                    href="#prev"
-                    aria-label={__('Previous Page', 'et_builder')}
-                    onClick={handlePreviousPage}
-                  >
-                    {__('« Older Entries', 'et_builder')}
-                  </a>
-                </div>
-              )
-            }
-            {
-              hasNextPage && (
-                <div className="alignright">
-                  <a
-                    href="#next"
-                    aria-label={__('Next Page', 'et_builder')}
-                    onClick={handleNextPage}
-                  >
-                    {__('Next Entries »', 'et_builder')}
-                  </a>
-                </div>
-              )
-            }
-          </div>
-        )
-      }
-      {
-        hasWpPagenavi && (
-          // eslint-disable-next-line max-len
-          // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
-          <div
-            role="navigation"
-            aria-label="Pagination Navigation"
-            onClick={handleWpPagenaviPagination}
+  if (hasWpPagenavi) {
+    return (
+      // eslint-disable-next-line max-len
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
+      <div
+        role="navigation"
+        aria-label="Pagination Navigation"
+        onClick={handleWpPagenaviPagination}
             // eslint-disable-next-line @typescript-eslint/naming-convention, react/no-danger
-            dangerouslySetInnerHTML={{ __html: metadata?.wpPagenavi }}
-          />
-        )
-      }
-    </React.Fragment>
+        dangerouslySetInnerHTML={{ __html: wpPagenavi }}
+      />
+    );
+  }
+
+  return (
+    <div className="pagination clearfix">
+      {hasPrevPage && (
+      <div className="alignleft">
+        <a
+          href="#prev"
+          aria-label={__('Previous Page', 'et_builder')}
+          onClick={handlePreviousPage}
+        >
+          {__('« Older Entries', 'et_builder')}
+        </a>
+      </div>
+      )}
+      {hasNextPage && (
+      <div className="alignright">
+        <a
+          href="#next"
+          aria-label={__('Next Page', 'et_builder')}
+          onClick={handleNextPage}
+        >
+          {__('Next Entries »', 'et_builder')}
+        </a>
+      </div>
+      )}
+    </div>
   );
 };
 

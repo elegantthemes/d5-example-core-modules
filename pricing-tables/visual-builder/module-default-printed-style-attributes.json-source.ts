@@ -54,9 +54,8 @@ const pricingTablesModuleDefaultPrintedStyleAttributes: Metadata.DefaultAttribut
         font: {
           desktop: {
             value: {
-              headingLevel: 'h2',
-              size:         '22px',
-              lineHeight:   '1em',
+              size:       '22px',
+              lineHeight: '1em',
             },
           },
         },

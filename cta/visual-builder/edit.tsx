@@ -1,5 +1,6 @@
 import React, {
   type ReactElement,
+  useRef,
 } from 'react';
 
 import {
@@ -23,34 +24,43 @@ import { type CtaEditProps } from './types';
 const CtaEdit = ({
   attrs,
   id,
+  isFirst,
+  isLast,
   name,
   elements,
-}: CtaEditProps): ReactElement => (
-  <ModuleContainer
-    attrs={attrs}
-    elements={elements}
-    id={id}
-    name={name}
-    stylesComponent={ModuleStyles}
-    scriptDataComponent={ModuleScriptData}
-    classnamesFunction={moduleClassnames}
-  >
-    {elements.styleComponents({
-      attrName: 'module',
-    })}
-    <div className="et_pb_promo_description">
-      {elements.render({
-        attrName: 'title',
+}: CtaEditProps): ReactElement => {
+  const ctaRef = useRef(null);
+
+  return (
+    <ModuleContainer
+      attrs={attrs}
+      domRef={ctaRef}
+      elements={elements}
+      id={id}
+      isFirst={isFirst}
+      isLast={isLast}
+      name={name}
+      stylesComponent={ModuleStyles}
+      scriptDataComponent={ModuleScriptData}
+      classnamesFunction={moduleClassnames}
+    >
+      {elements.styleComponents({
+        attrName: 'module',
       })}
+      <div className="et_pb_promo_description">
+        {elements.render({
+          attrName: 'title',
+        })}
+        {elements.render({
+          attrName: 'content',
+        })}
+      </div>
       {elements.render({
-        attrName: 'content',
+        attrName: 'button',
       })}
-    </div>
-    {elements.render({
-      attrName: 'button',
-    })}
-  </ModuleContainer>
-);
+    </ModuleContainer>
+  );
+};
 
 export {
   CtaEdit,

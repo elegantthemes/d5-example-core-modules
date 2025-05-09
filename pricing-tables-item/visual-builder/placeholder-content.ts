@@ -1,6 +1,6 @@
 import { _x } from '@wordpress/i18n';
 
-import { placeholderContent as placeholder } from '@divi/module';
+import { placeholderContent as placeholder } from '@divi/module-utils';
 import { type PricingTableAttrs } from '@divi/types';
 
 /**

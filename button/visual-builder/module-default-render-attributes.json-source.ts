@@ -43,26 +43,6 @@ const buttonModuleDefaultRenderAttributes: Metadata.DefaultAttributes<ButtonAttr
           },
         },
       },
-      border: {
-        desktop: {
-          value: {
-            styles: {
-              all: {
-                color: '',
-              },
-            },
-          },
-        },
-      },
-      font: {
-        font: {
-          desktop: {
-            value: {
-              color: '',
-            },
-          },
-        },
-      },
     },
   },
 };

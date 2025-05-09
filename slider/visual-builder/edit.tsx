@@ -22,6 +22,7 @@ import { moduleClassnames } from './module-classnames';
 import { ModuleScriptData } from './module-script-data';
 import { ModuleStyles } from './module-styles';
 import { type SliderEditProps } from './types';
+import './style.scss';
 
 /**
  * Text component of visual builder.
@@ -37,6 +38,8 @@ const SliderEdit = ({
   elements,
   defaultPrintedStyleAttrs,
   id,
+  isFirst,
+  isLast,
   name,
   childrenIds,
 }: SliderEditProps): ReactElement => {
@@ -114,6 +117,29 @@ const SliderEdit = ({
     initSlider();
   };
 
+  // Keep track of the previous children count.
+  const prevChildrenCount = useRef(childrenIds.length);
+
+  useEffect(() => {
+    if (childrenIds.length > prevChildrenCount.current) {
+      setTimeout(() => {
+        const $slider = jQuery(slider.current);
+
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const sliderApi = $slider.data('et_pb_simple_slider');
+
+        if (isObject(sliderApi)) {
+          // @ts-expect-error: the method is available
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+          sliderApi.et_slider_move_to(childrenIds.length - 1);
+        }
+      }, 600);
+    }
+
+    // Update previous count
+    prevChildrenCount.current = childrenIds.length;
+  }, [childrenIds]);
+
   useDeepEffect(() => {
     clearTimeout(reInitTimeout?.current);
     reInitTimeout.current = setTimeout(() => {
@@ -148,6 +174,8 @@ const SliderEdit = ({
       defaultPrintedStyleAttrs={defaultPrintedStyleAttrs}
       childrenIds={childrenIds}
       id={id}
+      isFirst={isFirst}
+      isLast={isLast}
       name={name}
       domRef={slider}
       stylesComponent={ModuleStyles}

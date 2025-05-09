@@ -1,6 +1,7 @@
 import React, { type ReactElement } from 'react';
 
 import {
+  CssStyle,
   StyleContainer,
   type StylesProps,
 } from '@divi/module';
@@ -20,6 +21,7 @@ import {
 
 export const ModuleStyles = ({
   attrs,
+  baseOrderClass,
   parentAttrs,
   settings,
   orderClass,
@@ -28,6 +30,7 @@ export const ModuleStyles = ({
   noStyleTag,
   defaultPrintedStyleAttrs,
   elements,
+  selectorPrefix = '',
 }: StylesProps<PricingTableAttrs, PricingTablesAttrs>): ReactElement => {
   const parentButtonAttr = getAttrByMode(parentAttrs?.button?.decoration?.button);
 
@@ -68,16 +71,9 @@ export const ModuleStyles = ({
             {
               componentName: 'divi/common',
               props:         {
-                selector:            `.et_pb_pricing .et_pb_pricing_table${orderClass}`,
+                selector:            `${selectorPrefix}.et_pb_pricing .et_pb_pricing_table${baseOrderClass}`,
                 attr:                attrs?.module?.decoration?.border,
                 declarationFunction: pricingTableBorderStyleDeclaration,
-              },
-            },
-            {
-              componentName: 'divi/css',
-              props:         {
-                attr:      attrs.css,
-                cssFields: elements?.moduleMetadata?.customCssFields,
               },
             },
           ],
@@ -130,6 +126,22 @@ export const ModuleStyles = ({
           ),
         },
       })}
+      {/* Module
+        * This is only to output the CSS form Custom CSS from Advanced Tab
+        * at the very end of the DOM, so that it can override the css from
+        * design tab. This is to fix the issue for re-ordering css
+        * https://github.com/elegantthemes/Divi/issues/38331
+        *
+        * This may not be the ideal solution as per the conversation here
+        * https://elegantthemes.slack.com/archives/C01CW343ZJ9/p1724934785470029?
+        * thread_ts=1708688820.993489&cid=C01CW343ZJ9
+        * so might need to re-visit this sometime later.
+      */}
+      <CssStyle
+        selector={orderClass}
+        attr={attrs.css}
+        cssFields={elements?.moduleMetadata?.customCssFields}
+      />
     </StyleContainer>
   );
 };

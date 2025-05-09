@@ -13,7 +13,21 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
   titles:      'Pricing Table Items',
   moduleIcon:  'divi/module-pricing-table',
   category:    'child-module',
-  attributes:  {
+  videos:      [
+    {
+      id:   'd2MTMey712I',
+      name: 'An introduction to the Pricing Table module',
+    },
+    {
+      id:   '1iqjhnHVA9Y',
+      name: 'Design Settings and Advanced Module Settings',
+    },
+    {
+      id:   'boNZZ0MYU0E',
+      name: 'Saving and loading from the library',
+    },
+  ],
+  attributes: {
     module: {
       type:     'object',
       selector: '{{selector}}',
@@ -55,8 +69,9 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
             component:  {
               name:  'divi/composite',
               props: {
-                groupLabel: 'Layout',
-                fields:     {
+                groupLabel:        'Layout',
+                clipboardCategory: 'style',
+                fields:            {
                   featured: {
                     render:      true,
                     label:       'Make This Table Featured',
@@ -65,6 +80,7 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
                       responsive: false,
                       hover:      false,
                       sticky:     false,
+                      preset:     ['html'],
                     },
 
                     // Built-in component.
@@ -96,16 +112,16 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
           selector: '{{selector}}.et_pb_pricing_table',
         },
         border: {
-          selector: '.et_pb_pricing .et_pb_pricing_table{{selector}}',
+          selector: '{{selectorPrefix}}.et_pb_pricing .et_pb_pricing_table{{baseSelector}}',
         },
         spacing: {
-          selector:          '.et_pb_pricing {{selector}} .et_pb_pricing_heading,.et_pb_pricing {{selector}} .et_pb_pricing_content_top,.et_pb_pricing {{selector}} .et_pb_pricing_content',
+          selector:          '{{selectorPrefix}}.et_pb_pricing {{baseSelector}} .et_pb_pricing_heading,{{selectorPrefix}}.et_pb_pricing {{baseSelector}} .et_pb_pricing_content_top,{{selectorPrefix}}.et_pb_pricing {{baseSelector}} .et_pb_pricing_content',
           propertySelectors: {
             desktop: {
               value: {
-                'padding-left':   '.et_pb_pricing {{selector}} .et_pb_pricing_heading,.et_pb_pricing {{selector}} .et_pb_pricing_content_top,.et_pb_pricing {{selector}} .et_pb_pricing_content,{{selector}} .et_pb_button_wrapper',
-                'padding-right':  '.et_pb_pricing {{selector}} .et_pb_pricing_heading,.et_pb_pricing {{selector}} .et_pb_pricing_content_top,.et_pb_pricing {{selector}} .et_pb_pricing_content,{{selector}} .et_pb_button_wrapper',
-                'padding-bottom': '.et_pb_pricing {{selector}} .et_pb_pricing_heading,.et_pb_pricing {{selector}} .et_pb_pricing_content_top,.et_pb_pricing {{selector}} .et_pb_pricing_content,.et_pb_pricing {{selector}}',
+                'padding-left':   '{{selectorPrefix}}.et_pb_pricing {{baseSelector}} .et_pb_pricing_heading,{{selectorPrefix}}.et_pb_pricing {{baseSelector}} .et_pb_pricing_content_top,{{selectorPrefix}}.et_pb_pricing {{baseSelector}} .et_pb_pricing_content,{{selector}} .et_pb_button_wrapper',
+                'padding-right':  '{{selectorPrefix}}.et_pb_pricing {{baseSelector}} .et_pb_pricing_heading,{{selectorPrefix}}.et_pb_pricing {{baseSelector}} .et_pb_pricing_content_top,{{selectorPrefix}}.et_pb_pricing {{baseSelector}} .et_pb_pricing_content,{{selector}} .et_pb_button_wrapper',
+                'padding-bottom': '{{selectorPrefix}}.et_pb_pricing {{baseSelector}} .et_pb_pricing_heading,{{selectorPrefix}}.et_pb_pricing {{baseSelector}} .et_pb_pricing_content_top,{{selectorPrefix}}.et_pb_pricing {{baseSelector}} .et_pb_pricing_content,{{selectorPrefix}}.et_pb_pricing {{baseSelector}}',
               },
             },
           },
@@ -132,6 +148,7 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
                   type: 'text',
                 },
                 sticky: false,
+                preset: 'content',
               },
               component: {
                 name: 'divi/text',
@@ -150,6 +167,7 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
                   type: 'text',
                 },
                 sticky: false,
+                preset: 'content',
               },
               component: {
                 name: 'divi/text',
@@ -181,7 +199,6 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
         class: 'et_pb_dollar_sign',
       },
       tagName:           'span',
-      elementType:       'heading',
       inlineEditor:      'plainText',
       childrenSanitizer: 'et_core_esc_previously',
       styleProps:        {
@@ -218,6 +235,7 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
                 type: 'text',
               },
               sticky: false,
+              preset: 'content',
             },
 
             // Built-in component.
@@ -249,7 +267,6 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
         class: 'et_pb_best_value',
       },
       tagName:           'span',
-      elementType:       'heading',
       inlineEditor:      'plainText',
       childrenSanitizer: 'et_core_esc_previously',
       styleProps:        {
@@ -286,6 +303,7 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
                 type: 'text',
               },
               sticky: false,
+              preset: 'content',
             },
 
             // Built-in component.
@@ -348,7 +366,7 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
       styleProps:        {
         selector:   '{{selector}} .et_pb_pricing_heading h2,{{selector}} .et_pb_pricing_heading h1.et_pb_pricing_title,{{selector}} .et_pb_pricing_heading h3.et_pb_pricing_title,{{selector}} .et_pb_pricing_heading h4.et_pb_pricing_title,{{selector}} .et_pb_pricing_heading h5.et_pb_pricing_title,{{selector}} .et_pb_pricing_heading h6.et_pb_pricing_title,{{selector}}.et_pb_featured_table .et_pb_pricing_heading h2,{{selector}}.et_pb_featured_table .et_pb_pricing_heading h1.et_pb_pricing_title,{{selector}}.et_pb_featured_table .et_pb_pricing_heading h3.et_pb_pricing_title,{{selector}}.et_pb_featured_table .et_pb_pricing_heading h4.et_pb_pricing_title,{{selector}}.et_pb_featured_table .et_pb_pricing_heading h5.et_pb_pricing_title,{{selector}}.et_pb_featured_table .et_pb_pricing_heading h6.et_pb_pricing_title',
         background: {
-          selector: '.et_pb_pricing {{selector}}.et_pb_pricing_table .et_pb_pricing_heading',
+          selector: '{{selectorPrefix}}.et_pb_pricing {{baseSelector}}.et_pb_pricing_table .et_pb_pricing_heading',
         },
         font: {
           selector:  '{{selector}} .et_pb_pricing_heading h2,{{selector}} .et_pb_pricing_heading h1.et_pb_pricing_title,{{selector}} .et_pb_pricing_heading h3.et_pb_pricing_title,{{selector}} .et_pb_pricing_heading h4.et_pb_pricing_title,{{selector}} .et_pb_pricing_heading h5.et_pb_pricing_title,{{selector}} .et_pb_pricing_heading h6.et_pb_pricing_title,{{selector}}.et_pb_featured_table .et_pb_pricing_heading h2,{{selector}}.et_pb_featured_table .et_pb_pricing_heading h1.et_pb_pricing_title,{{selector}}.et_pb_featured_table .et_pb_pricing_heading h3.et_pb_pricing_title,{{selector}}.et_pb_featured_table .et_pb_pricing_heading h4.et_pb_pricing_title,{{selector}}.et_pb_featured_table .et_pb_pricing_heading h5.et_pb_pricing_title,{{selector}}.et_pb_featured_table .et_pb_pricing_heading h6.et_pb_pricing_title',
@@ -374,6 +392,7 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
                 type: 'text',
               },
               sticky: false,
+              preset: 'content',
             },
             component: {
               name: 'divi/text',
@@ -441,7 +460,6 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
         class: 'et_pb_sum',
       },
       tagName:           'span',
-      elementType:       'heading',
       inlineEditor:      'plainText',
       childrenSanitizer: 'et_core_esc_previously',
       styleProps:        {
@@ -459,7 +477,7 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
           },
         },
         border: {
-          selector: '.et_pb_pricing {{selector}} .et_pb_pricing_content_top',
+          selector: '{{selectorPrefix}}.et_pb_pricing {{baseSelector}} .et_pb_pricing_content_top',
         },
         background: {
           selector: '{{selector}} .et_pb_pricing_content_top',
@@ -524,6 +542,7 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
                             icon: 'divi/align-right',
                           },
                         },
+                        showLabel: false,
                       },
                     },
                   },
@@ -543,7 +562,7 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
         hasWrapper: true,
       },
       styleProps: {
-        selector: '.et_pb_pricing {{selector}} .et_pb_pricing_table_button.et_pb_button',
+        selector: '{{selectorPrefix}}.et_pb_pricing {{baseSelector}} .et_pb_pricing_table_button.et_pb_button',
         border:   {
           important: {
             desktop: {
@@ -557,19 +576,19 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
           propertySelectors: {
             desktop: {
               value: {
-                'text-align': '.et_pb_pricing {{selector}} .et_pb_button_wrapper',
+                'text-align': '{{selectorPrefix}}.et_pb_pricing {{baseSelector}} .et_pb_button_wrapper',
               },
             },
           },
         },
         font: {
-          selector:  '.et_pb_pricing {{selector}} .et_pb_pricing_table_button.et_pb_button',
+          selector:  '{{selectorPrefix}}.et_pb_pricing {{baseSelector}} .et_pb_pricing_table_button.et_pb_button',
           important: {
             font: true,
           },
         },
         spacing: {
-          selector:  '.et_pb_pricing {{selector}} .et_pb_pricing_table_button.et_pb_button',
+          selector:  '{{selectorPrefix}}.et_pb_pricing {{baseSelector}} .et_pb_pricing_table_button.et_pb_button',
           important: {
             desktop: {
               value: {
@@ -618,7 +637,10 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
             render:      true,
 
             features: {
-              sticky: false,
+              sticky:         false,
+              dynamicContent: {
+                type: 'text',
+              },
             },
 
             // Built-in component.
@@ -652,8 +674,9 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
             component:  {
               name:  'divi/composite',
               props: {
-                groupLabel: 'Bullet',
-                fields:     {
+                groupLabel:        'Bullet',
+                clipboardCategory: 'style',
+                fields:            {
                   bulletColor: {
                     render:      true,
                     label:       'Bullet Color',
@@ -761,7 +784,9 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
         component: {
           name:  'divi/composite',
           props: {
-            groupLabel: 'Title Text',
+            groupLabel:        'Title Text',
+            clipboardCategory: 'style',
+            presetGroup:       'divi/font',
           },
         },
       },
@@ -774,7 +799,9 @@ const pricingTableModuleMetaData: Metadata.Values<PricingTableAttrs> = {
         component: {
           name:  'divi/composite',
           props: {
-            groupLabel: 'Price Text',
+            groupLabel:        'Price Text',
+            clipboardCategory: 'style',
+            presetGroup:       'divi/font',
           },
         },
       },

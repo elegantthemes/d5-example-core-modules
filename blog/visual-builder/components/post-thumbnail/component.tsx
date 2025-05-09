@@ -1,7 +1,6 @@
-import React, { type ReactElement } from 'react';
+import React, { Fragment, type ReactElement } from 'react';
 
 import { processFontIcon } from '@divi/icon-library';
-import { getAttrByMode } from '@divi/module-utils';
 
 import { type PostThumbnailProps } from './types';
 
@@ -14,26 +13,60 @@ import { type PostThumbnailProps } from './types';
  *
  * @returns {ReactElement}
  */
-const PostThumbnail = ({ post, enable, showOverlay, overlayIcon }: PostThumbnailProps): ReactElement => {
-  const isThumbnail = 'on' === getAttrByMode(enable);
-
+const PostThumbnail = ({
+  post,
+  overlayIcon,
+  hasWrapper,
+  showOverlay,
+}: PostThumbnailProps): ReactElement => {
   const iconValue = processFontIcon(overlayIcon);
 
+  const renderOverlay = () => {
+    if (! showOverlay) {
+      return null;
+    }
+
+    return (
+      <span
+        className="et_overlay et_pb_inline_icon"
+        data-icon={iconValue}
+      />
+    );
+  };
+
+  const renderThumbnail = () => {
+    if (! post.thumbnail?.src) {
+      return null;
+    }
+
+    return (
+      <a href={post.permalink} className="entry-featured-image-url">
+        <img
+          src={post?.thumbnail?.src}
+          className={post?.thumbnail?.class}
+          alt={post.thumbnail.alt}
+          srcSet={post.thumbnail.srcset}
+          sizes={post.thumbnail.sizes}
+          width={post.thumbnail.width}
+          height={post.thumbnail.height}
+        />
+        {renderOverlay()}
+      </a>
+    );
+  };
+
+  if (hasWrapper) {
+    return (
+      <div className="et_pb_image_container">
+        {renderThumbnail()}
+      </div>
+    );
+  }
+
   return (
-    <React.Fragment>
-      {
-        post.thumbnail?.src && isThumbnail && (
-          <a href={post.permalink} className="entry-featured-image-url">
-            <img src={post?.thumbnail?.src} alt={post.thumbnail.alt} />
-            {
-              'on' === showOverlay && (
-                <span className="et_overlay et_pb_inline_icon" data-icon={iconValue} />
-              )
-            }
-          </a>
-        )
-      }
-    </React.Fragment>
+    <Fragment>
+      {renderThumbnail()}
+    </Fragment>
   );
 };
 

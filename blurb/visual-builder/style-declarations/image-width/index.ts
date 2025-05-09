@@ -19,7 +19,7 @@ export const imageWidthStyleDeclaration = (
   });
 
   if (attrValue?.image) {
-    declarations.add('max-width', attrValue?.image);
+    declarations.add('width', attrValue?.image);
   }
 
   return declarations.value as string;

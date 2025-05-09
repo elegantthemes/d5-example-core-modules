@@ -7,9 +7,7 @@ import {
   isEmpty,
 } from 'lodash';
 
-import {
-  ModuleContainer,
-} from '@divi/module';
+import { InnerMousetrap, ModuleContainer } from '@divi/module';
 import {
   getAttrByMode,
 } from '@divi/module-utils';
@@ -38,7 +36,6 @@ export const PricingTableEdit = ({
 }: PricingTableEditProps): ReactElement => {
   const per                = getAttrByMode(attrs?.currencyFrequency?.innerContent)?.per ?? '';
   const currency           = getAttrByMode(attrs?.currencyFrequency?.innerContent)?.currency ?? '';
-  const content            = getAttrByMode(attrs?.content?.innerContent) ?? '';
   const parentHeadingLevel = getAttrByMode(parentAttrs?.title?.decoration?.font?.font)?.headingLevel ?? 'h2';
   let headingLevel         = getAttrByMode(attrs?.title?.decoration?.font?.font)?.headingLevel;
   headingLevel             = isEmpty(headingLevel) ? parentHeadingLevel : headingLevel;
@@ -79,6 +76,7 @@ export const PricingTableEdit = ({
       hasModuleClassName={false}
       classnamesFunction={moduleClassnames}
     >
+      <InnerMousetrap type="edited" />
       {elements.styleComponents({
         attrName: 'module',
       })}
@@ -92,6 +90,7 @@ export const PricingTableEdit = ({
         })}
       </div>
       <div className="et_pb_pricing_content_top">
+        <InnerMousetrap type="edited" />
         <span className="et_pb_et_price">
           {elements.render({
             attrName:              'currencyFrequency',
@@ -122,7 +121,15 @@ export const PricingTableEdit = ({
         </span>
       </div>
       <div className="et_pb_pricing_content">
-        <PricingList content={content} />
+        <InnerMousetrap type="edited" />
+        {elements.render({
+          attrName:              'content',
+          inlineEditor:          'plainText',
+          allowHtml:             true,
+          inlineTextEditorProps: {
+            contentRenderer: value => <PricingList content={value} />,
+          },
+        })}
       </div>
       {elements.render({
         attrName: 'button',

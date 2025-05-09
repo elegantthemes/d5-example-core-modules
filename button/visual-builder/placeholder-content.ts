@@ -1,4 +1,4 @@
-import { placeholderContent as placeholder } from '@divi/module';
+import { placeholderContent as placeholder } from '@divi/module-utils';
 import { type ButtonAttrs } from '@divi/types';
 
 /**
@@ -15,17 +15,6 @@ export const placeholderContent: ButtonAttrs = {
       desktop: {
         value: {
           text: placeholder.button,
-        },
-      },
-    },
-    decoration: {
-      button: {
-        desktop: {
-          value: {
-            icon: {
-              enable: 'on',
-            },
-          },
         },
       },
     },

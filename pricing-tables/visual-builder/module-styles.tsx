@@ -1,6 +1,7 @@
 import React, { type ReactElement } from 'react';
 
 import {
+  CssStyle,
   StyleContainer,
   type StylesProps,
 } from '@divi/module';
@@ -71,13 +72,6 @@ export const ModuleStyles = ({
               selector:            `${orderClass} .et_pb_pricing_table`,
               attr:                attrs?.module?.decoration?.border,
               declarationFunction: pricingTableBorderStyleDeclaration,
-            },
-          },
-          {
-            componentName: 'divi/css',
-            props:         {
-              attr:      attrs.css,
-              cssFields: elements?.moduleMetadata?.customCssFields,
             },
           },
         ],
@@ -176,5 +170,22 @@ export const ModuleStyles = ({
     {elements.style({
       attrName: 'featuredExcluded',
     })}
+
+    {/* Module
+      * This is only to output the CSS form Custom CSS from Advanced Tab
+      * at the very end of the DOM, so that it can override the css from
+      * design tab. This is to fix the issue for re-ordering css
+      * https://github.com/elegantthemes/Divi/issues/38331
+      *
+      * This may not be the ideal solution as per the conversation here
+      * https://elegantthemes.slack.com/archives/C01CW343ZJ9/p1724934785470029?
+      * thread_ts=1708688820.993489&cid=C01CW343ZJ9
+      * so might need to re-visit this sometime later.
+    */}
+    <CssStyle
+      selector={orderClass}
+      attr={attrs.css}
+      cssFields={elements?.moduleMetadata?.customCssFields}
+    />
   </StyleContainer>
 );

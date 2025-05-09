@@ -8,6 +8,7 @@ import { CtaEdit } from './edit';
 import { ctaModuleMetaData } from './module.json-source';
 import { ctaModuleDefaultPrintedStyleAttributes } from './module-default-printed-style-attributes.json-source';
 import { ctaModuleDefaultRenderAttributes } from './module-default-render-attributes.json-source';
+import { ModuleStyles } from './module-styles';
 import { placeholderContent } from './placeholder-content';
 
 /**
@@ -21,7 +22,8 @@ export const cta: ModuleLibrary.Module.RegisterDefinition<CtaAttrs> = {
   defaultAttrs:             ctaModuleDefaultRenderAttributes,
   defaultPrintedStyleAttrs: ctaModuleDefaultPrintedStyleAttributes,
   renderers:                {
-    edit: CtaEdit,
+    edit:   CtaEdit,
+    styles: ModuleStyles,
   },
   placeholderContent,
   conversionOutline,

@@ -39,8 +39,9 @@ const sliderModuleDefaultPrintedStyleAttributes: Metadata.DefaultAttributes<Slid
         font: {
           desktop: {
             value: {
-              size:       '46px',
-              lineHeight: '1em',
+              size:         '46px',
+              lineHeight:   '1em',
+              headingLevel: 'h2',
             },
           },
         },

@@ -1,4 +1,4 @@
-import { type BlurbAttrs, type ModuleMetadata } from '@divi/types';
+import { type BlurbAttrs, type Metadata } from '@divi/types';
 
 /**
  * Blurb Module Meta Data.
@@ -6,7 +6,7 @@ import { type BlurbAttrs, type ModuleMetadata } from '@divi/types';
  * Note: The module metadata will be used to generate `module.json` upon build.
  * Variable name must end with `ModuleMetaData` to be picked up by the build script.
  */
-const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
+const blurbModuleMetaData: Metadata.Values<BlurbAttrs> = {
   name:        'divi/blurb',
   d4Shortcode: 'et_pb_blurb',
   title:       'Blurb',
@@ -15,7 +15,7 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
   category:    'module',
   videos:      [
     {
-      id:   'XW7HR86lp8U',
+      id:   'SFuDWEMH-qg',
       name: 'An introduction to the Blurb module',
     },
     {
@@ -30,7 +30,7 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
   attributes: {
     imageIcon: {
       type:     'object',
-      selector: '{{selector}} .et-pb-icon, {{selector}} .et_pb_image_wrap',
+      selector: '{{selector}} .et_pb_main_blurb_image img',
       settings: {
         innerContent: {
           groupType: 'group-items',
@@ -45,6 +45,7 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
                 hover:      false,
                 sticky:     false,
                 responsive: false,
+                preset:     'content',
               },
               render:   true,
               priority: 10,
@@ -62,6 +63,7 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
               description: 'Choose an icon to display with your blurb.',
               features:    {
                 sticky: false,
+                preset: 'content',
               },
               render:   true,
               priority: 10,
@@ -84,13 +86,22 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
                 sticky:     false,
                 responsive: true,
                 hover:      true,
+                preset:     'content',
               },
               render:   true,
               priority: 10,
 
               component: {
-                type: 'field',
-                name: 'divi/upload',
+                type:  'field',
+                name:  'divi/upload',
+                props: {
+                  syncImageData: {
+                    src:       true,
+                    id:        true,
+                    alt:       true,
+                    titleText: false,
+                  },
+                },
               },
             },
             alt: {
@@ -106,6 +117,7 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
                 sticky:     false,
                 responsive: false,
                 hover:      false,
+                preset:     ['html'],
               },
               render:   true,
               priority: 10,
@@ -124,6 +136,7 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
               features:    {
                 sticky: false,
                 hover:  false,
+                preset: ['html'],
               },
               render:   true,
               priority: 20,
@@ -215,24 +228,17 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
 
                 component: {
                   type:  'field',
-                  name:  'divi/range',
+                  name:  'divi/range', // has unit-picker
                   props: {
-                    min:          1,
-                    max:          200,
-                    allowedUnits: [
-                      '%',
-                      'em',
-                      'rem',
-                      'px',
-                      'cm',
-                      'mm',
-                      'in',
-                      'pt',
-                      'pc',
-                      'ex',
-                      'vh',
-                      'vw',
-                    ],
+                    cssProperty: 'width',
+                    min:         1,
+                    max:         200,
+                  },
+                },
+                features: {
+                  preset:         ['html'],
+                  dynamicContent: {
+                    type: 'number',
                   },
                 },
               },
@@ -247,24 +253,17 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
 
                 component: {
                   type:  'field',
-                  name:  'divi/range',
+                  name:  'divi/range', // has unit-picker
                   props: {
-                    min:          1,
-                    max:          200,
-                    allowedUnits: [
-                      '%',
-                      'em',
-                      'rem',
-                      'px',
-                      'cm',
-                      'mm',
-                      'in',
-                      'pt',
-                      'pc',
-                      'ex',
-                      'vh',
-                      'vw',
-                    ],
+                    cssProperty: 'font-size',
+                    min:         1,
+                    max:         200,
+                  },
+                },
+                features: {
+                  preset:         ['html'],
+                  dynamicContent: {
+                    type: 'number',
                   },
                 },
               },
@@ -299,6 +298,7 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
                       icon: 'divi/align-right',
                     },
                   },
+                  showLabel: false,
                 },
               },
             },
@@ -388,42 +388,9 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
           },
         },
       },
-      default: {
-        innerContent: {
-          desktop: {
-            value: {
-              useIcon:   'off',
-              animation: 'top',
-            },
-          },
-        },
-        advanced: {
-          color: {
-            desktop: {
-              value: '#7ebec5',
-            },
-          },
-          placement: {
-            desktop: {
-              value: 'top',
-            },
-          },
-        },
-      },
-      defaultPrintedStyle: {
-        advanced: {
-          width: {
-            desktop: {
-              value: {
-                icon:  '96px',
-                image: '100%',
-              },
-            },
-          },
-        },
-      },
       styleProps: {
-        spacing: {
+        selector: '{{selector}} .et-pb-icon, {{selector}} .et_pb_image_wrap',
+        spacing:  {
           selector:  '{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon',
           important: true,
         },
@@ -431,11 +398,32 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
           selector:   '{{selector}} .et_pb_main_blurb_image .et_pb_image_wrap',
           useOverlay: true,
         },
-        filter: {
-          selector: '{{selector}} .et_pb_main_blurb_image',
+        filters: {
+          selector:  '{{selector}} .et_pb_main_blurb_image',
+          selectors: {
+            desktop: {
+              value: '{{selector}} .et_pb_main_blurb_image',
+              hover: '{{selector}}{{:hover}} .et_pb_main_blurb_image',
+            },
+          },
         },
         border: {
-          selector: '{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon',
+          selector:  '{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon',
+          selectors: {
+            desktop: {
+              value: '{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon',
+              hover: '{{selector}}{{:hover}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}}{{:hover}} .et_pb_main_blurb_image .et-pb-icon',
+            },
+          },
+        },
+        background: {
+          selector:  '{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon',
+          selectors: {
+            desktop: {
+              value: '{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon',
+              hover: '{{selector}}{{:hover}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}}{{:hover}} .et_pb_main_blurb_image .et-pb-icon',
+            },
+          },
         },
       },
       styleComponentsProps: {
@@ -480,6 +468,7 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
           boxShadow:  {},
           conditions: {},
           disabledOn: {},
+          order:      {},
           filters:    {},
           overflow:   {},
           position:   {},
@@ -506,27 +495,6 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
           zIndex:     {},
         },
       },
-      default: {
-        meta: {
-          adminLabel: {
-            desktop: {
-              value: 'Blurb',
-            },
-          },
-        },
-        advanced: {
-          text: {
-            text: {
-              desktop: {
-                value: {
-                  orientation: 'left',
-                  color:       'light',
-                },
-              },
-            },
-          },
-        },
-      },
       styleProps: {
         spacing: {
           important: true,
@@ -542,28 +510,6 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
           font: {},
         },
       },
-      defaultPrintedStyle: {
-        innerContent: {
-          desktop: {
-            value: {
-              target: 'off',
-            },
-          },
-        },
-      },
-      default: {
-        decoration: {
-          font: {
-            font: {
-              desktop: {
-                value: {
-                  headingLevel: 'h4',
-                },
-              },
-            },
-          },
-        },
-      },
       attributes: {
         class: 'et_pb_module_header',
       },
@@ -576,7 +522,16 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
           selectors: {
             desktop: {
               value: '{{selector}} .et_pb_module_header, {{selector}} .et_pb_module_header a',
-              hover: '{{selector}}:hover .et_pb_module_header, {{selector}}:hover .et_pb_module_header a',
+              hover: '{{selector}}{{:hover}} .et_pb_module_header, {{selector}}{{:hover}} .et_pb_module_header a',
+            },
+          },
+          important: {
+            font: {
+              desktop: {
+                value: {
+                  color: true,
+                },
+              },
             },
           },
         },
@@ -584,14 +539,21 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
     },
     content: {
       type:        'object',
-      selector:    '{{selector}}, {{selector}} .et_pb_blurb_description',
+      selector:    '{{selector}} .et_pb_blurb_description',
       elementType: 'content',
       attributes:  {
         class: 'et_pb_blurb_description',
       },
       settings: {
-        innerContent: {},
-        decoration:   {
+        innerContent: {
+          item: {
+            groupSlug: 'contentText',
+            features:  {
+              dynamicContent: { type: 'text' },
+            },
+          },
+        },
+        decoration: {
           bodyFont: {},
         },
       },
@@ -599,8 +561,8 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
         bodyFont: {
           selectors: {
             desktop: {
-              value: '{{selector}}, {{selector}} .et_pb_blurb_description',
-              hover: '{{selector}}:hover, {{selector}}:hover .et_pb_blurb_description',
+              value: '{{selector}} .et_pb_blurb_description',
+              hover: '{{selector}}{{:hover}}, {{selector}}{{:hover}} .et_pb_blurb_description',
             },
           },
         },
@@ -628,36 +590,17 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
                 render:      true,
                 component:   {
                   type:  'field',
-                  name:  'divi/range',
+                  name:  'divi/range', // has unit-picker
                   props: {
-                    max:          1100,
-                    allowedUnits: [
-                      '%',
-                      'em',
-                      'rem',
-                      'px',
-                      'cm',
-                      'mm',
-                      'in',
-                      'pt',
-                      'pc',
-                      'ex',
-                      'vh',
-                      'vw',
-                    ],
+                    cssProperty: 'width',
+                    max:         1100,
                   },
                 },
-              },
-            },
-          },
-        },
-      },
-      defaultPrintedStyle: {
-        decoration: {
-          sizing: {
-            desktop: {
-              value: {
-                maxWidth: '550px',
+                features: {
+                  dynamicContent: {
+                    type: 'number',
+                  },
+                },
               },
             },
           },
@@ -707,7 +650,8 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
         component:     {
           name:  'divi/composite',
           props: {
-            groupLabel: 'Image & Icon',
+            groupLabel:        'Image & Icon',
+            clipboardCategory: 'style',
           },
         },
       },
@@ -721,7 +665,9 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
         component:     {
           name:  'divi/composite',
           props: {
-            groupLabel: 'Sizing',
+            groupLabel:        'Sizing',
+            clipboardCategory: 'style',
+            presetGroup:       'divi/sizing',
           },
         },
       },
@@ -735,7 +681,9 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
         component:     {
           name:  'divi/composite',
           props: {
-            groupLabel: 'Animation',
+            groupLabel:        'Animation',
+            clipboardCategory: 'style',
+            presetGroup:       'divi/animation',
           },
         },
       },
@@ -753,6 +701,14 @@ const blurbModuleMetaData: ModuleMetadata<BlurbAttrs> = {
           },
         },
       },
+    },
+  },
+  mousetrap: {
+    inner: {
+
+      // Blurb has content wrapper which covers the surface of the module. Thus inner mousetrap needs to be added
+      // inside content wrapper.
+      edited: true,
     },
   },
 };

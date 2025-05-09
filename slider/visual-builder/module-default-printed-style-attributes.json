@@ -29,7 +29,8 @@
           "desktop": {
             "value": {
               "size": "46px",
-              "lineHeight": "1em"
+              "lineHeight": "1em",
+              "headingLevel": "h2"
             }
           }
         }

@@ -2,6 +2,10 @@
   transition: none !important;
 }
 
+.et_pb_button::after {
+  pointer-events: none;
+}
+
 .et_pb_empty_button .et_pb_button {
   background: none !important;
   border: none;

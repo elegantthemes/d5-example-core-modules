@@ -1,0 +1,1 @@
+export { overflowStyleDeclaration } from './overflow';

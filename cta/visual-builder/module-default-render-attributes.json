@@ -12,7 +12,7 @@
       "background": {
         "desktop": {
           "value": {
-            "color": "#7EBEC5"
+            "color": "var(--gcid-primary-color)"
           }
         }
       }
@@ -51,26 +51,6 @@
             "enable": "off",
             "icon": {
               "enable": "on"
-            }
-          }
-        }
-      },
-      "border": {
-        "desktop": {
-          "value": {
-            "styles": {
-              "all": {
-                "color": ""
-              }
-            }
-          }
-        }
-      },
-      "font": {
-        "font": {
-          "desktop": {
-            "value": {
-              "color": ""
             }
           }
         }

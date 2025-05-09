@@ -3,8 +3,6 @@ import { map } from 'lodash';
 
 import { __, sprintf } from '@wordpress/i18n';
 
-import { getAttrByMode } from '@divi/module-utils';
-
 import { type PostMetaProps } from './types';
 
 /**
@@ -16,22 +14,28 @@ import { type PostMetaProps } from './types';
  *
  * @returns {ReactElement}
  */
-const PostMeta = ({ post, enable }: PostMetaProps): ReactElement => {
+const PostMeta = ({
+  post,
+  showAuthor,
+  showDate,
+  showCategories,
+  showComments,
+}: PostMetaProps): ReactElement => {
   const postMeta: string[] = [];
 
-  if ('on' === getAttrByMode(enable?.author)) {
+  if (showAuthor) {
     postMeta.push(sprintf(__('by %s'), `<span class="author vcard"><a href="${post?.author?.link}" title="${sprintf(__('Posts by %s', 'et_builder'), post?.author?.name)}" rel="author">${post?.author?.name}</a></span>`));
   }
 
-  if ('on' === getAttrByMode(enable?.date)) {
+  if (showDate) {
     postMeta.push(`<span class="published">${post.date}</span>`);
   }
 
-  if ('on' === getAttrByMode(enable?.categories)) {
+  if (showCategories) {
     postMeta.push(map(post.categories, category => (`<a href="${category.link}" rel="tag">${category.name}</a>`)).join(', '));
   }
 
-  if ('on' === getAttrByMode(enable?.comments)) {
+  if (showComments) {
     postMeta.push(post.comment);
   }
 

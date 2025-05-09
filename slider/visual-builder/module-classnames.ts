@@ -18,23 +18,29 @@ import { type SliderAttrs } from '@divi/types';
  */
 export const moduleClassnames = ({
   attrs,
-  classnamesInstance,
-  childrenIds,
+  baseBreakpoint,
   breakpoint,
+  breakpointNames,
+  childrenIds,
+  classnamesInstance,
   state,
 }: ModuleClassnamesParams<SliderAttrs>): void => {
   // Module components.
   const showArrows = getAttrValue({
     attr: attrs?.arrows?.advanced?.show,
-    mode: 'getAndInheritAll',
+    baseBreakpoint,
     breakpoint,
+    breakpointNames,
+    mode: 'getAndInheritAll',
     state,
   });
 
   const showPagination = getAttrValue({
     attr: attrs?.pagination?.advanced?.show,
-    mode: 'getAndInheritAll',
+    baseBreakpoint,
     breakpoint,
+    breakpointNames,
+    mode: 'getAndInheritAll',
     state,
   });
 

@@ -8,7 +8,7 @@
   "category": "module",
   "videos": [
     {
-      "id": "XW7HR86lp8U",
+      "id": "SFuDWEMH-qg",
       "name": "An introduction to the Blurb module"
     },
     {
@@ -23,7 +23,7 @@
   "attributes": {
     "imageIcon": {
       "type": "object",
-      "selector": "{{selector}} .et-pb-icon, {{selector}} .et_pb_image_wrap",
+      "selector": "{{selector}} .et_pb_main_blurb_image img",
       "settings": {
         "innerContent": {
           "groupType": "group-items",
@@ -37,7 +37,8 @@
               "features": {
                 "hover": false,
                 "sticky": false,
-                "responsive": false
+                "responsive": false,
+                "preset": "content"
               },
               "render": true,
               "priority": 10,
@@ -53,7 +54,8 @@
               "label": "Icon",
               "description": "Choose an icon to display with your blurb.",
               "features": {
-                "sticky": false
+                "sticky": false,
+                "preset": "content"
               },
               "render": true,
               "priority": 10,
@@ -74,13 +76,22 @@
                 },
                 "sticky": false,
                 "responsive": true,
-                "hover": true
+                "hover": true,
+                "preset": "content"
               },
               "render": true,
               "priority": 10,
               "component": {
                 "type": "field",
-                "name": "divi/upload"
+                "name": "divi/upload",
+                "props": {
+                  "syncImageData": {
+                    "src": true,
+                    "id": true,
+                    "alt": true,
+                    "titleText": false
+                  }
+                }
               }
             },
             "alt": {
@@ -95,7 +106,10 @@
                 },
                 "sticky": false,
                 "responsive": false,
-                "hover": false
+                "hover": false,
+                "preset": [
+                  "html"
+                ]
               },
               "render": true,
               "priority": 10,
@@ -112,7 +126,10 @@
               "description": "This controls the direction of the lazy-loading animation.",
               "features": {
                 "sticky": false,
-                "hover": false
+                "hover": false,
+                "preset": [
+                  "html"
+                ]
               },
               "render": true,
               "priority": 20,
@@ -202,22 +219,17 @@
                   "type": "field",
                   "name": "divi/range",
                   "props": {
+                    "cssProperty": "width",
                     "min": 1,
-                    "max": 200,
-                    "allowedUnits": [
-                      "%",
-                      "em",
-                      "rem",
-                      "px",
-                      "cm",
-                      "mm",
-                      "in",
-                      "pt",
-                      "pc",
-                      "ex",
-                      "vh",
-                      "vw"
-                    ]
+                    "max": 200
+                  }
+                },
+                "features": {
+                  "preset": [
+                    "html"
+                  ],
+                  "dynamicContent": {
+                    "type": "number"
                   }
                 }
               },
@@ -233,22 +245,17 @@
                   "type": "field",
                   "name": "divi/range",
                   "props": {
+                    "cssProperty": "font-size",
                     "min": 1,
-                    "max": 200,
-                    "allowedUnits": [
-                      "%",
-                      "em",
-                      "rem",
-                      "px",
-                      "cm",
-                      "mm",
-                      "in",
-                      "pt",
-                      "pc",
-                      "ex",
-                      "vh",
-                      "vw"
-                    ]
+                    "max": 200
+                  }
+                },
+                "features": {
+                  "preset": [
+                    "html"
+                  ],
+                  "dynamicContent": {
+                    "type": "number"
                   }
                 }
               }
@@ -281,7 +288,8 @@
                     "right": {
                       "icon": "divi/align-right"
                     }
-                  }
+                  },
+                  "showLabel": false
                 }
               }
             }
@@ -370,41 +378,8 @@
           }
         }
       },
-      "default": {
-        "innerContent": {
-          "desktop": {
-            "value": {
-              "useIcon": "off",
-              "animation": "top"
-            }
-          }
-        },
-        "advanced": {
-          "color": {
-            "desktop": {
-              "value": "#7ebec5"
-            }
-          },
-          "placement": {
-            "desktop": {
-              "value": "top"
-            }
-          }
-        }
-      },
-      "defaultPrintedStyle": {
-        "advanced": {
-          "width": {
-            "desktop": {
-              "value": {
-                "icon": "96px",
-                "image": "100%"
-              }
-            }
-          }
-        }
-      },
       "styleProps": {
+        "selector": "{{selector}} .et-pb-icon, {{selector}} .et_pb_image_wrap",
         "spacing": {
           "selector": "{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon",
           "important": true
@@ -413,11 +388,32 @@
           "selector": "{{selector}} .et_pb_main_blurb_image .et_pb_image_wrap",
           "useOverlay": true
         },
-        "filter": {
-          "selector": "{{selector}} .et_pb_main_blurb_image"
+        "filters": {
+          "selector": "{{selector}} .et_pb_main_blurb_image",
+          "selectors": {
+            "desktop": {
+              "value": "{{selector}} .et_pb_main_blurb_image",
+              "hover": "{{selector}}{{:hover}} .et_pb_main_blurb_image"
+            }
+          }
         },
         "border": {
-          "selector": "{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon"
+          "selector": "{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon",
+          "selectors": {
+            "desktop": {
+              "value": "{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon",
+              "hover": "{{selector}}{{:hover}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}}{{:hover}} .et_pb_main_blurb_image .et-pb-icon"
+            }
+          }
+        },
+        "background": {
+          "selector": "{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon",
+          "selectors": {
+            "desktop": {
+              "value": "{{selector}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}} .et_pb_main_blurb_image .et-pb-icon",
+              "hover": "{{selector}}{{:hover}} .et_pb_main_blurb_image .et_pb_only_image_mode_wrap, {{selector}}{{:hover}} .et_pb_main_blurb_image .et-pb-icon"
+            }
+          }
         }
       },
       "styleComponentsProps": {
@@ -462,6 +458,7 @@
           "boxShadow": {},
           "conditions": {},
           "disabledOn": {},
+          "order": {},
           "filters": {},
           "overflow": {},
           "position": {},
@@ -488,27 +485,6 @@
           "zIndex": {}
         }
       },
-      "default": {
-        "meta": {
-          "adminLabel": {
-            "desktop": {
-              "value": "Blurb"
-            }
-          }
-        },
-        "advanced": {
-          "text": {
-            "text": {
-              "desktop": {
-                "value": {
-                  "orientation": "left",
-                  "color": "light"
-                }
-              }
-            }
-          }
-        }
-      },
       "styleProps": {
         "spacing": {
           "important": true
@@ -524,28 +500,6 @@
           "font": {}
         }
       },
-      "defaultPrintedStyle": {
-        "innerContent": {
-          "desktop": {
-            "value": {
-              "target": "off"
-            }
-          }
-        }
-      },
-      "default": {
-        "decoration": {
-          "font": {
-            "font": {
-              "desktop": {
-                "value": {
-                  "headingLevel": "h4"
-                }
-              }
-            }
-          }
-        }
-      },
       "attributes": {
         "class": "et_pb_module_header"
       },
@@ -558,7 +512,16 @@
           "selectors": {
             "desktop": {
               "value": "{{selector}} .et_pb_module_header, {{selector}} .et_pb_module_header a",
-              "hover": "{{selector}}:hover .et_pb_module_header, {{selector}}:hover .et_pb_module_header a"
+              "hover": "{{selector}}{{:hover}} .et_pb_module_header, {{selector}}{{:hover}} .et_pb_module_header a"
+            }
+          },
+          "important": {
+            "font": {
+              "desktop": {
+                "value": {
+                  "color": true
+                }
+              }
             }
           }
         }
@@ -566,13 +529,22 @@
     },
     "content": {
       "type": "object",
-      "selector": "{{selector}}, {{selector}} .et_pb_blurb_description",
+      "selector": "{{selector}} .et_pb_blurb_description",
       "elementType": "content",
       "attributes": {
         "class": "et_pb_blurb_description"
       },
       "settings": {
-        "innerContent": {},
+        "innerContent": {
+          "item": {
+            "groupSlug": "contentText",
+            "features": {
+              "dynamicContent": {
+                "type": "text"
+              }
+            }
+          }
+        },
         "decoration": {
           "bodyFont": {}
         }
@@ -581,8 +553,8 @@
         "bodyFont": {
           "selectors": {
             "desktop": {
-              "value": "{{selector}}, {{selector}} .et_pb_blurb_description",
-              "hover": "{{selector}}:hover, {{selector}}:hover .et_pb_blurb_description"
+              "value": "{{selector}} .et_pb_blurb_description",
+              "hover": "{{selector}}{{:hover}}, {{selector}}{{:hover}} .et_pb_blurb_description"
             }
           }
         }
@@ -612,34 +584,15 @@
                   "type": "field",
                   "name": "divi/range",
                   "props": {
-                    "max": 1100,
-                    "allowedUnits": [
-                      "%",
-                      "em",
-                      "rem",
-                      "px",
-                      "cm",
-                      "mm",
-                      "in",
-                      "pt",
-                      "pc",
-                      "ex",
-                      "vh",
-                      "vw"
-                    ]
+                    "cssProperty": "width",
+                    "max": 1100
+                  }
+                },
+                "features": {
+                  "dynamicContent": {
+                    "type": "number"
                   }
                 }
-              }
-            }
-          }
-        }
-      },
-      "defaultPrintedStyle": {
-        "decoration": {
-          "sizing": {
-            "desktop": {
-              "value": {
-                "maxWidth": "550px"
               }
             }
           }
@@ -686,7 +639,8 @@
         "component": {
           "name": "divi/composite",
           "props": {
-            "groupLabel": "Image & Icon"
+            "groupLabel": "Image & Icon",
+            "clipboardCategory": "style"
           }
         }
       },
@@ -698,7 +652,9 @@
         "component": {
           "name": "divi/composite",
           "props": {
-            "groupLabel": "Sizing"
+            "groupLabel": "Sizing",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/sizing"
           }
         }
       },
@@ -710,7 +666,9 @@
         "component": {
           "name": "divi/composite",
           "props": {
-            "groupLabel": "Animation"
+            "groupLabel": "Animation",
+            "clipboardCategory": "style",
+            "presetGroup": "divi/animation"
           }
         }
       },
@@ -726,6 +684,11 @@
           }
         }
       }
+    }
+  },
+  "mousetrap": {
+    "inner": {
+      "edited": true
     }
   }
 }

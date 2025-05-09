@@ -1261,11 +1261,6 @@ class SliderPresetAttrsMap {
 				'preset'   => [ 'style' ],
 				'subName'  => 'radius',
 			],
-			'button.decoration.border__styles'             => [
-				'attrName' => 'button.decoration.border',
-				'preset'   => [ 'style' ],
-				'subName'  => 'styles',
-			],
 			'button.decoration.border__styles.all.width'   => [
 				'attrName' => 'button.decoration.border',
 				'preset'   => [ 'style' ],
@@ -1365,11 +1360,6 @@ class SliderPresetAttrsMap {
 				'attrName' => 'button.decoration.font.font',
 				'preset'   => [ 'style' ],
 				'subName'  => 'lineStyle',
-			],
-			'button.decoration.font.font__textAlign'       => [
-				'attrName' => 'button.decoration.font.font',
-				'preset'   => [ 'style' ],
-				'subName'  => 'textAlign',
 			],
 			'button.decoration.font.font__color'           => [
 				'attrName' => 'button.decoration.font.font',
@@ -1900,7 +1890,7 @@ class SliderPresetAttrsMap {
 			],
 			'module.decoration.conditions'                 => [
 				'attrName' => 'module.decoration.conditions',
-				'preset'   => [ 'style' ],
+				'preset'   => [ 'html' ],
 			],
 			'children.content.advanced.showOnMobile'       => [
 				'attrName' => 'children.content.advanced.showOnMobile',

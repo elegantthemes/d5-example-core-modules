@@ -1,13 +1,14 @@
 import React, {
-  type ReactElement,
+  type ReactElement, useRef,
 } from 'react';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
 
+import { useDynamicData } from '@divi/dynamic-data';
 import {
   boxShadowHasOverlayClassnames,
+  InnerMousetrap,
   ModuleContainer,
-  useDynamicData,
 } from '@divi/module';
 import {
   getAttrByMode,
@@ -17,6 +18,7 @@ import { moduleClassnames } from './module-classnames';
 import { ModuleScriptData } from './module-script-data';
 import { ModuleStyles } from './module-styles';
 import { type BlurbEditProps } from './types';
+import './style.scss';
 
 /**
  * Renders `Blurb` edit component for visual builder.
@@ -30,9 +32,13 @@ import { type BlurbEditProps } from './types';
 const BlurbEdit = ({
   attrs,
   id,
+  isFirst,
+  isLast,
   name,
   elements,
 }: BlurbEditProps): ReactElement => {
+  const blurbRef = useRef(null);
+
   // Attrs by mode
   const titleAttr                              = getAttrByMode(attrs?.title?.innerContent);
   const imageAttr                              = getAttrByMode(attrs?.imageIcon?.innerContent);
@@ -41,38 +47,51 @@ const BlurbEdit = ({
   /**
    * Gets title's link values.
    */
-  const titleLink       = titleAttr?.url;
-  const titleLinkTarget = titleAttr?.target;
-  const isUsingIcon     = 'on' === attrs?.imageIcon?.innerContent?.desktop?.value?.useIcon ?? false;
+  const { resolvedValue: titleLink } = useDynamicData(titleAttr?.url);
+  const titleLinkTarget              = 'on' === titleAttr?.target ? '_blank' : null;
+  const isUsingIcon                  = 'on' === attrs?.imageIcon?.innerContent?.desktop?.value?.useIcon ?? false;
 
   /**
    * Gets image attribute values and constructs the image output.
    */
   const imageAlt      = imageAttr?.alt;
-  const imageTemplate = ! isUsingIcon && ! isLoading
+  const imageTemplate = ! isUsingIcon && ! isLoading && imageSrc
     ? (
-      <div className="et_pb_main_blurb_image">
-        <span className={classNames('et_pb_image_wrap', 'et_pb_only_image_mode_wrap', boxShadowHasOverlayClassnames(attrs?.imageIcon?.decoration?.boxShadow))}>
-          {elements.styleComponents({
-            attrName:             'imageIcon',
-            styleComponentsProps: {
-              id: `${id}-overlay`,
-            },
+      <span className={classNames('et_pb_image_wrap', 'et_pb_only_image_mode_wrap', boxShadowHasOverlayClassnames(attrs?.imageIcon?.decoration?.boxShadow))}>
+        {elements.styleComponents({
+          attrName:             'imageIcon',
+          styleComponentsProps: {
+            id: `${id}-overlay`,
+          },
+        })}
+        <img
+          src={imageSrc}
+          alt={imageAlt}
+          className={classNames({
+            [`et_pb_animation_${attrs?.imageIcon?.innerContent?.desktop?.value?.animation}`]:       true,
+            [`et_pb_animation_${attrs?.imageIcon?.innerContent?.tablet?.value?.animation}_tablet`]: ! isEmpty(attrs?.imageIcon?.innerContent?.tablet?.value?.animation),
+            [`et_pb_animation_${attrs?.imageIcon?.innerContent?.phone?.value?.animation}_phone`]:   ! isEmpty(attrs?.imageIcon?.innerContent?.phone?.value?.animation),
           })}
-          <img
-            src={imageSrc}
-            alt={imageAlt}
-            className={classNames({
-              [`et_pb_animation_${attrs?.imageIcon?.innerContent?.desktop?.value?.animation}`]:       true,
-              [`et_pb_animation_${attrs?.imageIcon?.innerContent?.tablet?.value?.animation}_tablet`]: ! isEmpty(attrs?.imageIcon?.innerContent?.tablet?.value?.animation),
-              [`et_pb_animation_${attrs?.imageIcon?.innerContent?.phone?.value?.animation}_phone`]:   ! isEmpty(attrs?.imageIcon?.innerContent?.phone?.value?.animation),
-            })}
-          />
-        </span>
-      </div>
+        />
+      </span>
     )
     : '';
-  const image         = titleLink ? <a href={titleLink} target={titleLinkTarget}>{imageTemplate}</a> : imageTemplate;
+
+  const image = imageTemplate
+    ? (
+      <div className="et_pb_main_blurb_image">
+        {titleLink
+          ? (
+            <a href={titleLink} target={titleLinkTarget}>
+              {imageTemplate}
+            </a>
+          )
+          : (
+            imageTemplate
+          )}
+      </div>
+    )
+    : null;
 
   /**
    * Gets icon attribute values and constructs the icon output.
@@ -82,29 +101,45 @@ const BlurbEdit = ({
    */
   const iconTemplate = isUsingIcon
     ? (
-      <div className="et_pb_main_blurb_image">
-        <div className="et_pb_image_wrap">
-          <span className={classNames({
-            'et-pb-icon':                                                                           true,
-            'et-waypoint':                                                                          true,
-            'et-animated':                                                                          true,
-            'et-animated--vb':                                                                      true,
-            [`et_pb_animation_${attrs?.imageIcon?.innerContent?.desktop?.value?.animation}`]:       ! isEmpty(attrs?.imageIcon?.innerContent?.desktop?.value?.animation),
-            [`et_pb_animation_${attrs?.imageIcon?.innerContent?.tablet?.value?.animation}_tablet`]: ! isEmpty(attrs?.imageIcon?.innerContent?.tablet?.value?.animation),
-            [`et_pb_animation_${attrs?.imageIcon?.innerContent?.phone?.value?.animation}_phone`]:   ! isEmpty(attrs?.imageIcon?.innerContent?.phone?.value?.animation),
-          })}
-          />
-        </div>
-      </div>
+      <span className="et_pb_image_wrap">
+        <span className={classNames({
+          'et-pb-icon':                                                                           true,
+          'et-waypoint':                                                                          true,
+          'et-animated':                                                                          true,
+          'et-animated--vb':                                                                      true,
+          [`et_pb_animation_${attrs?.imageIcon?.innerContent?.desktop?.value?.animation}`]:       ! isEmpty(attrs?.imageIcon?.innerContent?.desktop?.value?.animation),
+          [`et_pb_animation_${attrs?.imageIcon?.innerContent?.tablet?.value?.animation}_tablet`]: ! isEmpty(attrs?.imageIcon?.innerContent?.tablet?.value?.animation),
+          [`et_pb_animation_${attrs?.imageIcon?.innerContent?.phone?.value?.animation}_phone`]:   ! isEmpty(attrs?.imageIcon?.innerContent?.phone?.value?.animation),
+        })}
+        />
+      </span>
     )
     : '';
-  const icon         = titleLink ? <a href={titleLink} target={titleLinkTarget}>{iconTemplate}</a> : iconTemplate;
+
+  const icon = iconTemplate
+    ? (
+      <div className="et_pb_main_blurb_image">
+        {titleLink
+          ? (
+            <a href={titleLink} target={titleLinkTarget}>
+              {iconTemplate}
+            </a>
+          )
+          : (
+            iconTemplate
+          )}
+      </div>
+    )
+    : null;
 
   return (
     <ModuleContainer
       attrs={attrs}
+      domRef={blurbRef}
       elements={elements}
       id={id}
+      isFirst={isFirst}
+      isLast={isLast}
       stylesComponent={ModuleStyles}
       scriptDataComponent={ModuleScriptData}
       classnamesFunction={moduleClassnames}
@@ -117,6 +152,7 @@ const BlurbEdit = ({
         attrName: 'contentContainer',
         children: (
           <React.Fragment>
+            <InnerMousetrap type="edited" />
             {isUsingIcon ? icon : image}
             <div className="et_pb_blurb_container">
               {elements.render({

@@ -1,0 +1,64 @@
+{
+  "_comment": "!!! THIS IS AN AUTOMATICALLY GENERATED FILE - DO NOT EDIT !!!",
+  "module": {
+    "meta": {
+      "adminLabel": {
+        "desktop": {
+          "value": "Contact Form"
+        }
+      }
+    },
+    "advanced": {
+      "spamProtection": {
+        "desktop": {
+          "value": {
+            "enabled": "off",
+            "useBasicCaptcha": "on"
+          }
+        }
+      }
+    }
+  },
+  "title": {
+    "decoration": {
+      "font": {
+        "font": {
+          "desktop": {
+            "value": {
+              "headingLevel": "h1"
+            }
+          }
+        }
+      }
+    }
+  },
+  "button": {
+    "innerContent": {
+      "desktop": {
+        "value": {
+          "text": "Submit"
+        }
+      }
+    },
+    "decoration": {
+      "button": {
+        "desktop": {
+          "value": {
+            "icon": {
+              "enable": "on"
+            }
+          }
+        }
+      }
+    }
+  },
+  "redirect": {
+    "advanced": {
+      "useRedirect": {
+        "desktop": {
+          "value": "off"
+        }
+      }
+    }
+  }
+}

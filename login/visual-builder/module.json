@@ -1,0 +1,486 @@
+{
+  "_comment": "!!! THIS IS AN AUTOMATICALLY GENERATED FILE - DO NOT EDIT !!!",
+  "name": "divi/login",
+  "moduleClassName": "et_pb_login",
+  "moduleOrderClassName": "et_pb_login",
+  "d4Shortcode": "et_pb_login",
+  "title": "Login",
+  "titles": "Logins",
+  "moduleIcon": "divi/module-login",
+  "category": "module",
+  "childrenName": [],
+  "videos": [
+    {
+      "id": "PffCGMlUSTA",
+      "name": "An introduction to the Login module"
+    },
+    {
+      "id": "1iqjhnHVA9Y",
+      "name": "Design Settings and Advanced Module Settings"
+    },
+    {
+      "id": "boNZZ0MYU0E",
+      "name": "Saving and loading from the library"
+    }
+  ],
+  "attributes": {
+    "module": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "styleProps": {
+        "background": {
+          "selector": "{{selector}}.et_pb_login"
+        },
+        "spacing": {
+          "selector": "{{selector}}.et_pb_login",
+          "important": true
+        },
+        "sizing": {
+          "important": {
+            "desktop": {
+              "value": {
+                "margin-left": true,
+                "margin-right": true
+              }
+            }
+          }
+        },
+        "border": {
+          "selector": "{{selector}}.et_pb_login"
+        },
+        "filter": {
+          "selector": "{{selector}}.et_pb_login"
+        },
+        "position": {
+          "selector": "{{selector}}.et_pb_login",
+          "important": true
+        }
+      },
+      "settings": {
+        "meta": {
+          "adminLabel": {}
+        },
+        "advanced": {
+          "elements": {},
+          "link": {},
+          "loop": {},
+          "text": {},
+          "currentPageRedirect": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentRedirect",
+              "priority": 5,
+              "render": true,
+              "label": "Redirect To The Current Page",
+              "description": "Here you can choose whether the user should be redirected back to the current page after logging in.",
+              "defaultAttr": {
+                "desktop": {
+                  "value": "off"
+                }
+              },
+              "features": {
+                "responsive": false,
+                "hover": false,
+                "sticky": false,
+                "preset": "content"
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle",
+                "props": {
+                  "options": {
+                    "off": "No",
+                    "on": "Yes"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "decoration": {
+          "animation": {},
+          "attributes": {},
+          "background": {},
+          "border": {},
+          "boxShadow": {},
+          "conditions": {},
+          "disabledOn": {},
+          "filters": {},
+          "interactions": {},
+          "layout": {},
+          "overflow": {},
+          "order": {},
+          "position": {},
+          "scroll": {},
+          "sizing": {},
+          "spacing": {},
+          "sticky": {},
+          "transform": {},
+          "transition": {},
+          "zIndex": {}
+        }
+      }
+    },
+    "title": {
+      "type": "object",
+      "selector": "{{selector}}.et_pb_login h1.et_pb_module_header, {{selector}}.et_pb_login h2, {{selector}}.et_pb_login h3.et_pb_module_header, {{selector}}.et_pb_login h4.et_pb_module_header, {{selector}}.et_pb_login h5.et_pb_module_header, {{selector}}.et_pb_login h6.et_pb_module_header",
+      "supportsCustomAttributes": true,
+      "attributes": {
+        "class": "et_pb_module_header"
+      },
+      "tagName": "h2",
+      "inlineEditor": "plainText",
+      "elementType": "heading",
+      "childrenSanitizer": "et_core_esc_previously",
+      "styleProps": {
+        "font": {
+          "important": true
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentText",
+            "priority": 5,
+            "render": true,
+            "label": "Title",
+            "description": "Choose a title of your login box.",
+            "features": {
+              "dynamicContent": {
+                "type": "text"
+              },
+              "sticky": false,
+              "preset": "content"
+            },
+            "component": {
+              "name": "divi/text",
+              "type": "field"
+            }
+          }
+        },
+        "decoration": {
+          "font": {
+            "priority": 10,
+            "component": {
+              "props": {
+                "groupLabel": "Title Text",
+                "fieldLabel": "Title",
+                "fields": {
+                  "headingLevel": {
+                    "render": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "selector": "{{selector}}.et_pb_login .et_pb_newsletter_description_content, {{selector}}.et_pb_login p, {{selector}}.et_pb_login span",
+      "supportsCustomAttributes": true,
+      "elementType": "content",
+      "attributes": {
+        "class": "et_pb_newsletter_description_content"
+      },
+      "styleProps": {
+        "bodyFont": {
+          "propertySelectors": {
+            "body": {
+              "font": {
+                "desktop": {
+                  "value": {
+                    "line-height": "{{selector}}.et_pb_login p",
+                    "font-family": "{{selector}}.et_pb_login, {{selector}}.et_pb_login .et_pb_newsletter_description_content, {{selector}}.et_pb_login p, {{selector}}.et_pb_login span",
+                    "font-weight": "{{selector}}.et_pb_login, {{selector}}.et_pb_login .et_pb_newsletter_description_content, {{selector}}.et_pb_login p, {{selector}}.et_pb_login span",
+                    "text-transform": "{{selector}}.et_pb_login .et_pb_newsletter_description_content, {{selector}}.et_pb_login p, {{selector}}.et_pb_login span",
+                    "font-size": "{{selector}}.et_pb_login",
+                    "color": "{{selector}}.et_pb_login",
+                    "text-align": "{{selector}}.et_pb_login",
+                    "letter-spacing": "{{selector}}.et_pb_login"
+                  }
+                }
+              },
+              "textShadow": {
+                "desktop": {
+                  "value": {
+                    "text-shadow": "{{selector}}.et_pb_login, {{selector}}.et_pb_login .et_pb_newsletter_description_content, {{selector}}.et_pb_login p, {{selector}}.et_pb_login span"
+                  }
+                }
+              }
+            }
+          },
+          "important": {
+            "body": {
+              "font": {
+                "desktop": {
+                  "value": {
+                    "color": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentText",
+            "priority": 10,
+            "render": true,
+            "label": "Body",
+            "description": "Input the main text content for your module here.",
+            "features": {
+              "dynamicContent": {
+                "type": "text"
+              },
+              "sticky": false,
+              "preset": "content"
+            },
+            "component": {
+              "name": "divi/richtext",
+              "type": "field"
+            }
+          }
+        },
+        "decoration": {
+          "bodyFont": {
+            "priority": 21,
+            "component": {
+              "props": {
+                "groups": {
+                  "body": {
+                    "groupLabel": "Body Text",
+                    "fieldLabel": "Body"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "field": {
+      "type": "object",
+      "elementType": "field",
+      "selector": "{{selector}} input[type=\"password\"], {{selector}} input[type=\"text\"], {{selector}} textarea, {{selector}} input",
+      "attributes": {
+        "class": "input"
+      },
+      "supportsCustomAttributes": true,
+      "settings": {
+        "decoration": {
+          "background": {},
+          "border": {},
+          "boxShadow": {},
+          "spacing": {},
+          "font": {}
+        },
+        "advanced": {
+          "focusUseBorder": {
+            "groupType": "group-item",
+            "item": {
+              "priority": 100,
+              "render": true,
+              "groupSlug": "designFieldField",
+              "label": "Use Focus Borders",
+              "description": "",
+              "defaultAttr": {
+                "desktop": {
+                  "value": "off"
+                }
+              },
+              "component": {
+                "type": "field",
+                "name": "divi/toggle"
+              }
+            }
+          },
+          "focus": {}
+        }
+      }
+    },
+    "button": {
+      "type": "object",
+      "selector": "{{selector}}.et_pb_login .et_pb_newsletter_button.et_pb_button",
+      "supportsCustomAttributes": true,
+      "elementType": "button",
+      "tagName": "a",
+      "attributes": {
+        "class": "et_pb_newsletter_button"
+      },
+      "elementProps": {
+        "allowEmptyUrl": true,
+        "type": "link",
+        "hasWrapper": false
+      },
+      "childrenSanitizer": "et_core_esc_previously",
+      "styleProps": {
+        "type": "button",
+        "font": {
+          "important": {
+            "font": {
+              "desktop": {
+                "value": {
+                  "font-size": true,
+                  "line-height": true,
+                  "text-decoration-color": true,
+                  "text-decoration-line": true,
+                  "text-decoration-style": true
+                }
+              }
+            }
+          }
+        },
+        "spacing": {
+          "important": {
+            "desktop": {
+              "value": {
+                "margin": true,
+                "padding": true
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "into-multiple-groups",
+          "groups": {
+            "text": {
+              "groupType": "group-item",
+              "item": {
+                "priority": 9,
+                "groupSlug": "contentText",
+                "render": true,
+                "attrName": "button.innerContent",
+                "subName": "text",
+                "label": "Button",
+                "description": "Define the text which will be displayed on the login button.",
+                "features": {
+                  "dynamicContent": {
+                    "type": "text"
+                  },
+                  "sticky": false,
+                  "preset": "content"
+                },
+                "component": {
+                  "name": "divi/text",
+                  "type": "field"
+                }
+              }
+            },
+            "link": {
+              "groupType": "group-item",
+              "item": {
+                "groupSlug": "contentText",
+                "render": false
+              }
+            }
+          }
+        },
+        "decoration": {
+          "button": {
+            "component": {
+              "props": {
+                "fields": {
+                  "alignment": {
+                    "render": false
+                  },
+                  "fontGroup": {
+                    "component": {
+                      "props": {
+                        "fields": {
+                          "lineHeight": {
+                            "render": true
+                          },
+                          "textAlign": {
+                            "render": false
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "customCssFields": {
+    "newsletterTitle": {
+      "label": "Login Title",
+      "subName": "newsletterTitle",
+      "selectorSuffix": ".et_pb_login h2"
+    },
+    "newsletterDescription": {
+      "label": "Login Description",
+      "subName": "newsletterDescription",
+      "selectorSuffix": " .et_pb_newsletter_description"
+    },
+    "newsletterForm": {
+      "label": "Login Form",
+      "subName": "newsletterForm",
+      "selectorSuffix": " .et_pb_newsletter_form"
+    },
+    "newsletterFields": {
+      "label": "Login Fields",
+      "subName": "newsletterFields",
+      "selectorSuffix": " .et_pb_newsletter_form input"
+    },
+    "newsletterButton": {
+      "label": "Login Button",
+      "subName": "newsletterButton",
+      "selectorSuffix": ".et_pb_login .et_pb_login_form .et_pb_newsletter_button.et_pb_button"
+    }
+  },
+  "settings": {
+    "content": "auto",
+    "advanced": "auto",
+    "groups": {
+      "contentText": {
+        "panel": "content",
+        "priority": 10,
+        "groupName": "text",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Text"
+          }
+        }
+      },
+      "contentRedirect": {
+        "panel": "content",
+        "priority": 15,
+        "groupName": "redirect",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Redirect"
+          }
+        }
+      },
+      "designFieldField": {
+        "panel": "design",
+        "priority": 10,
+        "groupName": "field",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Fields",
+            "clipboardCategory": "style"
+          }
+        }
+      }
+    }
+  }
+}

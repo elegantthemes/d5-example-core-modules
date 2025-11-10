@@ -1,0 +1,78 @@
+{
+  "_comment": "!!! THIS IS AN AUTOMATICALLY GENERATED FILE - DO NOT EDIT !!!",
+  "advanced": {
+    "admin_label": "module.meta.adminLabel",
+    "animation": "module.decoration.animation",
+    "background": "module.decoration.background",
+    "borders": {
+      "default": "module.decoration.border",
+      "fields": "field.decoration.border",
+      "fields_focus": "field.advanced.focus.border"
+    },
+    "box_shadow": {
+      "button": "button.decoration.boxShadow",
+      "default": "module.decoration.boxShadow",
+      "fields": "field.decoration.boxShadow"
+    },
+    "button": {
+      "button": "button"
+    },
+    "disabled_on": "module.decoration.disabledOn",
+    "display_conditions": "module.decoration.conditions",
+    "filters": {
+      "default": "module.decoration.filters"
+    },
+    "fonts": {
+      "body": "content.decoration.bodyFont.body",
+      "body_link": "content.decoration.bodyFont.link",
+      "body_ol": "content.decoration.bodyFont.ol",
+      "body_quote": "content.decoration.bodyFont.quote",
+      "body_ul": "content.decoration.bodyFont.ul",
+      "form_field": "field.decoration.font",
+      "header": "title.decoration.font"
+    },
+    "form_field": {
+      "form_field": "field"
+    },
+    "height": "module.decoration.sizing",
+    "link_options": "module.advanced.link",
+    "margin_padding": "module.decoration.spacing",
+    "max_width": "module.decoration.sizing",
+    "module": "module.advanced.htmlAttributes",
+    "overflow": "module.decoration.overflow",
+    "position_fields": "module.decoration.position",
+    "scroll": "module.decoration.scroll",
+    "sticky": "module.decoration.sticky",
+    "text": "module.advanced.text",
+    "text_shadow": {
+      "default": "module.advanced.text.textShadow"
+    },
+    "transform": "module.decoration.transform",
+    "transition": "module.decoration.transition",
+    "z_index": "module.decoration.zIndex"
+  },
+  "css": {
+    "after": "css.*.after",
+    "free_form": "css.*.freeForm",
+    "before": "css.*.before",
+    "main_element": "css.*.mainElement",
+    "newsletter_button": "css.*.newsletterButton",
+    "newsletter_description": "css.*.newsletterDescription",
+    "newsletter_fields": "css.*.newsletterFields",
+    "newsletter_form": "css.*.newsletterForm",
+    "newsletter_title": "css.*.newsletterTitle"
+  },
+  "module": {
+    "content": "content.innerContent.*",
+    "current_page_redirect": "module.advanced.currentPageRedirect.*",
+    "title": "title.innerContent.*",
+    "header_level": "title.decoration.font.font.*.headingLevel",
+    "inline_fonts": "content.decoration.inlineFont.*.families",
+    "form_field_custom_margin": "field.decoration.spacing.*.margin",
+    "form_field_custom_padding": "field.decoration.spacing.*.padding",
+    "use_focus_border_color": "field.advanced.focusUseBorder.*"
+  },
+  "valueExpansionFunctionMap": {
+    "inline_fonts": "convertInlineFont"
+  }
+}

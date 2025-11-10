@@ -1,0 +1,561 @@
+{
+  "_comment": "!!! THIS IS AN AUTOMATICALLY GENERATED FILE - DO NOT EDIT !!!",
+  "name": "divi/contact-form",
+  "d4Shortcode": "et_pb_contact_form",
+  "moduleClassName": "et_pb_contact_form_container",
+  "moduleOrderClassName": "et_pb_contact_form",
+  "title": "Contact Form",
+  "titles": "Contact Forms",
+  "moduleIcon": "divi/module-contact-form",
+  "childModuleName": "divi/contact-field",
+  "childModuleTitle": "Field",
+  "childModuleTitleAttribute": "fieldItem",
+  "category": "module",
+  "childrenName": [
+    "divi/contact-field"
+  ],
+  "allowAllElements": true,
+  "videos": [
+    {
+      "id": "YM5qQRKKvVk",
+      "name": "An introduction to the Contact Form module"
+    },
+    {
+      "id": "1iqjhnHVA9Y",
+      "name": "Design Settings and Advanced Module Settings"
+    },
+    {
+      "id": "boNZZ0MYU0E",
+      "name": "Saving and loading from the library"
+    }
+  ],
+  "attributes": {
+    "module": {
+      "type": "object",
+      "selector": "{{selector}}",
+      "elementType": "element",
+      "styleProps": {
+        "sizing": {
+          "propertySelectors": {
+            "desktop": {
+              "value": {
+                "margin-right": "{{selector}}.et_pb_contact_form_container.et_pb_module",
+                "margin-left": "{{selector}}.et_pb_contact_form_container.et_pb_module"
+              }
+            }
+          }
+        },
+        "spacing": {
+          "important": {
+            "desktop": {
+              "value": {
+                "margin": true
+              }
+            }
+          }
+        },
+        "border": {
+          "propertySelectors": {
+            "desktop": {
+              "value": {
+                "border-radius": "{{selector}}.et_pb_contact_form_container .input, {{selector}}.et_pb_contact_form_container .input[type=\"checkbox\"] + label i, {{selector}}.et_pb_contact_form_container .input[type=\"radio\"] + label i",
+                "border-style": "{{selector}}.et_pb_contact_form_container .input, {{selector}}.et_pb_contact_form_container .input[type=\"checkbox\"] + label i, {{selector}}.et_pb_contact_form_container .input[type=\"radio\"] + label i"
+              }
+            }
+          }
+        },
+        "boxShadow": {
+          "selector": "{{selector}} .et_pb_contact_field input, {{selector}} .et_pb_contact_field select, {{selector}} .et_pb_contact_field textarea, {{selector}} .et_pb_contact_field .et_pb_contact_field_options_list label > i, {{selector}} input.et_pb_contact_captcha"
+        },
+        "layout": {
+          "selector": "{{selector}} .et_pb_contact_form"
+        }
+      },
+      "settings": {
+        "meta": {
+          "adminLabel": {}
+        },
+        "advanced": {
+          "elements": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentElements",
+              "priority": 5,
+              "render": true,
+              "component": {
+                "type": "group",
+                "name": "divi/elements",
+                "props": {
+                  "grouped": false
+                }
+              }
+            }
+          },
+          "link": {},
+          "loop": {},
+          "text": {
+            "component": {
+              "props": {
+                "fields": {
+                  "color": {
+                    "render": false
+                  }
+                }
+              }
+            }
+          },
+          "successMessage": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentText",
+              "priority": 10,
+              "render": true,
+              "attrName": "module.advanced.successMessage",
+              "label": "Success Message",
+              "description": "Type the message you want to display after successful form submission. Leave blank for default",
+              "features": {
+                "dynamicContent": {
+                  "type": "text"
+                },
+                "sticky": false,
+                "responsive": false,
+                "hover": false,
+                "preset": "content"
+              },
+              "component": {
+                "name": "divi/text",
+                "type": "field"
+              }
+            }
+          }
+        },
+        "decoration": {
+          "layout": {},
+          "animation": {},
+          "attributes": {},
+          "background": {},
+          "border": {
+            "component": {
+              "props": {
+                "fieldLabel": "Inputs"
+              }
+            }
+          },
+          "boxShadow": {},
+          "conditions": {},
+          "disabledOn": {},
+          "filters": {},
+          "interactions": {},
+          "overflow": {},
+          "order": {},
+          "position": {},
+          "scroll": {},
+          "sizing": {},
+          "spacing": {},
+          "sticky": {},
+          "transform": {},
+          "transition": {},
+          "zIndex": {}
+        }
+      }
+    },
+    "title": {
+      "type": "object",
+      "selector": "{{selector}} h1, {{selector}} h2.et_pb_contact_main_title, {{selector}} h3.et_pb_contact_main_title, {{selector}} h4.et_pb_contact_main_title, {{selector}} h5.et_pb_contact_main_title, {{selector}} h6.et_pb_contact_main_title",
+      "supportsCustomAttributes": true,
+      "elementType": "heading",
+      "attributes": {
+        "class": "et_pb_contact_main_title"
+      },
+      "tagName": "h1",
+      "inlineEditor": "plainText",
+      "childrenSanitizer": "et_core_esc_previously",
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentText",
+            "priority": 5,
+            "render": true,
+            "attrName": "title.innerContent",
+            "label": "Title",
+            "description": "Define a title for your contact form.",
+            "features": {
+              "dynamicContent": {
+                "type": "text"
+              },
+              "sticky": false,
+              "preset": "content"
+            },
+            "component": {
+              "name": "divi/text",
+              "type": "field"
+            }
+          }
+        },
+        "decoration": {
+          "font": {
+            "priority": 10,
+            "component": {
+              "props": {
+                "groupLabel": "Title Text",
+                "fieldLabel": "Title",
+                "fields": {
+                  "headingLevel": {
+                    "render": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "styleProps": {
+        "selector": "{{selector}}.et_pb_contact_form_container h1, {{selector}}.et_pb_contact_form_container h2.et_pb_contact_main_title, {{selector}}.et_pb_contact_form_container h3.et_pb_contact_main_title, {{selector}}.et_pb_contact_form_container h4.et_pb_contact_main_title, {{selector}}.et_pb_contact_form_container h5.et_pb_contact_main_title, {{selector}}.et_pb_contact_form_container h6.et_pb_contact_main_title"
+      }
+    },
+    "captcha": {
+      "type": "object",
+      "selector": "",
+      "elementType": "element",
+      "styleProps": {
+        "selector": "{{selector}}.et_pb_contact_form_container .et_pb_contact_right p"
+      },
+      "settings": {
+        "decoration": {
+          "font": {
+            "priority": 15,
+            "component": {
+              "props": {
+                "groupLabel": "Captcha Text",
+                "fieldLabel": "Captcha",
+                "fields": {
+                  "textAlign": {
+                    "render": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "field": {
+      "type": "object",
+      "elementType": "field",
+      "selector": "{{selector}} .input",
+      "styleProps": {
+        "selector": "{{selector}} .input",
+        "selectors": {
+          "desktop": {
+            "value": "{{selector}}.et_pb_contact_form_container .input, {{selector}}.et_pb_contact_form_container .input::placeholder, {{selector}}.et_pb_contact_form_container .input::-webkit-input-placeholder, {{selector}}.et_pb_contact_form_container .input::-moz-placeholder, {{selector}}.et_pb_contact_form_container .input:-ms-input-placeholder, {{selector}}.et_pb_contact_form_container .input[type=checkbox] + label, {{selector}}.et_pb_contact_form_container .input[type=radio] + label",
+            "hover": "{{selector}}.et_pb_contact_form_container .input:hover, {{selector}}.et_pb_contact_form_container .input:hover::placeholder, {{selector}}.et_pb_contact_form_container .input:hover::-webkit-input-placeholder, {{selector}}.et_pb_contact_form_container .input:hover::-moz-placeholder, {{selector}}.et_pb_contact_form_container .input:hover:-ms-input-placeholder, {{selector}}.et_pb_contact_form_container .input[type=checkbox]:hover + label, {{selector}}.et_pb_contact_form_container .input[type=radio]:hover + label"
+          }
+        }
+      },
+      "settings": {
+        "decoration": {
+          "background": {},
+          "font": {},
+          "spacing": {}
+        },
+        "advanced": {
+          "focus": {}
+        }
+      }
+    },
+    "button": {
+      "type": "object",
+      "selector": "{{selector}} .et_pb_contact_submit.et_pb_button",
+      "supportsCustomAttributes": true,
+      "elementType": "button",
+      "tagName": "button",
+      "attributes": {
+        "type": "submit",
+        "name": "et_builder_submit_button",
+        "class": "et_pb_contact_submit"
+      },
+      "styleProps": {
+        "selector": "{{selector}}.et_pb_contact_form_container.et_pb_module .et_pb_button",
+        "boxShadow": {
+          "selector": "{{selector}} .et_pb_contact_submit",
+          "propertySelectors": {
+            "desktop": {
+              "value": {
+                "box-shadow": "{{selector}} .et_pb_contact_submit"
+              }
+            }
+          }
+        },
+        "spacing": {
+          "important": true
+        }
+      },
+      "elementProps": {
+        "allowEmptyUrl": true,
+        "type": "button"
+      },
+      "settings": {
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentText",
+            "priority": 20,
+            "render": true,
+            "attrName": "button.innerContent",
+            "subName": "text",
+            "label": "Submit Button",
+            "description": "Define the text of the form submit button.",
+            "features": {
+              "dynamicContent": {
+                "type": "text"
+              },
+              "sticky": false,
+              "preset": "content"
+            },
+            "component": {
+              "name": "divi/text",
+              "type": "field"
+            }
+          }
+        },
+        "decoration": {
+          "background": {},
+          "border": {},
+          "boxShadow": {},
+          "button": {},
+          "font": {},
+          "spacing": {}
+        }
+      }
+    },
+    "email": {
+      "type": "object",
+      "settings": {
+        "advanced": {
+          "receiver": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentEmail",
+              "priority": 5,
+              "render": true,
+              "attrName": "email.advanced.receiver",
+              "label": "Email Address",
+              "description": "Input the email address where messages should be sent.<br /><br /> Note: email delivery and spam prevention are complex processes. We recommend using a delivery service such as <a href=\"http://mandrill.com/\">Mandrill</a>, <a href=\"https://sendgrid.com/\">SendGrid</a>, or other similar service to ensure the deliverability of messages that are submitted through this form",
+              "features": {
+                "responsive": false,
+                "hover": false,
+                "sticky": false,
+                "preset": "content",
+                "dynamicContent": {
+                  "type": "text"
+                }
+              },
+              "component": {
+                "name": "divi/text",
+                "type": "field"
+              }
+            }
+          }
+        },
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentEmail",
+            "priority": 10,
+            "render": true,
+            "attrName": "email.innerContent",
+            "label": "Message Pattern",
+            "description": "Here you can define the custom pattern for the email Message. Fields should be included in following format - <strong>%%field_id%%</strong>. For example if you want to include the field with id = <strong>phone</strong> and field with id = <strong>message</strong>, then you can use the following pattern: <strong>My message is %%message%% and phone number is %%phone%%</strong>. Leave blank for default.",
+            "features": {
+              "responsive": false,
+              "hover": false,
+              "sticky": false,
+              "preset": "content",
+              "dynamicContent": {
+                "type": "text"
+              }
+            },
+            "component": {
+              "name": "divi/textarea",
+              "type": "field",
+              "props": {
+                "processing": "custom_message"
+              }
+            }
+          }
+        }
+      }
+    },
+    "redirect": {
+      "type": "object",
+      "settings": {
+        "advanced": {
+          "useRedirect": {
+            "groupType": "group-item",
+            "item": {
+              "groupSlug": "contentRedirect",
+              "priority": 5,
+              "render": true,
+              "attrName": "redirect.advanced.useRedirect",
+              "label": "Enable Redirect URL",
+              "description": "Redirect users after successful form submission.",
+              "features": {
+                "responsive": false,
+                "hover": false,
+                "sticky": false,
+                "preset": "content"
+              },
+              "component": {
+                "name": "divi/toggle",
+                "type": "field"
+              }
+            }
+          }
+        },
+        "innerContent": {
+          "groupType": "group-item",
+          "item": {
+            "groupSlug": "contentRedirect",
+            "priority": 10,
+            "render": true,
+            "attrName": "redirect.innerContent",
+            "label": "Redirect URL",
+            "description": "Type the Redirect URL",
+            "features": {
+              "responsive": false,
+              "hover": false,
+              "sticky": false,
+              "preset": "content",
+              "dynamicContent": {
+                "type": "url"
+              }
+            },
+            "component": {
+              "name": "divi/text",
+              "type": "field"
+            }
+          }
+        }
+      }
+    }
+  },
+  "customCssFields": {
+    "contactTitle": {
+      "label": "Contact Title",
+      "subName": "contactTitle",
+      "selectorSuffix": " .et_pb_contact_main_title"
+    },
+    "contactButton": {
+      "label": "Contact Button",
+      "subName": "contactButton",
+      "selectorSuffix": ".et_pb_contact_form_container .et_contact_bottom_container .et_pb_contact_submit.et_pb_button"
+    },
+    "contactFields": {
+      "label": "Form Fields",
+      "subName": "contactFields",
+      "selectorSuffix": " input"
+    },
+    "textField": {
+      "label": "Message Field",
+      "subName": "textField",
+      "selectorSuffix": " textarea.et_pb_contact_message"
+    },
+    "captchaField": {
+      "label": "Captcha Field",
+      "subName": "captchaField",
+      "selectorSuffix": " input.et_pb_contact_captcha"
+    },
+    "captchaLabel": {
+      "label": "Captcha Text",
+      "subName": "captchaLabel",
+      "selectorSuffix": " .et_pb_contact_right p"
+    }
+  },
+  "script": [
+    "divi-module-library-script-contact-form"
+  ],
+  "settings": {
+    "content": "auto",
+    "groups": {
+      "contentElements": {
+        "panel": "content",
+        "priority": 5,
+        "groupName": "contentElements",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Elements"
+          }
+        }
+      },
+      "contentText": {
+        "panel": "content",
+        "priority": 10,
+        "groupName": "text",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Text"
+          }
+        }
+      },
+      "contentEmail": {
+        "panel": "content",
+        "priority": 15,
+        "groupName": "contentEmail",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Email"
+          }
+        }
+      },
+      "contentRedirect": {
+        "panel": "content",
+        "priority": 20,
+        "groupName": "contentRedirect",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Redirect"
+          }
+        }
+      },
+      "contentSpamProtection": {
+        "panel": "content",
+        "priority": 25,
+        "groupName": "contentSpamProtection",
+        "multiElements": true,
+        "component": {
+          "name": "divi/spam-protection",
+          "props": {
+            "groupLabel": "Spam Protection"
+          }
+        }
+      },
+      "designFieldField": {
+        "panel": "design",
+        "priority": 10,
+        "groupName": "field",
+        "multiElements": true,
+        "component": {
+          "name": "divi/composite",
+          "props": {
+            "groupLabel": "Fields",
+            "clipboardCategory": "style"
+          }
+        }
+      }
+    }
+  },
+  "mousetrap": {
+    "inner": {
+      "edited": true
+    }
+  }
+}

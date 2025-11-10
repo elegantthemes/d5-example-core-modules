@@ -1,0 +1,38 @@
+{
+  "_comment": "!!! THIS IS AN AUTOMATICALLY GENERATED FILE - DO NOT EDIT !!!",
+  "module": {
+    "decoration": {
+      "sizing": {
+        "desktop": {
+          "value": {
+            "flexType": "24_24"
+          }
+        }
+      }
+    }
+  },
+  "fieldItem": {
+    "advanced": {
+      "id": {
+        "desktop": {
+          "value": ""
+        }
+      },
+      "type": {
+        "desktop": {
+          "value": "input"
+        }
+      },
+      "required": {
+        "desktop": {
+          "value": "on"
+        }
+      }
+    },
+    "innerContent": {
+      "desktop": {
+        "value": "New Field"
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "_comment": "!!! THIS IS AN AUTOMATICALLY GENERATED FILE - DO NOT EDIT !!!",
+  "module": {
+    "decoration": {
+      "layout": {
+        "desktop": {
+          "value": {
+            "columnGap": "15px",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "rowGap": "15px"
+          }
+        }
+      }
+    }
+  },
+  "title": {
+    "decoration": {
+      "font": {
+        "font": {
+          "desktop": {
+            "value": {
+              "size": "26px",
+              "lineHeight": "1em"
+            }
+          }
+        }
+      }
+    }
+  },
+  "captcha": {
+    "decoration": {
+      "font": {
+        "font": {
+          "desktop": {
+            "value": {
+              "lineHeight": "1.7em"
+            }
+          }
+        }
+      }
+    }
+  }
+}

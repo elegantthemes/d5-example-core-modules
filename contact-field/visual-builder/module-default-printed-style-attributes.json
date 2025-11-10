@@ -1,0 +1,35 @@
+{
+  "_comment": "!!! THIS IS AN AUTOMATICALLY GENERATED FILE - DO NOT EDIT !!!",
+  "module": {
+    "decoration": {
+      "layout": {
+        "desktop": {
+          "value": {
+            "flexDirection": "column",
+            "rowGap": "10px",
+            "columnGap": "10px"
+          }
+        }
+      }
+    }
+  },
+  "fieldItem": {
+    "advanced": {
+      "minLength": {
+        "desktop": {
+          "value": "0"
+        }
+      },
+      "maxLength": {
+        "desktop": {
+          "value": "0"
+        }
+      },
+      "allowedSymbols": {
+        "desktop": {
+          "value": "all"
+        }
+      }
+    }
+  }
+}

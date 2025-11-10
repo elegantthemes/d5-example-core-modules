@@ -1,0 +1,6 @@
+// In D4, when there are no title and content, the description is hidden by adding class
+// `et_pb_multi_view_hidden`. However, this class is not supposed to be used in builder.
+// So, we use "no title" and "no content" class combination below to do the job.
+.et_pb_newsletter_description_no_title.et_pb_newsletter_description_no_content .et_pb_newsletter_description {
+  display: none;
+}

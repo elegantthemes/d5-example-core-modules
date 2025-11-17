@@ -1,0 +1,72 @@
+import {
+  type ContactFieldAttrs,
+  type ModuleFlatObject,
+} from '@divi/types';
+
+import {
+  contactFieldModuleMetaData,
+} from '../../module.json-source';
+
+/**
+ * Add filter to `divi.addModule.attrs` hook.
+ *
+ * This filter allows developers to modify the new module's attributes.
+ * In this case, it generating unique value for field ID.
+ *
+ * @since ??
+ */
+export const generateNewFieldId = (
+  attrs: ContactFieldAttrs,
+  info: {
+    name: string,
+    parentId: string,
+    state: Record<string, ModuleFlatObject<ContactFieldAttrs>>
+  },
+) => {
+  const { name, state, parentId } = info;
+
+  if (contactFieldModuleMetaData.name !== name) {
+    return attrs;
+  }
+
+  // If the field ID is already exist, don't generate new unique value
+  if (attrs?.fieldItem?.advanced?.id?.desktop?.value) {
+    return attrs;
+  }
+
+  const fieldUniqueBase = 'Field';
+  const siblings        = Object.keys(state).filter(key => state[key]?.parent === parentId);
+  const countStart      = (siblings.length + 1);
+
+  const findByAttrsId = (uniqueId: string):boolean => {
+    const found = siblings.some(key => state[key]?.props?.attrs?.fieldItem?.advanced?.id?.desktop?.value === uniqueId);
+
+    return found;
+  };
+
+  let fieldUnique    = `${fieldUniqueBase}_${countStart}`;
+  let checkIncrement = 0;
+
+  // Re-generate unique value for field ID if it's already exist
+  while (findByAttrsId(fieldUnique)) {
+    checkIncrement++;
+    fieldUnique = `${fieldUniqueBase}_${(checkIncrement + countStart)}`;
+  }
+
+  return {
+    ...attrs,
+    fieldItem: {
+      ...attrs?.fieldItem,
+      advanced: {
+        ...attrs?.fieldItem?.advanced,
+        id: {
+          ...attrs?.fieldItem?.advanced?.id,
+          desktop: {
+            ...attrs?.fieldItem?.advanced?.id?.desktop,
+            value: fieldUnique,
+          },
+        },
+      },
+    },
+  };
+};

@@ -1,0 +1,37 @@
+[
+  {
+    "title": "returns custom button icon style for login module",
+    "cases": [
+      {
+        "args": {
+          "attrValue": {
+            "icon": {
+              "settings": {
+                "unicode": "&#x37;",
+                "type": "divi",
+                "weight": "400"
+              },
+              "placement": "left"
+            }
+          }
+        },
+        "expected": "font-family: 'ETmodules' !important; font-weight: 400; content: '7';"
+      },
+      {
+        "args": {
+          "attrValue": {
+            "icon": {
+              "settings": {
+                "unicode": "&#x37;",
+                "type": "divi",
+                "weight": "400"
+              },
+              "placement": "right"
+            }
+          }
+        },
+        "expected": "font-family: 'ETmodules' !important; font-weight: 400; content: '7';"
+      }
+    ]
+  }
+]

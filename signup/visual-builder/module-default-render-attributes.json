@@ -1,0 +1,253 @@
+{
+  "_comment": "!!! THIS IS AN AUTOMATICALLY GENERATED FILE - DO NOT EDIT !!!",
+  "module": {
+    "meta": {
+      "adminLabel": {
+        "desktop": {
+          "value": "Email Optin"
+        }
+      }
+    },
+    "advanced": {
+      "text": {
+        "text": {
+          "desktop": {
+            "value": {
+              "orientation": "left",
+              "color": "dark"
+            }
+          }
+        }
+      },
+      "spamProtection": {
+        "desktop": {
+          "value": {
+            "enabled": "off"
+          }
+        }
+      }
+    },
+    "decoration": {
+      "background": {
+        "desktop": {
+          "value": {
+            "color": "$variable({\"type\":\"color\",\"value\":{\"name\":\"gcid-primary-color\",\"settings\":{}}})$",
+            "enableColor": "on"
+          }
+        }
+      }
+    }
+  },
+  "title": {
+    "decoration": {
+      "font": {
+        "font": {
+          "desktop": {
+            "value": {
+              "headingLevel": "h2"
+            }
+          }
+        }
+      }
+    }
+  },
+  "content": {
+    "decoration": {
+      "bodyFont": {
+        "body": {
+          "font": {
+            "desktop": {
+              "value": {
+                "lineHeight": "1.7em",
+                "size": "14px"
+              }
+            }
+          }
+        },
+        "link": {
+          "font": {
+            "desktop": {
+              "value": {
+                "lineHeight": "1em",
+                "size": "14px"
+              }
+            }
+          }
+        },
+        "ul": {
+          "font": {
+            "desktop": {
+              "value": {
+                "lineHeight": "1em",
+                "size": "14px"
+              }
+            }
+          }
+        },
+        "ol": {
+          "font": {
+            "desktop": {
+              "value": {
+                "lineHeight": "1em",
+                "size": "14px"
+              }
+            }
+          }
+        },
+        "quote": {
+          "font": {
+            "desktop": {
+              "value": {
+                "lineHeight": "1em",
+                "size": "14px"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "resultMessage": {
+    "decoration": {
+      "font": {
+        "font": {
+          "desktop": {
+            "value": {
+              "lineHeight": "1em",
+              "size": "26px"
+            }
+          }
+        }
+      }
+    }
+  },
+  "button": {
+    "innerContent": {
+      "desktop": {
+        "value": {
+          "text": "Subscribe",
+          "linkUrl": "#"
+        }
+      }
+    },
+    "decoration": {
+      "button": {
+        "desktop": {
+          "value": {
+            "enable": "off",
+            "icon": {
+              "enable": "on"
+            }
+          }
+        }
+      }
+    }
+  },
+  "field": {
+    "advanced": {
+      "nameFieldOnly": {
+        "desktop": {
+          "value": "on"
+        }
+      },
+      "nameField": {
+        "desktop": {
+          "value": "off"
+        }
+      },
+      "firstNameField": {
+        "desktop": {
+          "value": "on"
+        }
+      },
+      "lastNameField": {
+        "desktop": {
+          "value": "on"
+        }
+      },
+      "firstNameFullwidth": {
+        "desktop": {
+          "value": "on"
+        }
+      },
+      "lastNameFullwidth": {
+        "desktop": {
+          "value": "on"
+        }
+      },
+      "nameFullwidth": {
+        "desktop": {
+          "value": "on"
+        }
+      },
+      "emailFullwidth": {
+        "desktop": {
+          "value": "on"
+        }
+      },
+      "ipAddress": {
+        "desktop": {
+          "value": "on"
+        }
+      },
+      "focus": {
+        "border": {
+          "desktop": {
+            "value": {
+              "radius": {
+                "sync": "on",
+                "topLeft": "3px",
+                "topRight": "3px",
+                "bottomLeft": "3px",
+                "bottomRight": "3px"
+              }
+            }
+          }
+        }
+      },
+      "focusUseBorder": {
+        "desktop": {
+          "value": "off"
+        }
+      }
+    },
+    "decoration": {
+      "border": {
+        "desktop": {
+          "value": {
+            "radius": {
+              "sync": "on",
+              "topLeft": "3px",
+              "topRight": "3px",
+              "bottomLeft": "3px",
+              "bottomRight": "3px"
+            }
+          }
+        }
+      }
+    }
+  },
+  "customFields": {
+    "advanced": {
+      "enable": {
+        "desktop": {
+          "value": "off"
+        }
+      }
+    }
+  },
+  "success": {
+    "advanced": {
+      "action": {
+        "desktop": {
+          "value": "message"
+        }
+      },
+      "message": {
+        "desktop": {
+          "value": "Success!"
+        }
+      }
+    }
+  }
+}

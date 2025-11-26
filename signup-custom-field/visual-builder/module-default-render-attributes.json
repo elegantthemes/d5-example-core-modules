@@ -1,0 +1,32 @@
+{
+  "_comment": "!!! THIS IS AN AUTOMATICALLY GENERATED FILE - DO NOT EDIT !!!",
+  "fieldItem": {
+    "advanced": {
+      "fullwidth": {
+        "desktop": {
+          "value": "on"
+        }
+      },
+      "id": {
+        "desktop": {
+          "value": ""
+        }
+      },
+      "type": {
+        "desktop": {
+          "value": "input"
+        }
+      },
+      "required": {
+        "desktop": {
+          "value": "on"
+        }
+      }
+    },
+    "innerContent": {
+      "desktop": {
+        "value": "New Field"
+      }
+    }
+  }
+}

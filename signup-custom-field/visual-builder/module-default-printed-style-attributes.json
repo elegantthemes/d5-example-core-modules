@@ -1,0 +1,77 @@
+{
+  "_comment": "!!! THIS IS AN AUTOMATICALLY GENERATED FILE - DO NOT EDIT !!!",
+  "module": {
+    "decoration": {
+      "border": {
+        "desktop": {
+          "value": {
+            "radius": {
+              "sync": "on",
+              "topLeft": "3px",
+              "topRight": "3px",
+              "bottomLeft": "3px",
+              "bottomRight": "3px"
+            },
+            "styles": {
+              "all": {
+                "width": "0px",
+                "color": "#333333",
+                "style": "solid"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "fieldItem": {
+    "advanced": {
+      "predefinedField": {
+        "desktop": {
+          "value": "none"
+        }
+      },
+      "minLength": {
+        "desktop": {
+          "value": "0"
+        }
+      },
+      "maxLength": {
+        "desktop": {
+          "value": "0"
+        }
+      },
+      "allowedSymbols": {
+        "desktop": {
+          "value": "all"
+        }
+      }
+    }
+  },
+  "field": {
+    "advanced": {
+      "focus": {
+        "border": {
+          "desktop": {
+            "value": {
+              "radius": {
+                "sync": "on",
+                "topLeft": "3px",
+                "topRight": "3px",
+                "bottomLeft": "3px",
+                "bottomRight": "3px"
+              },
+              "styles": {
+                "all": {
+                  "width": "0px",
+                  "color": "#333333",
+                  "style": "solid"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
